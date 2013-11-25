@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20131007170821) do
     t.string   "code"
     t.string   "author"
     t.string   "last_updated_at"
+    t.string   "url"
     t.integer  "source_id"
     t.integer  "view_count",      default: 0
     t.string   "desc"

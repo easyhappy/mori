@@ -5,6 +5,7 @@ class CreateBooks < ActiveRecord::Migration
       t.string :code
       t.string :author
       t.string :last_updated_at
+      t.string :url
       t.references :source, index: true
       t.integer :view_count,default: 0
       t.string :desc
