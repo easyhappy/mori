@@ -25,3 +25,4 @@ capybara-*.html
 /config/initializers/secret_token.rb
 /Gemfile.lock
 /thin.sh
+config/database.yml
