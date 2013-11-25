@@ -6,7 +6,7 @@ class CategoriesController < ApplicationController
   def show
     @category_id = params[:id]
     @category = Category.find @category_id
-    @books = @category.books.order(content_active: :desc,updated_at: :desc).page(@page)
+    @books = @category.books.order(updated_at: :desc).page(@page)
     ClickLog.click params.merge({ref_obj: @category})
   end
 

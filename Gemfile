@@ -38,9 +38,9 @@ group :development, :test do
   gem 'pry-stack_explorer',     '0.4.9'
   gem 'pry-rails',              '0.2.2'
   gem 'zeus',                   '0.13.3'
+  gem 'thin',                   '1.6.1'
 end
 
-gem 'thin'
 gem 'hpricot'
 gem 'kaminari'
 gem 'quiet_assets'

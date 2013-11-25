@@ -1,12 +1,15 @@
 class Book < ActiveRecord::Base
   belongs_to :source
   belongs_to :category
+  belongs_to :last_chapter
   
   has_many :chapters,counter_cache: true
 
   scope :hot,   ->{where("view_count>1").includes(:category).order(view_count: :desc).limit(10)}
   scope :recent,->{includes(:category).order(updated_at: :desc).limit(10)}
   
+  delegate :name, :to => :last_chapter
+
   class<<self
     def search config
       @q = config[:q]

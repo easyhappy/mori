@@ -163,7 +163,6 @@ class Ranwen
         log "\t#{chapter_name}"
 
         chapter = Chapter.create config if chapter.nil?
-
         parent_id = chapter.id
       rescue => e
         log e
