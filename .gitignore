@@ -21,8 +21,8 @@ capybara-*.html
 /pickle-email-*.html
 /.project
 /.setting
+config/database.yml
 /.idea
 /config/initializers/secret_token.rb
 /Gemfile.lock
 /thin.sh
-config/database.yml
