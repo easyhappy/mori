@@ -6,7 +6,6 @@ class CreateChapterIds < ActiveRecord::Migration
 
       # t.timestamps
     end
-    
-    execute "insert into chapter_ids(id,status) select id,status from chapters"
+    #execute "insert into chapter_ids(id,status) select id, status from chapters"
   end
 end

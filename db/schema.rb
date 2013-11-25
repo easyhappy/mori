@@ -19,54 +19,35 @@ ActiveRecord::Schema.define(version: 20131007170821) do
     t.string   "author"
     t.string   "last_updated_at"
     t.integer  "source_id"
-    t.string   "url"
-    t.string   "source_ref_id"
-    t.integer  "view_count",                   default: 0
+    t.integer  "view_count",      default: 0
     t.string   "desc"
-    t.boolean  "recommend",                    default: false
-    t.boolean  "hot",                          default: false
-    t.integer  "word_count",                   default: 0
-    t.integer  "comment_count",                default: 0
-    t.integer  "chapters_count",               default: 0
-    t.integer  "contents_count",               default: 0
-    t.boolean  "content_active",               default: false
+    t.boolean  "recommend",       default: false
+    t.boolean  "hot",             default: false
+    t.integer  "word_count",      default: 0
+    t.integer  "comment_count",   default: 0
     t.datetime "deleted_at"
-    t.boolean  "deleted",                      default: false
+    t.boolean  "deleted",         default: false
     t.integer  "last_chapter_id"
-    t.string   "last_chapter_url"
-    t.string   "chapter_status",    limit: 18, default: "Pending"
-    t.string   "last_chapter_name"
-    t.string   "chapter_url"
-    t.string   "status",                       default: "Pending"
-    t.string   "book_status"
+    t.string   "status"
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "books", ["author"], name: "index_books_author", using: :btree
   add_index "books", ["category_id"], name: "index_books_on_category_id", using: :btree
-  add_index "books", ["chapter_status"], name: "index_books_chapter_status", using: :btree
   add_index "books", ["last_chapter_id"], name: "index_books_on_last_chapter_id", using: :btree
-  add_index "books", ["name"], name: "index_books_name", using: :btree
   add_index "books", ["source_id"], name: "index_books_on_source_id", using: :btree
-  add_index "books", ["url"], name: "books_url", using: :btree
 
   create_table "categories", force: true do |t|
     t.string   "name"
     t.integer  "books_count"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "view_count"
   end
 
-  add_index "categories", ["name"], name: "index_category_name", using: :btree
-
   create_table "chapter_ids", id: false, force: true do |t|
-    t.integer  "id"
-    t.string   "status",     default: "Pending"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer "id"
+    t.string  "status", default: "Pending"
   end
 
   create_table "chapters", force: true do |t|
@@ -75,19 +56,17 @@ ActiveRecord::Schema.define(version: 20131007170821) do
     t.string   "url"
     t.datetime "deleted_at"
     t.string   "deleted"
-    t.integer  "pre_id"
+    t.integer  "parent_id"
     t.integer  "next_id"
     t.integer  "volume_id"
     t.string   "code"
     t.integer  "view_count"
+    t.integer  "integer"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "status",     limit: 18, default: "Pending"
   end
 
   add_index "chapters", ["book_id"], name: "index_chapters_on_book_id", using: :btree
-  add_index "chapters", ["status"], name: "index_chapter_status", using: :btree
-  add_index "chapters", ["url"], name: "index_chapter_url", using: :btree
   add_index "chapters", ["volume_id"], name: "index_chapters_on_volume_id", using: :btree
 
   create_table "click_logs", force: true do |t|
@@ -105,7 +84,7 @@ ActiveRecord::Schema.define(version: 20131007170821) do
     t.integer  "book_id"
     t.integer  "chapter_id"
     t.integer  "volume_id"
-    t.text     "content",    limit: 2147483647
+    t.text     "content"
     t.integer  "word_count"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -153,8 +132,6 @@ ActiveRecord::Schema.define(version: 20131007170821) do
     t.integer  "current_chapter_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "status",             limit: 18, default: "Pending"
-    t.integer  "view_count",                    default: 1
   end
 
   add_index "read_book_histories", ["book_id"], name: "index_read_book_histories_on_book_id", using: :btree
@@ -185,7 +162,8 @@ ActiveRecord::Schema.define(version: 20131007170821) do
 
   create_table "search_words", force: true do |t|
     t.string   "q"
-    t.integer  "count",      default: 1
+    t.integer  "count",      default: 0
+    t.integer  "integer",    default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
