@@ -11,26 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131007170821) do
+ActiveRecord::Schema.define(version: 20131212153814) do
 
   create_table "books", force: true do |t|
-    t.string   "name"
-    t.string   "code"
-    t.string   "author"
-    t.string   "last_updated_at"
-    t.string   "url"
+    t.integer  "category_id"
     t.integer  "source_id"
-    t.integer  "view_count",      default: 0
-    t.string   "desc"
+    t.integer  "last_chapter_id"
+    t.string   "url"
+    t.string   "chapter_url"
+    t.string   "name"
+    t.string   "author"
+    t.string   "code"
+    t.string   "status"
     t.boolean  "recommend",       default: false
     t.boolean  "hot",             default: false
-    t.integer  "word_count",      default: 0
-    t.integer  "comment_count",   default: 0
-    t.datetime "deleted_at"
     t.boolean  "deleted",         default: false
-    t.integer  "last_chapter_id"
-    t.string   "status"
-    t.integer  "category_id"
+    t.integer  "view_count",      default: 0
+    t.integer  "comment_count",   default: 0
+    t.integer  "word_count",      default: 0
+    t.string   "desc"
+    t.string   "last_updated_at"
+    t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

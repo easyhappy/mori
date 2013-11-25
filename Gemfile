@@ -32,6 +32,14 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+group :development, :test do
+  gem 'pry',                    '0.9.12'
+  gem 'pry-nav',                '0.2.2'
+  gem 'pry-stack_explorer',     '0.4.9'
+  gem 'pry-rails',              '0.2.2'
+  gem 'zeus',                   '0.13.3'
+end
+
 gem 'thin'
 gem 'hpricot'
 gem 'kaminari'

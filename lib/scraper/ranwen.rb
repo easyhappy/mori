@@ -149,33 +149,30 @@ class Ranwen
   
   def parse_chapter_info book
     log "parse chapter"
-    doc = h book.chapter_url,ENCODING
+    doc = h book.chapter_url, ENCODING
     book_info = doc/"#container_bookinfo"
-    parent_chapter = Chapter.new
+    
+    parent_id = nil
     (book_info/"tr/td/div.dccss/a").each do |a|
       begin
-        _url,_text = la a
+        relative_url, chapter_name = la a
 
-        url = book.chapter_url.sub('index.html',_url)
-      
-        config = {book_id: book.id,name: _text,url: url,pre_id: parent_chapter.id}
-        chapter = Chapter.find_by url: url
-        log "\t#{_text}"
-        if chapter.nil?
-          chapter = Chapter.create 
-        end
-        
-        chapter.update_attributes config
-        ChapterId.create id: chapter.id if ChapterId.find_by(id: chapter.id).nil?
-        
-        parent_chapter = chapter
+        url = book.chapter_url.sub('index.html',relative_url)
+        config = {book_id: book.id, name: chapter_name,url: url, parent_id: parent_id}
+        chapter = Chapter.find_by_url url
+        log "\t#{chapter_name}"
+
+        chapter = Chapter.create config if chapter.nil?
+
+        parent_id = chapter.id
       rescue => e
         log e
         ErrorUrl.create url: url, status: "book:#{book.id},parent:#{parent_chapter.id}"
+        break
       end
     end
-    
-    book.update_attributes chapter_status: 'Done'
+    book.last_chapter = Chapter.find_by_id(parent_id)
+    book.save
   end
   
   def parse_book_update
@@ -222,16 +219,17 @@ class Ranwen
         author = t author
       
         chapter_url,chapter_name = la chapter_url/"a"
-      
         status = t status
       
-        category = Category.find_by_name category_name
-        category = Category.create(name: category_name) if category.nil?
+        category = Category.find_or_create_by_name category_name
         book = Book.find_by_url book_url
         
-        config = {name: book_name,url: book_url,category_id: category.id,author: author,status: status,last_chapter_url: last_chapter_url,
-          last_chapter_name: last_chapter_name,chapter_url: chapter_url,last_updated_at: Time.now}
-        
+        config = {
+                  name: book_name, url: book_url,category_id: category.id, 
+                  author: author,status: status, chapter_url: chapter_url, 
+                  last_updated_at: Time.now
+                }
+
         if book.nil?
           log "\tCreate book:#{book_name}"
           book = Book.create config
@@ -239,7 +237,7 @@ class Ranwen
           parse_content book.chapters.where(status: 'Pending')
           parse_chapter_associate_inner book.chapters
         else
-          if book.last_chapter_url == last_chapter_url
+          if book.last_chapter.url == last_chapter_url
             log "\tBook #{book_name} not updated,next"
             @updated_books_count += 1
             updated_status = true if @updated_books_count > 100
@@ -247,6 +245,9 @@ class Ranwen
           else
             log "\tUpdate book:#{book_name}"
             book.update_attributes config
+            chapter.book = book
+            chapter.save
+            
             parse_chapter_info book
             parse_content book.chapters.where(status: 'Pending')
             parse_chapter_associate_inner book.chapters
