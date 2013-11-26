@@ -26,7 +26,7 @@ module Books
           logger_error e.inspect
         end
       end
-      parse_next_page doc
+      #parse_next_page doc
     end
 
     def parse_next_page doc
@@ -47,6 +47,10 @@ module Books
       category_name = $1 if (t category) =~ /\[(.*?)\]/
       book_url, book_name = la name/"a"
       last_chapter_url, last_chapter_name = la last_chapter/"a"
+
+      chapter_url = (la chapter_url/"a")[0]
+      author      = (la author/"a")[1]
+      status      = (la status/"font")[1]
     
       category = Category.find_or_create_by_name category_name
       book = Book.find_by_url book_url
