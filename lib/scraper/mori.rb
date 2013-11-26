@@ -29,7 +29,6 @@ module Mori
       else
         proxy_ip   = @proxy_server.ip
         proxy_port = @proxy_server.port
-        log "proxy:#{proxy_ip},#{proxy_port}"
         proxy = Net::HTTP::Proxy(proxy_ip,proxy_port)
         http = proxy.new(uri.host, uri.port)
       end
@@ -63,7 +62,6 @@ module Mori
           get(url,true)
       end
     rescue => e
-      log "error:#{e.inspect}"
       save_error url,e.inspect    
       return get(url,true)
     end
@@ -130,7 +128,6 @@ module Mori
 
     str
   rescue => e
-    log "[error]trim:#{e.inspect}"
     obj
   end
 
@@ -138,8 +135,6 @@ module Mori
   def time_to_str time=Time.now, format="%Y-%m-%d %H:%M:%S"
     time.strftime(format) unless time.nil?
   rescue => e
-    log "[error]trim:#{e.inspect}"
-    log "       #{time},#{format}"
     time
   end
   
@@ -147,7 +142,6 @@ module Mori
     if v =~ /(.*)\(\d+\)/
       $1
     else
-      log "unknow tag:#{v}"
       v
     end
   end

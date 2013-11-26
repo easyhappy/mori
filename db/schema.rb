@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20130915120550) do
     t.string   "author"
     t.string   "code"
     t.string   "status"
-    t.string   "scrapter_status"
+    t.string   "scraper_status"
     t.boolean  "recommend",        default: false
     t.boolean  "hot",              default: false
     t.boolean  "deleted",          default: false
@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 20130915120550) do
     t.string   "deleted"
     t.integer  "view_count"
     t.integer  "integer"
-    t.string   "scrapter_status"
+    t.string   "scraper_status"
     t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
