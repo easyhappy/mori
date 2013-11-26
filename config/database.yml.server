@@ -1,5 +1,6 @@
 # MySQL.  Versions 4.1 and 5.0 are recommended.
 #
+#
 # Install the MYSQL driver
 #   gem install mysql2
 #
@@ -13,9 +14,9 @@ development:
   encoding: utf8
   database: mori_development
   pool: 500
-  username: trace
-  password: trace123
-  socket: /tmp/mysql.sock
+  username: tianji
+  password: tianji
+  socket: /var/run/mysqld/mysqld.sock
   reconnect: false
 
 # Warning: The database defined as "test" will be erased and
@@ -24,11 +25,11 @@ development:
 test:
   adapter: mysql2
   encoding: utf8
-  database: mori_test
+  database: mori_development
   pool: 500
-  username: root
-  password:
-  socket: /tmp/mysql.sock
+  username: tianji
+  password: tianji
+  socket: /var/run/mysqld/mysqld.sock
   reconnect: false
 
 production:
@@ -36,7 +37,7 @@ production:
   encoding: utf8
   database: mori_development
   pool: 500
-  username: trace
-  password: trace123
-  socket: /tmp/mysql.sock
+  username: tianji
+  password: tianji
+  socket: /var/run/mysqld/mysqld.sock
   reconnect: false
