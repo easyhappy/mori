@@ -7,12 +7,12 @@ require 'scraper/ranwen'
 namespace :scraper do
   desc "parse book"
   task :book => :environment do
-    Ranwen.new.init_parse
+    Ranwen.new.init_parse_book
   end
   
   desc "parse chapter"
   task :chapter => :environment do
-    Ranwen.new.parse_chapter
+    Ranwen.new.init_parse_chapter
   end
   
   desc "parse content"

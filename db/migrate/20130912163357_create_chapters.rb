@@ -15,6 +15,7 @@ class CreateChapters < ActiveRecord::Migration
       t.string        :deleted
       
       t.integer       :view_count,    :integer
+      t.string        :scraper_status  
 
       t.timestamp     :deleted_at
       t.timestamps

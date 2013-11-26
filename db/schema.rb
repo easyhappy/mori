@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20130915120550) do
     t.string   "deleted"
     t.integer  "view_count"
     t.integer  "integer"
+    t.string   "scrapter_status"
     t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"

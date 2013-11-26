@@ -6,7 +6,7 @@ module Books
     extend ActiveSupport::Concern
     include Books::BaseHandler
 
-    def init_parse
+    def init_parse_book
       logger_write 'begin parse book...'
 
       parse_books_list
@@ -62,7 +62,7 @@ module Books
 
       if book.nil?
         book = Book.new config
-        book.scrapter_status = :open
+        book.scraper_status = :open
         book.save!
         return
       end
