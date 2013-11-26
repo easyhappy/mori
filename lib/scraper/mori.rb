@@ -6,9 +6,16 @@ require "yaml"
 module Mori 
   ENABLE_PROXY = false
 
-  def log *msg
-    file, line, others = caller.first.split(":")
-    puts "#{time_to_str Time.now}\t#{file.split("/").last}:#{line}\t#{msg.join("\t")}"
+  BOOK_LOGGER = Logger.new(STDOUT)
+  #BOOK_LOGGER = Logger.new('log/scraper.log')
+  def logger_write message
+    BOOK_LOGGER.info message
+  end
+
+  def logger_error message
+    BOOK_LOGGER.logger.fatal '-'*60
+    BOOK_LOGGER.logger.fatal message
+    BOOK_LOGGER.logger.fatal '-'*60
   end
 
   def get url,use_proxy=false,method='get',encoding=nil
