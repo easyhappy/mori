@@ -18,6 +18,18 @@ module Mori
     BOOK_LOGGER.logger.fatal '-'*60
   end
 
+  def get_base_url
+     "http://www.ranwen.net"
+  end
+
+  def pre_page
+    25
+  end
+
+  def get_encoding
+    "gb2312"
+  end
+
   def content_count html
     trim(html).length rescue 0
   end

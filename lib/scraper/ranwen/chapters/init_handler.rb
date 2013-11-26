@@ -2,7 +2,6 @@ $:.unshift(File.dirname(__FILE__))
 
 module Chapters
   module InitHandler
-    extend ActiveSupport::Concern
 
     def init_parse_chapter
       books = Book.where(:scraper_status => :open)

@@ -2,7 +2,6 @@ class CreateBooks < ActiveRecord::Migration
   def change
     create_table :books do |t|
       t.references  :category,        index: true
-      t.references  :source,          index: true
       t.references  :last_chapter,    index: true
 
       t.string      :url
@@ -15,6 +14,7 @@ class CreateBooks < ActiveRecord::Migration
       t.string      :code
       t.string      :status
       t.string      :scraper_status
+      t.string      :source
       
       t.boolean     :recommend,       default: false
       t.boolean     :hot,             default: false

@@ -1,15 +1,23 @@
 $:.unshift(File.dirname(__FILE__))
-require 'base_handler'
 
 module Books
   module InitHandler
-    extend ActiveSupport::Concern
-    include Books::BaseHandler
+    attr_accessor :current_page
 
     def init_parse_book
       logger_write 'begin parse book...'
+      
+      begin
+        pre_books_count = Book.count
+        current_page = 1
+        parse_books_list current_page
+      rescue Exception => e
+        logger_error e.inspect
+      end
 
-      parse_books_list
+      books_count = Book.count
+      logger_write("before is #{pre_books_count}, now is #{books_count}")
+      logger_write("current_page is #{current_page}")
     end
 
     def parse_books_list page=1
@@ -37,7 +45,7 @@ module Books
       relative_url, text = la next_page
       
       logger_write("抓取#{relative_url}...")
-      parse_books_list $1 if relative_url =~ /page=(\d+)$/
+      current_page = $1 and parse_books_list(current_page) if relative_url =~ /page=(\d+)$/
     end
 
     def parse_book_info_part tr
@@ -66,6 +74,14 @@ module Books
         book.save!
         return
       end
+
+      if book.last_chapter.try(:url) == last_chapter_url
+        book.scraper_status   = :close
+      else
+        book.last_chapter_url = last_chapter_url
+        book.scraper_status   = :open
+      end
+      book.save!
     end
   end
 end
