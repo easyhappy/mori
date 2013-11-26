@@ -1,12 +1,12 @@
 $:.unshift(File.dirname(__FILE__))
 
-require 'book/init_handler'
+require 'books/init_handler'
 
 module Scraper
   module Ranwen
     module BookHandler
       extend ActiveSupport::Concern
-      include Book::InitHandler
+      include Books::InitHandler
     end
   end
 end

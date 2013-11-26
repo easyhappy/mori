@@ -1,16 +1,20 @@
 $:.unshift(File.dirname(__FILE__))
 require 'base_handler'
 
-module Book
+module Books
   module InitHandler
     extend ActiveSupport::Concern
-    include Book::BaseHandler
+    include Books::BaseHandler
 
     def init_parse
       logger_write 'begin parse book...'
-      
-      url = "#{BASE_URL}/modules/article/index.php?page=#{page}"
-      doc = h url,ENCODING
+
+      parse_books_list
+    end
+
+    def parse_books_list page=1
+      url = "#{get_base_url}/modules/article/index.php?page=#{page}"
+      doc = h url,get_encoding
       parse_books_info doc
     end
 
@@ -43,7 +47,7 @@ module Book
       if book.nil?
         book = Book.new config
         book.scrapter_status = :open
-        book.save
+        book.save!
         return
       end
     end

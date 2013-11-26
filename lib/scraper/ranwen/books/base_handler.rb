@@ -1,4 +1,4 @@
-module Book
+module Books
   module BaseHandler
     extend ActiveSupport::Concern
 
