@@ -15,7 +15,7 @@ module Mori
   def logger_error message
     BOOK_LOGGER.fatal '-'*60
     BOOK_LOGGER.fatal message
-    BOOK_LOGGER.fatal '-'*60
+    BOOK_LOGGER.logger.fatal '-'*60
   end
 
   def get url,use_proxy=false,method='get',encoding=nil
@@ -29,6 +29,7 @@ module Mori
       else
         proxy_ip   = @proxy_server.ip
         proxy_port = @proxy_server.port
+        logger_write "proxy:#{proxy_ip},#{proxy_port}"
         proxy = Net::HTTP::Proxy(proxy_ip,proxy_port)
         http = proxy.new(uri.host, uri.port)
       end
@@ -62,6 +63,7 @@ module Mori
           get(url,true)
       end
     rescue => e
+      logger_write "error:#{e.inspect}"
       save_error url,e.inspect    
       return get(url,true)
     end
@@ -128,6 +130,7 @@ module Mori
 
     str
   rescue => e
+    logger_write "[error]trim:#{e.inspect}"
     obj
   end
 
@@ -135,6 +138,8 @@ module Mori
   def time_to_str time=Time.now, format="%Y-%m-%d %H:%M:%S"
     time.strftime(format) unless time.nil?
   rescue => e
+    logger_write "[error]trim:#{e.inspect}"
+    logger_write "       #{time},#{format}"
     time
   end
   
@@ -142,12 +147,13 @@ module Mori
     if v =~ /(.*)\(\d+\)/
       $1
     else
+      logger_write "unknow tag:#{v}"
       v
     end
   end
   
   def save_error url,content
-    log "http error:#{url},#{content}"
+    logger_write "http error:#{url},#{content}"
     error = ErrorUrl.find_by url:url
     ErrorUrl.create url: url, status: content if error.nil?
     @proxy_server.update_attributes active: false,status: 'Error' if ENABLE_PROXY

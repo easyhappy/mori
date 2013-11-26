@@ -19,7 +19,7 @@ namespace :scraper do
   task :content => :environment do
     page = ENV['page']
     max_page = ENV['max_page']
-    Ranwen.new.parse_content nil,page,max_page
+    Ranwen.new.init_parse_content
   end
   
   desc "update book"
