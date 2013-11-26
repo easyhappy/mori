@@ -4,10 +4,10 @@ $:.unshift(File.dirname(__FILE__))
 
 require 'scraper/ranwen'
 
-namespace :scraper do
+namespace :scraper_old do
   desc "parse book"
   task :book => :environment do
-    Ranwen.new.init_parse
+    Ranwen.new.parse_book
   end
   
   desc "parse chapter"

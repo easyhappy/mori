@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131212153814) do
+ActiveRecord::Schema.define(version: 20130915120550) do
 
   create_table "books", force: true do |t|
     t.integer  "category_id"
@@ -19,16 +19,17 @@ ActiveRecord::Schema.define(version: 20131212153814) do
     t.integer  "last_chapter_id"
     t.string   "url"
     t.string   "chapter_url"
+    t.string   "last_chapter_url"
     t.string   "name"
     t.string   "author"
     t.string   "code"
     t.string   "status"
-    t.boolean  "recommend",       default: false
-    t.boolean  "hot",             default: false
-    t.boolean  "deleted",         default: false
-    t.integer  "view_count",      default: 0
-    t.integer  "comment_count",   default: 0
-    t.integer  "word_count",      default: 0
+    t.boolean  "recommend",        default: false
+    t.boolean  "hot",              default: false
+    t.boolean  "deleted",          default: false
+    t.integer  "view_count",       default: 0
+    t.integer  "comment_count",    default: 0
+    t.integer  "word_count",       default: 0
     t.string   "desc"
     t.string   "last_updated_at"
     t.datetime "deleted_at"

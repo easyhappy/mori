@@ -7,6 +7,7 @@ class CreateBooks < ActiveRecord::Migration
 
       t.string      :url
       t.string      :chapter_url
+      t.string      :last_chapter_url
 
       t.string      :name
       t.string      :author
