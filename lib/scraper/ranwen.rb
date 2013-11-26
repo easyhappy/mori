@@ -166,11 +166,12 @@ class Ranwen
         parent_id = chapter.id
       rescue => e
         log e
+        binding.pry
         ErrorUrl.create url: url, status: "book:#{book.id},parent:#{parent_chapter.id}"
         break
       end
     end
-    book.last_chapter = Chapter.find_by_id(parent_id)
+    book.last_chapter_id = Chapter.find_by_id(parent_id).id
     book.save
   end
   

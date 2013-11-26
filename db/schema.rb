@@ -47,23 +47,19 @@ ActiveRecord::Schema.define(version: 20131212153814) do
     t.datetime "updated_at"
   end
 
-  create_table "chapter_ids", id: false, force: true do |t|
-    t.integer "id"
-    t.string  "status", default: "Pending"
-  end
-
   create_table "chapters", force: true do |t|
     t.integer  "book_id"
-    t.string   "name"
+    t.integer  "volume_id"
     t.string   "url"
-    t.datetime "deleted_at"
-    t.string   "deleted"
+    t.string   "chapters_url"
+    t.string   "name"
     t.integer  "parent_id"
     t.integer  "next_id"
-    t.integer  "volume_id"
     t.string   "code"
+    t.string   "deleted"
     t.integer  "view_count"
     t.integer  "integer"
+    t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
