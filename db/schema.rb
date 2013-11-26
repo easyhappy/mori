@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20130915120550) do
     t.string   "author"
     t.string   "code"
     t.string   "status"
+    t.string   "scrapter_status"
     t.boolean  "recommend",        default: false
     t.boolean  "hot",              default: false
     t.boolean  "deleted",          default: false
