@@ -1,7 +1,7 @@
 module Books
   module BaseHandler
     extend ActiveSupport::Concern
-    BOOK_LOGGER = Logger.new(STDOUT)
+    BOOK_LOGGER = Logger.new('log/scraper.log')
 
     def logger_write message
       BOOK_LOGGER.info message
