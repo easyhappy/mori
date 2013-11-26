@@ -18,6 +18,10 @@ module Mori
     BOOK_LOGGER.logger.fatal '-'*60
   end
 
+  def content_count html
+    trim(html).length rescue 0
+  end
+
   def get url,use_proxy=false,method='get',encoding=nil
     str = ''
     begin
