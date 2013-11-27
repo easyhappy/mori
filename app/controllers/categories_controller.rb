@@ -8,6 +8,7 @@ class CategoriesController < ApplicationController
     @category = Category.find @category_id
     @books = @category.books.order(updated_at: :desc).page(@page)
     ClickLog.click params.merge({ref_obj: @category})
+    render "books/index"
   end
 
 

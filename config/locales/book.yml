@@ -1,0 +1,8 @@
+zh-CN:
+  book:
+    name:               小说名称
+    author:             作者
+    status:             状态
+    last_chapter_name:  最新章节
+    updated_at:         更新时间
+    read_button:        操作

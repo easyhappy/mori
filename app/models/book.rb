@@ -23,4 +23,8 @@ class Book < ActiveRecord::Base
       self.where("name like ? or author like ?","%#{@q}%","%#{@q}%").page(config[:page]).order(view_count: :desc)
     end
   end
+
+  def read_button
+    I18n.t("book.read_button")
+  end
 end
