@@ -6,6 +6,7 @@
     = @book.name
   small
     = "作者：#{@book.author} 最后更新时间：#{@book.updated_at}"
+    
 #chapters
   table.table.table-striped
     - @chapters.each_slice(4) do |chapters|

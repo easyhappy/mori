@@ -11,9 +11,12 @@
     = "最后更新时间：#{@chapter.updated_at}"
     
 = chapter_navgation @pre_chapter, @current_chapter, @next_chapter
+
 #chapters
   table.table.table-striped
     = raw @chapter.content.try(:content)
+
+= chapter_navgation @pre_chapter, @current_chapter, @next_chapter
+
 = content_tag(:span, @pre_chapter.present? ? @pre_chapter.id : -1, :class => "pre_page_number display_none")
 = content_tag(:span, @next_chapter.present? ? @next_chapter.id : -1, :class => "next_page_number display_none")
-= chapter_navgation @pre_chapter, @current_chapter, @next_chapter
