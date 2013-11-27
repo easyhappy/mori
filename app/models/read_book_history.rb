@@ -6,7 +6,7 @@ class ReadBookHistory < ActiveRecord::Base
   
   class<<self
     def histories config
-      self.where(user_id: config[:user_id]).includes(:book,:current_chapter).order(updated_at: :desc).page(@page)
+      self.where(user_id: config[:user_id]).where("book_id is NOT NULL").includes(:book,:current_chapter).order(updated_at: :desc).page(@page)
     end
 
     def reading_chapters config
@@ -27,5 +27,9 @@ class ReadBookHistory < ActiveRecord::Base
         end
       end
     end
+  end
+
+  def action_buttons
+    I18n.t("main.action_buttons")
   end
 end

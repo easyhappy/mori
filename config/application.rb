@@ -21,6 +21,12 @@ module Mori
     # config.i18n.default_locale = :de
     config.time_zone = 'Beijing'
     config.active_record.default_timezone   = :local
+
+    # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
+    config.i18n.default_locale = 'zh-CN'
+    I18n.default_locale = 'zh-CN'
+    config.i18n.fallbacks = true
     
     config.generators.helper = false
     config.generators.stylesheets = false

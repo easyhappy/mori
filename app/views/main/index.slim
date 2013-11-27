@@ -1,0 +1,16 @@
+.col-xs-9
+  h3 我的历史记录
+  = show_model_table @histories do |row|
+    = row.show_text_link_column    :book, :name, :link => lambda{|model| book_path(model.book)}
+    = row.show_text_column         :book,            :author
+    = row.show_text_link_column    :current_chapter, :name, :link => lambda{|model| chapter_path(model.current_chapter) }
+    = row.show_text_column         :updated_at
+    = row.show_buttons_column      :action_buttons
+  = will_paginate @histories
+
+.col-xs-3#hot_books
+  .well.sidebar-nav
+    = history_books_sidebar @hot_books, '热门点击'
+    
+  .well.sidebar-nav
+    = history_books_sidebar @recent_books, '最近更新'

@@ -1,0 +1,7 @@
+zh-CN:
+  main:
+    book_name:            小说名称
+    book_author:          作者
+    current_chapter_name: 上次阅读
+    updated_at:           上次阅读时间
+    action_buttons:       操作
