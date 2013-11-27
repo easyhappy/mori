@@ -1,0 +1,15 @@
+#book_nav
+  = second_level_nav @book
+
+#book.text-center
+  h2
+    = @book.name
+  small
+    = "作者：#{@book.author} 最后更新时间：#{@book.updated_at}"
+#chapters
+  table.table.table-striped
+    - @chapters.each_slice(4) do |chapters|
+      tr
+        - chapters.each do |chapter|
+          td
+            = link_to trim(chapter.name), chapter,title: chapter.name
