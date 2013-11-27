@@ -7,7 +7,8 @@ html lang="en"
     meta name="author" content="Martin Xu(martin.xus@gmail.com)"
 
     = current_page_title @title
-    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    = stylesheet_link_tag :application, media: "all", "data-turbolinks-track" => true
+    = yield :stylesheet
     = csrf_meta_tags
 
   body
@@ -24,4 +25,6 @@ html lang="en"
 
     .container.content
       = yield
-      
+    
+= javascript_include_tag :application, :bootstrap
+= yield :js

@@ -1,0 +1,19 @@
+= content_for :stylesheet do
+  = stylesheet_link_tag :book
+= content_for :js do
+  = javascript_include_tag :chapter_page
+#book_nav
+  = second_level_nav @book, @chapter
+.text-center#book
+  h2
+    = @chapter.name
+  small
+    = "最后更新时间：#{@chapter.updated_at}"
+    
+= chapter_navgation @pre_chapter, @current_chapter, @next_chapter
+#chapters
+  table.table.table-striped
+    = raw @chapter.content.try(:content)
+= content_tag(:span, @pre_chapter.present? ? @pre_chapter.id : -1, :class => "pre_page_number display_none")
+= content_tag(:span, @next_chapter.present? ? @next_chapter.id : -1, :class => "next_page_number display_none")
+= chapter_navgation @pre_chapter, @current_chapter, @next_chapter

@@ -16,7 +16,7 @@ class ReadChapterHistory < ActiveRecord::Base
       if book_history.nil?
         ReadBookHistory.create user_id: config[:user_id],book_id: book_id,current_chapter_id: chapter_id
       else
-        book_history.update_attributes current_chapter_id: chapter_id,view_count: (book_history.view_count||0)+1
+        book_history.update_attributes current_chapter_id: chapter_id
       end
     end
   
