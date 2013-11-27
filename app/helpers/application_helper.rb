@@ -31,5 +31,4 @@ module ApplicationHelper
   def active_css2 *m
     " class=active " if m.include?(controller_name.downcase.singularize)
   end
-  
 end
