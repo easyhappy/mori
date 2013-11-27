@@ -1,0 +1,27 @@
+doctype html
+html lang="en"
+  head
+    meta charset="utf-8"
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    meta name="description" content=""
+    meta name="author" content="Martin Xu(martin.xus@gmail.com)"
+
+    = current_page_title @title
+    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    = csrf_meta_tags
+
+  body
+    .navbar.navbar-default.navbar-fixed-top
+      .container
+        .navbar-header
+          button.navbar-toggle[type="button" data-toggle="collapse" data-target=".navbar-collapse"]
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          = website_logo
+        .navbar-collapse.collapse
+          = current_page_header @category_id
+
+    .container.content
+      = yield
+      
