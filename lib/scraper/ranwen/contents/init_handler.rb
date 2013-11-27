@@ -4,7 +4,7 @@ module Contents
   module InitHandler
 
     def init_parse_content
-      chapters = Chapter.where(:scraper_status => :open).limit(10)
+      chapters = Chapter.where(:scraper_status => :open)
       chapters.each do |chapter|
         begin
           chapter = parse_content(chapter)

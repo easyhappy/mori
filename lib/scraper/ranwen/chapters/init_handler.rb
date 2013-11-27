@@ -10,7 +10,6 @@ module Chapters
       begin
         books.each do |book|
           parse_chapter book
-          break
         end
       rescue Exception => e
         logger_write e.inspect

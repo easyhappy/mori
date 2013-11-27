@@ -34,7 +34,7 @@ module Books
           logger_error e.inspect
         end
       end
-      #parse_next_page doc
+      parse_next_page doc
     end
 
     def parse_next_page doc
