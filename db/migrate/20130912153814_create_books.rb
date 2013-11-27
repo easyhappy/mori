@@ -14,7 +14,7 @@ class CreateBooks < ActiveRecord::Migration
       t.string      :code
       t.string      :status
       t.string      :scraper_status
-      t.string      :source
+      t.string      :source,          default: 0
       
       t.boolean     :recommend,       default: false
       t.boolean     :hot,             default: false
