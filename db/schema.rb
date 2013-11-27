@@ -15,7 +15,6 @@ ActiveRecord::Schema.define(version: 20130915120550) do
 
   create_table "books", force: true do |t|
     t.integer  "category_id"
-    t.integer  "source_id"
     t.integer  "last_chapter_id"
     t.string   "url"
     t.string   "chapter_url"
@@ -25,6 +24,7 @@ ActiveRecord::Schema.define(version: 20130915120550) do
     t.string   "code"
     t.string   "status"
     t.string   "scraper_status"
+    t.string   "source"
     t.boolean  "recommend",        default: false
     t.boolean  "hot",              default: false
     t.boolean  "deleted",          default: false
@@ -40,7 +40,6 @@ ActiveRecord::Schema.define(version: 20130915120550) do
 
   add_index "books", ["category_id"], name: "index_books_on_category_id", using: :btree
   add_index "books", ["last_chapter_id"], name: "index_books_on_last_chapter_id", using: :btree
-  add_index "books", ["source_id"], name: "index_books_on_source_id", using: :btree
 
   create_table "categories", force: true do |t|
     t.string   "name"

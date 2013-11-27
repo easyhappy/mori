@@ -27,7 +27,6 @@ module Contents
       end
           
       Content.create content: html,book_id: chapter.book_id,chapter_id: chapter.id,word_count: content_count(html)
-      
       return chapter if chapter.name.present?
 
       title = t doc/"h1.bname_content"

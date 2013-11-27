@@ -40,7 +40,7 @@ module Books
     def parse_next_page doc
       pagelink = doc/"#pagelink"
       next_page = pagelink/"a.next"
-      logger_write("抓取完毕...") and return if next_page.nil? || next_page.empty? || next_page.first.nil?
+      return if next_page.nil? || next_page.empty? || next_page.first.nil?
       
       relative_url, text = la next_page
       

@@ -4,11 +4,19 @@ module Chapters
   module InitHandler
 
     def init_parse_chapter
+      logger_write("begin parse chapter...")
       books = Book.where(:scraper_status => :open)
-
-      books.each do |book|
-        parse_chapter book
+      pre_chapter_count = Chapter.count
+      begin
+        books.each do |book|
+          parse_chapter book
+          break
+        end
+      rescue Exception => e
+        logger_write e.inspect
       end
+      now_chapter_count = Chapter.count
+      logger_write("before chapter count is #{pre_chapter_count}, now chapter count is #{now_chapter_count}")
     end
     
     def parse_chapter book
@@ -30,8 +38,6 @@ module Chapters
           logger_write e.inspect
           break
         end
-
-        break
       end
       book.last_chapter_id = Chapter.find_by_id(parent_id).id
       book.scraper_status = :close if book.last_chapter_url == Chapter.find_by_id(parent_id).url 
