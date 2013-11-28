@@ -36,4 +36,9 @@ namespace :scraper do
   task :associate => :environment do
     Ranwen.new.parse_chapter_associate
   end
+
+  desc "check chapter and content"
+  task :check_content => :environment do
+    Ranwen.new.check_contents
+  end
 end

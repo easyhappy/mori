@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130915120550) do
+ActiveRecord::Schema.define(version: 20131128050650) do
 
   create_table "books", force: true do |t|
     t.integer  "category_id"
@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(version: 20130915120550) do
     t.integer  "book_id"
     t.integer  "chapter_id"
     t.integer  "volume_id"
-    t.text     "content"
+    t.text     "content",    limit: 2147483647
     t.integer  "word_count"
     t.datetime "created_at"
     t.datetime "updated_at"
