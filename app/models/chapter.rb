@@ -8,6 +8,6 @@ class Chapter < ActiveRecord::Base
   end  
   
   def pre
-    Chapter.find parent_id unless parent_id.blank?
+    Chapter.find parent_id if parent_id.present?
   end
 end

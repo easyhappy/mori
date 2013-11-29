@@ -8,15 +8,15 @@ module BookHelper
     end
   end
 
-  def chapter_navgation pre, current, nxt
+  def chapter_navgation current
     contents_tag :div, :class => "text-center" do |contents|
-      if pre.present?
+      if (pre=current.pre).present?
         contents << link_to("上一章：#{truncate pre.name,length: 25} | ", chapter_path(pre))
       else
         contents << link_to("上一章：无 | ")  
       end
       contents << link_to("返回目录 | ", book_path(current.book)) if current.present?
-      if nxt.present?
+      if (nxt=current.next).present?
         contents << link_to("下一章：#{truncate nxt.name,length: 25}", chapter_path(nxt))
       else
         contents << link_to("下一章：无")  

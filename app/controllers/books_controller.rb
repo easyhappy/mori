@@ -7,8 +7,6 @@ class BooksController < ApplicationController
 
   def show
     @chapters = @book.chapters
-    ClickLog.click params.merge({ref_obj: @book})
-    @pre_chapter,@current_chapter,@next_chapter = ReadBookHistory.reading_chapters params.merge({ref_obj: @book})
   end
 
   private

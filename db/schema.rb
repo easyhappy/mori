@@ -128,6 +128,7 @@ ActiveRecord::Schema.define(version: 20131129044624) do
 
   create_table "read_book_histories", force: true do |t|
     t.integer  "user_id"
+    t.integer  "user_status"
     t.integer  "book_id"
     t.integer  "current_chapter_id"
     t.datetime "created_at"
@@ -135,7 +136,7 @@ ActiveRecord::Schema.define(version: 20131129044624) do
   end
 
   add_index "read_book_histories", ["book_id"], name: "index_read_book_histories_on_book_id", using: :btree
-  add_index "read_book_histories", ["user_id"], name: "index_read_book_histories_on_user_id", using: :btree
+  add_index "read_book_histories", ["user_id", "user_status", "book_id"], name: "index_user_and_user_status", unique: true, using: :btree
 
   create_table "read_chapter_histories", force: true do |t|
     t.integer  "user_id"
