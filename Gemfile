@@ -29,6 +29,7 @@ gem 'slim-rails',   '2.0.3'
 gem 'will_paginate','3.0.4'
 gem 'showbuilder',  '0.0.15'
 gem 'coffee-rails', '~> 4.0.0'
+gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
