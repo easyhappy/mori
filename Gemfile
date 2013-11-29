@@ -25,12 +25,10 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder',     '~> 1.2'
 
-group :assets do
-  gem 'slim-rails',   '2.0.3'
-  gem 'will_paginate','3.0.4'
-  gem 'showbuilder',  '0.0.15'
-  gem 'coffee-rails', '~> 4.0.0'
-end
+gem 'slim-rails',   '2.0.3'
+gem 'will_paginate','3.0.4'
+gem 'showbuilder',  '0.0.15'
+gem 'coffee-rails', '~> 4.0.0'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
