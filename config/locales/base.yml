@@ -1,2 +1,18 @@
 zh-CN:
   no_record:        没有记录
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            password_confirmation:
+              confirmation:         请输入正确密码
+            email:
+              blank:                不能为空
+              taken:                已经被注册了
+            password:
+              blank:                不能为空
+              too_short:            太短了
+  errors:
+    messages:
+      not_saved:                     保存失败

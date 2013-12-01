@@ -3,9 +3,29 @@
 }
 
 #book_body{
-  background-image: url("0018.gif")
+  background-image: url("bg.png")
 }
 
 #navbar_header{
-  background-image: url('bg.png');
+  background-image: linear-gradient(to bottom, #428bca 0%, #3071a9 100%);
+  border-color: #357ebd;
+}
+.navfont{
+  color: white !important;
+  font-size: 13px;
+}
+
+#new_user{
+  max-width: 421px;
+  padding: 50px;
+  margin: 0 auto;
+  font-size: 16px;
+  height: auto;
+}
+#error_explanation h2{
+  color: red;
+  font-size: 20px;
+}
+.form-control{
+  margin-bottom: 3px
 }

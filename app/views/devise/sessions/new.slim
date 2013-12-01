@@ -1,0 +1,6 @@
+= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+  = f.text_field :login, :required => false, :autofocus => true, :class => "form-control", :placeholder => "请输入邮箱"
+
+  = f.password_field :password, :required => false, :class => "form-control", :placeholder => "请输入密码"
+
+  = f.submit "登陆", :class => 'btn btn-lg btn-primary btn-block'

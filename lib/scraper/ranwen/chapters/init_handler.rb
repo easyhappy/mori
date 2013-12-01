@@ -5,7 +5,8 @@ module Chapters
 
     def init_parse_chapter
       logger_write("begin parse chapter...")
-      books = Book.where(:scraper_status => :open)
+      #books = Book.where(:scraper_status => :open)
+      books = Book.where(:id => 678)
       pre_chapter_count = Chapter.count
       begin
         books.each do |book|
