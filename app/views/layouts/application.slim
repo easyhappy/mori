@@ -11,8 +11,8 @@ html lang="en"
     = yield :stylesheet
     = csrf_meta_tags
 
-  body
-    .navbar.navbar-default.navbar-fixed-top
+  body#book_body
+    .navbar.navbar-default.navbar-fixed-top#navbar_header
       .container
         .navbar-header
           button.navbar-toggle[type="button" data-toggle="collapse" data-target=".navbar-collapse"]

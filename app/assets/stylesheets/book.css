@@ -1,3 +1,11 @@
 .display_none{
   display: none 
 }
+
+#book_body{
+  background-image: url("0018.gif")
+}
+
+#navbar_header{
+  background-image: url('bg.png');
+}
