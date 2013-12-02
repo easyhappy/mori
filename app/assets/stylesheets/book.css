@@ -48,6 +48,6 @@ body{
 
 .table-striped > tbody > tr:nth-child(odd) > td,
 .table-striped > tbody > tr:nth-child(odd) > th {
-  background-color: #380B2;
+  background-color: #D4E2F0;
 }
 
