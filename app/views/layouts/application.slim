@@ -21,8 +21,7 @@ html lang="en"
             span.icon-bar
             span.icon-bar
           = website_logo
-        .navbar-collapse.collapse
-          = current_page_header @category_id
+        = current_page_header @category_id
 
     .container.content
       = yield

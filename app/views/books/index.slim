@@ -6,5 +6,5 @@
     = row.show_text_link_column :last_chapter, :name
     = row.show_text_column      :updated_at
     = row.show_text_link_column :read_button,  :link => lambda{|model|book_path(model)}
-  .text-right
+  .text-center
     = will_paginate @books
