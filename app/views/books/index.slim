@@ -1,9 +1,10 @@
-= show_model_table @books, :book do |row|
-  = row.show_text_link_column :name
-  = row.show_text_column      :author
-  = row.show_text_column      :status
-  = row.show_text_link_column :last_chapter, :name
-  = row.show_text_column      :updated_at
-  = row.show_text_link_column :read_button,  :link => lambda{|model|book_path(model)}
-.text-right
-  = will_paginate @books
+#book_content
+  = show_model_table @books, :book do |row|
+    = row.show_text_link_column :name
+    = row.show_text_column      :author
+    = row.show_text_column      :status
+    = row.show_text_link_column :last_chapter, :name
+    = row.show_text_column      :updated_at
+    = row.show_text_link_column :read_button,  :link => lambda{|model|book_path(model)}
+  .text-right
+    = will_paginate @books
