@@ -38,7 +38,7 @@ module LayoutHelper
 
   def current_page_header_nav_more_part categories
     return unless categories.present?
-    contents_tag(:li, :class => 'dropdown navbar-li') do |cs|
+    contents_tag(:li, :class => 'dropdown') do |cs|
       cs << content_tag(:a, :class => 'dropdown-toggle', 'data-toggle' => "dropdown") do
         "更多<b class='caret'></b>".html_safe
       end

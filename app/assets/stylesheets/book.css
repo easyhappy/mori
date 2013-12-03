@@ -10,7 +10,13 @@
   background-image: linear-gradient(to bottom, #428bca 0%, #3071a9 100%);
   border-color: #357ebd;
 }
+
 .navfont{
+  color: rgb(248, 239, 239) !important;
+  font-size: 14px;
+  font-family: "Microsoft YaHei" ! important;
+}
+.dropdown-toggle{
   color: rgb(248, 239, 239) !important;
   font-size: 14px;
   font-family: "Microsoft YaHei" ! important;
@@ -46,6 +52,14 @@
   background-color: #225683;
 }
 
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus{
+  background-color: #225683;
+}
+
+.dropdown-menu > li > a{
+  background-color: #225683;
+}
+
 body{
   font-size: 13px;
 }
@@ -59,9 +73,4 @@ body{
   font-family: "Microsoft Yahei","SimHei";
   color: #14020D;
   font-size: 18px;
-}
-
-.navbar-collapse{
-    height: inherit !important;
-    display: block !important;
 }
