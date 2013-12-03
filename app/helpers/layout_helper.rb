@@ -20,7 +20,10 @@ module LayoutHelper
   private
 
   def current_page_header_user_part
-    
+    contents_tag :ul, :class => "nav navbar-nav pull-right", :id => "userbar" do |contents|
+      contents << content_tag(:li, link_to('注册', new_user_registration_path, :class => :navfont))
+      contents << content_tag(:li, link_to('登陆', new_user_session_path, :class => :navfont))
+    end
   end
 
   def current_page_header_nav_part(category_id)
