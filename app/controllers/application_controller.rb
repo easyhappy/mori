@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   #before_filter :authenticate_user!
-  
+  before_filter :update_sanitized_params, if: :devise_controller?
+
   protect_from_forgery with: :exception
   before_filter        :init_params
   
@@ -18,5 +19,13 @@ class ApplicationController < ActionController::Base
       params[:user_id]      = Session.find_by_session_id(cookies["_mori_session"]).try(:id)
       params[:user_status]  = 0
     end
+  end
+
+  private
+
+  def update_sanitized_params
+    binding.pry
+    devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(:email,   :password, :password_confirmation)}
+    devise_parameter_sanitizer.for(:sign_in) {|u| u.permit(:email,   :password)}
   end
 end
