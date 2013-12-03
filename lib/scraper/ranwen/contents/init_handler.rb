@@ -4,7 +4,8 @@ module Contents
   module InitHandler
 
     def init_parse_content
-      chapters = Chapter.where(:scraper_status => :open)
+      #chapters = Chapter.where(:scraper_status => :open)
+      chapters = Chapter.where(:id => 38009)
       chapters.each do |chapter|
         begin
           chapter = parse_content(chapter)
@@ -25,8 +26,18 @@ module Contents
       rescue Exception => e
         logger_write e.inspect
       end
-          
-      Content.create! content: html,book_id: chapter.book_id,chapter_id: chapter.id,word_count: content_count(html)
+
+      base_url = chapter.url.rpartition('/')[0]
+      
+      paginations = doc/'div#fenye/div#thumb/a'
+      pre_url = (la (paginations.first))[0]
+      next_url = (la (paginations[2]))[0]
+
+      pre_url = pre_url == 'index.html'  ?   '' : [base_url, pre_url].join('/')
+      next_url = next_url  == 'index.html' ? '' : [base_url, next_url].join('/')
+      Content.create! content: html, book_id: chapter.book_id,
+                        chapter_id: chapter.id, word_count: content_count(html),
+                        pre_url: pre_url, next_url: next_url
       return chapter if chapter.name.present?
 
       title = t doc/"h1.bname_content"
