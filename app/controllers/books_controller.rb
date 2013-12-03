@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: [:show, :edit, :update, :destroy]
+  before_action :set_book, only: [:show]
 
   def index
     @books = Book.search params.merge(page: @page)
@@ -7,6 +7,11 @@ class BooksController < ApplicationController
 
   def show
     @chapters = @book.chapters
+  end
+
+  def search
+    @books = Book.search params.merge(page: @page)
+    render :index
   end
 
   private

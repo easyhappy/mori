@@ -9,10 +9,10 @@ module LayoutHelper
     link_to 'Mori Reading', root_path, :class => "navbar-brand"
   end
 
-  def current_page_header category_id
+  def current_page_header params, category_id=nil
     contents_tag :div, :class => 'navbar-collapse collapse' do |cs|
-      cs << current_page_header_nav_part
-      cs << current_page_header_search_part
+      cs << current_page_header_nav_part(category_id)
+      cs << current_page_header_search_part(params)
       cs << current_page_header_user_part
     end
   end
@@ -23,20 +23,39 @@ module LayoutHelper
     
   end
 
-  def current_page_header_nav_part
+  def current_page_header_nav_part(category_id)
     contents_tag(:ul, :class => "nav navbar-nav") do |contents|
-      Category.limit(5).each do |c|
+      categories = Category.all
+      show_count = 5
+      categories[0..(show_count-1)].each do |c|
         klass = (category_id.to_i == c.id ? 'active navbar-li' : 'navbar-li')
         contents << content_tag(:li, link_to(c.name, category_path(c), :class => 'navfont'), :class => klass)
       end
-      contents << content_tag(:li, link_to('退出',destroy_user_session_path)) if current_user
+
+      contents << current_page_header_nav_more_part(categories[(show_count+1)..-1])
     end
   end
 
-  def current_page_header_search_part
-    contents_tag :form, :class => 'navbar-form navbar-left', :role => 'search' do |cs|
+  def current_page_header_nav_more_part categories
+    return unless categories.present?
+    contents_tag(:li, :class => 'dropdown navbar-li') do |cs|
+      cs << content_tag(:a, :class => 'dropdown-toggle', 'data-toggle' => "dropdown") do
+        "更多<b class='caret'></b>".html_safe
+      end
+      
+      cs << contents_tag(:ul, :class => 'dropdown-menu') do |cs2|
+        categories.each do |c|
+        klass = 'navbar-li'
+        cs2 << content_tag(:li, link_to(c.name, category_path(c), :class => 'navfont'), :class => klass)
+        end
+      end
+    end
+  end
+
+  def current_page_header_search_part params
+    contents_tag :form, :action => '/books/search', :class => 'navbar-form navbar-left', :role => 'search' do |cs|
       cs << content_tag(:div, :class => "form-group") do
-        content_tag(:input, nil, :class => "form-control",  :placeholder => "搜索", :type => 'text')
+        content_tag(:input, nil, :name => :q, :class => "form-control",  :placeholder => "搜索", :type => 'text', :value => params[:q])
       end
     end
   end
