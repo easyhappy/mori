@@ -14,6 +14,11 @@ namespace :scraper do
   task :chapter => :environment do
     Ranwen.new.init_parse_chapter
   end
+
+  desc "parse book pics"
+  task :book_pic => :environment do
+    Ranwen.new.parse_book_pics
+  end
   
   desc "parse content"
   task :content => :environment do

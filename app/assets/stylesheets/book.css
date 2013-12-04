@@ -56,6 +56,11 @@
   background-color: #225683;
 }
 
+.navbar-default .navbar-nav > .dropdown > a .caret {
+  border-top-color: #F8F3F0;
+  border-bottom-color: #777777;
+}
+
 .dropdown-menu > li > a{
   background-color: #225683;
 }

@@ -31,5 +31,7 @@ module Mori
     config.generators.helper = false
     config.generators.stylesheets = false
     config.generators.javascripts = false
+
+    config.filter_parameters += [:password, :password_confirmation]
   end
 end

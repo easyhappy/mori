@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
          :omniauth_providers => [:google_oauth2]
   
   def self.find_for_database_authentication(conditions)
-    binding.pry
+    conditions[:email] = conditions.delete(:login)
     user = where(conditions).first
   end
 end

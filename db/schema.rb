@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131203150401) do
+ActiveRecord::Schema.define(version: 20131204081609) do
 
   create_table "books", force: true do |t|
     t.integer  "category_id"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20131203150401) do
     t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "pic_url"
   end
 
   add_index "books", ["category_id"], name: "index_books_on_category_id", using: :btree
