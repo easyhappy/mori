@@ -45,6 +45,9 @@ group :development, :test do
   gem 'thin',                   '1.6.1'
 end
 
+gem 'typhoeus',                 '0.6.6'
+gem 'nokogiri',                 '1.6.0'
+
 gem 'hpricot'
 gem 'kaminari'
 gem 'quiet_assets'

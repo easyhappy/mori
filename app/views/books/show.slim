@@ -7,8 +7,6 @@
       = @book.name
     small
       = "作者：#{@book.author} 最后更新时间：#{@book.updated_at}"
-    a href=@book.chapter_url
-      = :origin_url
       
   #chapters
     table.table.table-striped

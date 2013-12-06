@@ -1,7 +1,7 @@
 module LayoutHelper
   def current_page_title title
     content_tag :title do
-      "#{title || "首页"} - Mori Reading"
+      "#{title || ""} Mori Reading"
     end
   end
 
