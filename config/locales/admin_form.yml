@@ -9,5 +9,6 @@ zh-CN:
     misc:
       ago:              前
       search:           搜索
+      filter:           搜索
     flash:
       successful:       保存成功

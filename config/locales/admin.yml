@@ -2,7 +2,7 @@ zh-CN:
   admin:
     actions:
       dashboard:
-        menu:           导航栏
+        menu:           管理主页
         breadcrumb:     标签
         title:          Title
       index:
@@ -33,5 +33,7 @@ zh-CN:
         menu:           历史记录
       history_show:
         menu:           历史记录
+        title:          历史记录
+        breadcrumb:     历史记录
       show_in_app:
         menu:           返回前台
