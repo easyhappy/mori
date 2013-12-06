@@ -7,17 +7,31 @@ zh-CN:
         title:          Title
       index:
         breadcrumb:     列表
+        title:          列表
         menu:           列表
+      edit:
+        title:          编辑
+        breadcrumb:     编辑
+        menu:           编辑
+        link:           编辑
+      show:
+        breadcrumb:     查看
+        menu:           查看
+        title:          查看
+      delete:
+        menu:           删除
       new:
         menu:           新建
+        link:           新建
+        title:          新建
       export:
         breadcrumb:     导出
         menu:           导出
+        link:           导出
         title:          Title
       history_index:
         menu:           历史记录
-    home:
-      name:             返回前端页面
-
-    misc:
-      ago:              前
+      history_show:
+        menu:           历史记录
+      show_in_app:
+        menu:           返回前台

@@ -1,0 +1,13 @@
+zh-CN:
+  admin:
+    form:
+      optional:           可选
+      char_length_up_to:  长度
+      basic_info:         基本信息
+    home:
+      name:             返回前端页面
+    misc:
+      ago:              前
+      search:           搜索
+    flash:
+      successful:       保存成功
