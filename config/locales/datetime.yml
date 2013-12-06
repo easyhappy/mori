@@ -1,0 +1,6 @@
+zh-CN:
+  datetime:
+    distance_in_words:
+      about_x_hours:        大约几小时
+      x_days:               大约几天
+      x_minutes:            大约几分钟 

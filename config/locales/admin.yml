@@ -1,0 +1,23 @@
+zh-CN:
+  admin:
+    actions:
+      dashboard:
+        menu:           导航栏
+        breadcrumb:     标签
+        title:          Title
+      index:
+        breadcrumb:     列表
+        menu:           列表
+      new:
+        menu:           新建
+      export:
+        breadcrumb:     导出
+        menu:           导出
+        title:          Title
+      history_index:
+        menu:           历史记录
+    home:
+      name:             返回前端页面
+
+    misc:
+      ago:              前
