@@ -1,0 +1,12 @@
+defaults: &defaults
+  admin_emails:
+    - "meeasyhappy@gmail.com"
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

@@ -47,6 +47,10 @@ end
 
 gem 'typhoeus',                 '0.6.6'
 gem 'nokogiri',                 '1.6.0'
+gem 'cancan',                   '1.6.10'
+
+#yaml配置信息
+gem 'settingslogic',            '2.0.9'
 
 gem 'hpricot'
 gem 'kaminari'

@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   include SocialMediaAuthentication
-  attr_accessor :login, :email
+  attr_accessor :login
 
   devise :database_authenticatable,   :registerable, :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, 
@@ -9,5 +9,9 @@ class User < ActiveRecord::Base
   def self.find_for_database_authentication(conditions)
     conditions[:email] = conditions.delete(:login)
     user = where(conditions).first
+  end
+
+  def admin?
+    Setting.admin_emails.include?(self.email)
   end
 end
