@@ -22,6 +22,7 @@ module LayoutHelper
   def current_page_header_user_part
     contents_tag :ul, :class => "nav navbar-nav pull-right", :id => "userbar" do |contents|
       if user_signed_in?
+        contents << content_tag(:li, link_to('后台管理', rails_admin_path, :class => :navfont)) if current_user.admin?
         contents << content_tag(:li, link_to('退出', destroy_user_session_path, :class => :navfont))
       else
         contents << content_tag(:li, link_to('注册', new_user_registration_path, :class => :navfont))
