@@ -11,6 +11,7 @@ set :branch,      'master'
 
 task :environment do
   invoke :'rvm:use[ruby-2.0.0-p247@mori]'
+  
 end
 
 # Put any custom mkdir's in here for when `mina setup` is ran.
