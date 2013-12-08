@@ -1,9 +1,9 @@
 .display_none{
-  display: none 
+  display: none;
 }
 
 #book_body{
-  background-image: url("bg.png")
+  background-image: url("bg.png");
 }
 
 #navbar_header{
@@ -36,7 +36,7 @@
 }
 
 .form-control{
-  margin-bottom: 3px
+  margin-bottom: 3px;
 }
 
 .well{
