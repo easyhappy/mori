@@ -11,7 +11,6 @@ set :branch,      'master'
 
 task :environment do
   invoke :'rvm:use[ruby-2.0.0-p247@mori]'
-  
 end
 
 # Put any custom mkdir's in here for when `mina setup` is ran.
@@ -31,10 +30,10 @@ task :deploy => :environment do
   deploy do
     # Put things that will set up an empty directory into a fully set-up
     # instance of your project.
-    invoke :'git:pull'
+    #invoke :'git:pull'
     #invoke :'deploy:link_shared_paths'
     #invoke :'bundle:install'
-    invoke :'rails:db_migrate'
+    #invoke :'rails:db_migrate'
     invoke :'rails:assets_precompile'
 
     to :launch do
