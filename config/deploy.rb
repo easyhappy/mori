@@ -5,7 +5,7 @@ require 'mina/rvm'
 
 set :domain,      'www.ml-china.org'
 set :user,        'ubuntu'
-set :deploy_to,   '/home/ubuntu/Document'
+set :deploy_to,   '/home/ubuntu/Document/mori'
 set :repository,  'git@github.com:easyhappy/mori.git'
 set :branch,      'master'
 
