@@ -31,10 +31,11 @@ task :deploy => :environment do
     # Put things that will set up an empty directory into a fully set-up
     # instance of your project.
     #invoke :'git:pull'
+    queue 'git pull'
     #invoke :'deploy:link_shared_paths'
     #invoke :'bundle:install'
     #invoke :'rails:db_migrate'
-    invoke :'rails:assets_precompile'
+    #invoke :'rails:assets_precompile'
 
     to :launch do
       #queue "touch #{deploy_to}/tmp/restart.txt"

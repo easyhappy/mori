@@ -3,7 +3,6 @@ class Ability
 
   def initialize(user)
     if user.admin?
-      
     end
   end
 end
