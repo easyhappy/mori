@@ -3,7 +3,7 @@ require 'mina/rails'
 require 'mina/git'
 require 'mina/rvm'
 
-set :domain,      'www.5ireading.org'
+set :domain,      'www.5ireading.com'
 set :user,        'ubuntu'
 set :deploy_to,   '/home/ubuntu/Document/mori'
 set :repository,  'git@github.com:easyhappy/mori.git'
