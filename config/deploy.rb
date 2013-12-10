@@ -3,14 +3,14 @@ require 'mina/rails'
 require 'mina/git'
 require 'mina/rvm'
 
-set :domain,      'www.ml-china.org'
+set :domain,      'www.5ireading.org'
 set :user,        'ubuntu'
 set :deploy_to,   '/home/ubuntu/Document/mori'
 set :repository,  'git@github.com:easyhappy/mori.git'
 set :branch,      'master'
 
 task :environment do
-  invoke :'rvm:use[ruby-2.0.0-p247@mori]'
+  invoke :'rvm:use[ruby-2.0.0-p353@mori]'
 end
 
 # Put any custom mkdir's in here for when `mina setup` is ran.
@@ -30,10 +30,10 @@ task :deploy => :environment do
   deploy do
     # Put things that will set up an empty directory into a fully set-up
     # instance of your project.
-    #queue 'git pull'
-    queue 'sudo service nginx stop'
+    queue 'git pull'
+    #queue 'sudo service nginx stop'
     #invoke :'deploy:link_shared_paths'
-    #invoke :'bundle:install'
+    invoke :'bundle:install'
     #invoke :'rails:db_migrate'
     #invoke :'rails:assets_precompile'
 
