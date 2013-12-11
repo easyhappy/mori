@@ -70,4 +70,3 @@ gem 'omniauth-github'
 
 gem "omniauth-google-oauth2"
 gem 'newrelic_rpm'
-gem 'sinatra'
