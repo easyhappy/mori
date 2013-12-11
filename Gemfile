@@ -1,4 +1,5 @@
-source 'http://ruby.taobao.org'
+eval(File.read(File.dirname(__FILE__) + '/Gemfile.local'), binding) rescue source 'http://rubygems.org'
+#source 'http://ruby.taobao.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
@@ -69,3 +70,4 @@ gem 'omniauth-github'
 
 gem "omniauth-google-oauth2"
 gem 'newrelic_rpm'
+gem 'sinatra'
