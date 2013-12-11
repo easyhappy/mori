@@ -50,7 +50,7 @@ gem 'nokogiri',                 '1.6.0'
 gem 'cancan',                   '1.6.10'
 gem 'rails_admin',              '0.6.0'
 gem 'kaminari'
-gem 'unicorn'
+gem 'unicorn-rails'
 
 #yaml配置信息
 gem 'settingslogic',            '2.0.9'
