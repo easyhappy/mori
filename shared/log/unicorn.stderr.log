@@ -191,3 +191,12 @@ I, [2013-12-13T17:13:03.882214 #6241]  INFO -- : worker=3 spawned pid=6241
 I, [2013-12-13T17:13:03.886896 #6241]  INFO -- : worker=3 ready
 I, [2013-12-13T17:13:17.884099 #6272]  INFO -- : worker=4 spawned pid=6272
 I, [2013-12-13T17:13:17.888038 #6272]  INFO -- : worker=4 ready
+I, [2013-12-13T17:13:31.890249 #6300]  INFO -- : worker=5 spawned pid=6300
+I, [2013-12-13T17:13:31.893170 #6300]  INFO -- : worker=5 ready
+I, [2013-12-13T17:13:45.896387 #6313]  INFO -- : worker=6 spawned pid=6313
+I, [2013-12-13T17:13:45.901130 #6313]  INFO -- : worker=6 ready
+I, [2013-12-13T17:13:59.903450 #6325]  INFO -- : worker=7 spawned pid=6325
+I, [2013-12-13T17:13:59.906223 #6325]  INFO -- : worker=7 ready
+I, [2013-12-13T17:14:13.884982 #6151]  INFO -- : master process ready
+I, [2013-12-13T17:14:13.917479 #6336]  INFO -- : worker=8 spawned pid=6336
+I, [2013-12-13T17:14:13.923418 #6336]  INFO -- : worker=8 ready

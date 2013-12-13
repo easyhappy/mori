@@ -23,6 +23,9 @@ task :setup => :environment do
   #queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/config"]
   #queue! %[touch "#{deploy_to}/config/database.yml"]
   #queue  %[echo  "-----> Be sure to edit 'config/database.yml'."]
+  queue   %[mkdir -p shared/logs]
+  queue   %[mkdir -p shared/sockets]
+  queue   %[mkdir -p shared/pids]
 end
 
 desc "Deploys the current version to the server."
