@@ -27,3 +27,5 @@ capybara-*.html
 /Gemfile.lock
 /thin.sh
 Gemfile.local
+shared
+shared/*
