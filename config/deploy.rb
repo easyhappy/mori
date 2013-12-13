@@ -38,9 +38,9 @@ task :deploy => :environment do
     #invoke :'deploy:link_shared_paths'
     #invoke :'bundle:install'
     #invoke :'unicorn_rails restart'
-    invoke :'bundle exec rake assets:precompile Rails_env=production'
     #invoke :'rails:db_migrate'
-    #invoke :'rails:assets_precompile'
+    invoke :'rails:assets_precompile'
+    queue 'unicorn_rails  -c config/unicorn.rb -Eproduction'
 
     to :launch do
       #queue "touch #{deploy_to}/tmp/restart.txt"
