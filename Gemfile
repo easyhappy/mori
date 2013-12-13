@@ -56,10 +56,6 @@ gem 'unicorn-rails'
 #yaml配置信息
 gem 'settingslogic',            '2.0.9'
 
-group :assets do
-  gem 'turbo-sprockets-rails3'
-end
-
 gem 'hpricot'
 gem 'kaminari'
 gem 'quiet_assets'
