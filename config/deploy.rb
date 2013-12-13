@@ -40,10 +40,11 @@ task :deploy => :environment do
     #invoke :'unicorn_rails restart'
     #invoke :'rails:db_migrate'
     invoke :'rails:assets_precompile'
-    queue 'unicorn_rails  -c config/unicorn.rb -Eproduction'
 
     to :launch do
       #queue "touch #{deploy_to}/tmp/restart.txt"
+      #queue 'unicorn_rails   -c config/unicorn.rb -Eproduction'
+      queue 'cat /home/ubuntu/Document/mori/shared/pids/unicorn.pid | xargs kill -USR2'
     end
   end
 end
