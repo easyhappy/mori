@@ -5,6 +5,7 @@ class CommentsController < ApplicationController
   # GET /comments.json
   def index
     @comments = Comment.all
+    render :json => @comments.to_json
   end
 
   # GET /comments/1

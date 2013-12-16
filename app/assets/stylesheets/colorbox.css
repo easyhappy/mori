@@ -144,12 +144,12 @@
 }
 
 #cboxLoadedContent{
-  margin-bottom:28px;
+  margin-top:28px;
 }
 
 #cboxTitle{
   position:absolute;
-  bottom:4px; left:0;
+  top:0px; left:0;
   text-align:center;
   width:100%;
   color:#949494;
@@ -221,7 +221,7 @@
 
 #cboxClose{
   position:absolute;
-  bottom:0; right:0;
+  top:0; right:0;
   background:url(controls.png) no-repeat -25px 0;
   width:25px;
   height:25px;
