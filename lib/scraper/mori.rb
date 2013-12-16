@@ -6,8 +6,8 @@ require "yaml"
 module Mori 
   ENABLE_PROXY = false
 
-  BOOK_LOGGER = Logger.new(STDOUT)
-  #BOOK_LOGGER = Logger.new('log/scraper.log')
+  #BOOK_LOGGER = Logger.new(STDOUT)
+  BOOK_LOGGER = Logger.new('log/scraper.log')
   def logger_write message
     BOOK_LOGGER.info message
   end

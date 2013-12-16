@@ -44,7 +44,7 @@ group :development, :test do
   gem 'pry-rails',              '0.2.2'
   gem 'zeus',                   '0.13.3'
   gem 'thin',                   '1.6.1'
-  gem 'rspec'
+  gem 'rspec-rails'
 end
 
 gem 'typhoeus',                 '0.6.6'

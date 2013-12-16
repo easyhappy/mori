@@ -9,7 +9,7 @@ module Books
       
       begin
         pre_books_count = Book.count
-        current_page = 444
+        current_page = 588
         parse_books_list current_page
       rescue Exception => e
         logger_error e.inspect
