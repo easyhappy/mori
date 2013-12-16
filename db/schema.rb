@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131206073250) do
+ActiveRecord::Schema.define(version: 20131216060122) do
 
   create_table "books", force: true do |t|
     t.integer  "category_id"
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20131206073250) do
     t.string   "code"
     t.string   "status"
     t.string   "scraper_status"
-    t.string   "source",           default: "0"
+    t.string   "source"
     t.boolean  "recommend",        default: false
     t.boolean  "hot",              default: false
     t.boolean  "deleted",          default: false
@@ -81,6 +81,17 @@ ActiveRecord::Schema.define(version: 20131206073250) do
   end
 
   add_index "click_logs", ["user_id"], name: "index_click_logs_on_user_id", using: :btree
+
+  create_table "comments", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "book_id"
+    t.string   "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["book_id"], name: "index_comments_on_book_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "contents", force: true do |t|
     t.integer  "book_id"
@@ -154,6 +165,18 @@ ActiveRecord::Schema.define(version: 20131206073250) do
 
   add_index "read_book_histories", ["book_id"], name: "index_read_book_histories_on_book_id", using: :btree
   add_index "read_book_histories", ["user_id", "user_status", "book_id"], name: "index_user_and_user_status", unique: true, using: :btree
+
+  create_table "read_chapter_histories", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "book_id"
+    t.integer  "chapter_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "read_chapter_histories", ["book_id"], name: "index_read_chapter_histories_on_book_id", using: :btree
+  add_index "read_chapter_histories", ["chapter_id"], name: "index_read_chapter_histories_on_chapter_id", using: :btree
+  add_index "read_chapter_histories", ["user_id"], name: "index_read_chapter_histories_on_user_id", using: :btree
 
   create_table "search_logs", force: true do |t|
     t.integer  "user_id"

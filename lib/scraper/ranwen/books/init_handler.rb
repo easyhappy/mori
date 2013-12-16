@@ -9,7 +9,7 @@ module Books
       
       begin
         pre_books_count = Book.count
-        current_page = 588
+        current_page = 1
         parse_books_list current_page
       rescue Exception => e
         logger_error current_page
@@ -32,7 +32,8 @@ module Books
         begin
           parse_book_info_part tr
         rescue Exception => e
-          logger_error e.inspect
+          logger_write e.inspect
+          logger_error current_page
         end
       end
       parse_next_page doc

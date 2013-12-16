@@ -11,6 +11,7 @@ html lang="en"
     = stylesheet_link_tag :book
     = javascript_include_tag :application, :bootstrap
     = csrf_meta_tags
+    = yield :cs
 
   body#book_body
     .navbar.navbar-default.navbar-fixed-top#navbar_header

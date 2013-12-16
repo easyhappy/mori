@@ -1,3 +1,7 @@
+= content_for :cs do 
+  = stylesheet_link_tag 'colorbox'
+a.test_colorbox href="#{asset_path('1.jpg')}"
+  = 'test'
 #book_content
   #book_nav
     = second_level_nav @book
@@ -15,3 +19,7 @@
           - chapters.each do |chapter|
             td.row
               = link_to chapter.name, chapter,title: chapter.name
+
+= content_for :js do
+  = javascript_include_tag 'jquery.colorbox'
+  = javascript_include_tag 'comments'
