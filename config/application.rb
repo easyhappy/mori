@@ -28,10 +28,12 @@ module Mori
     I18n.default_locale = 'zh-CN'
     config.i18n.fallbacks = true
     
-    config.generators.helper = false
-    config.generators.stylesheets = false
-    config.generators.javascripts = false
-
     config.filter_parameters += [:password, :password_confirmation]
+  
+    config.generators do |g|
+      g.orm             :active_record
+      g.template_engine :slim
+      g.test_framework  :rspec
+    end
   end
 end
