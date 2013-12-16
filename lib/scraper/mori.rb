@@ -15,7 +15,7 @@ module Mori
   def logger_error message
     BOOK_LOGGER.fatal '-'*60
     BOOK_LOGGER.fatal message
-    BOOK_LOGGER.logger.fatal '-'*60
+    BOOK_LOGGER.fatal '-'*60
   end
 
   def get_base_url
