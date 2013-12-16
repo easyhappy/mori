@@ -8,14 +8,15 @@ module Mori
 
   #BOOK_LOGGER = Logger.new(STDOUT)
   BOOK_LOGGER = Logger.new('log/scraper.log')
+  ERROR_LOGGER = Logger.new('log/scraper_err.log')
   def logger_write message
     BOOK_LOGGER.info message
   end
 
   def logger_error message
-    BOOK_LOGGER.fatal '-'*60
-    BOOK_LOGGER.fatal message
-    BOOK_LOGGER.fatal '-'*60
+    #BOOK_LOGGER.fatal '-'*60
+    ERROR_LOGGER.fatal message
+    #BOOK_LOGGER.fatal '-'*60
   end
 
   def get_base_url

@@ -12,7 +12,8 @@ module Books
         current_page = 588
         parse_books_list current_page
       rescue Exception => e
-        logger_error e.inspect
+        logger_error current_page
+        logger_write e.inspect
       end
 
       books_count = Book.count
