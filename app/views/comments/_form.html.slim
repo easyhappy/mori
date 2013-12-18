@@ -1,18 +1,6 @@
-= form_for @comment do |f|
-  - if @comment.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@comment.errors.count, "error")} prohibited this comment from being saved:"
-      ul
-        - @comment.errors.full_messages.each do |message|
-          li = message
-
-  .field
-    = f.label :user
-    = f.text_field :user
-  .field
-    = f.label :book
-    = f.text_field :book
-  .field
-    = f.label :content
-    = f.text_field :content
-  .actions = f.submit 'Save'
+div.new_comment
+  label 
+    = '我要评论：  '
+  textarea#comment_content.contents
+  .comment_submit.btn.btn-primary.btn-large data-loading-text="Loading..."
+    = '提交评论'
