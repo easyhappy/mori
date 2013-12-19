@@ -23,4 +23,5 @@ class Comment
       onComplete: self.complete_callback;
       html: $('.new_comment_form').html(), 
       width: '45%', height: '50%');
+
 comment = new Comment
