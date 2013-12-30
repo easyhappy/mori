@@ -2,6 +2,9 @@
   = stylesheet_link_tag 'colorbox'
 a.test_colorbox
   = '我来评下'
+- @comment = Comment.new
+.new_comment_form style='display:none'
+  = render "comments/form"
 a.test_colorbox_1
 = hidden_field_tag :input, @book.id, :class => :current_book_id
 

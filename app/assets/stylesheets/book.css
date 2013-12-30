@@ -79,3 +79,13 @@ body{
   color: #14020D;
   font-size: 18px;
 }
+
+#comment_content{
+  width: 80%;
+  height: 150px;
+}
+.comment_submit{
+  float: right;
+  margin-right: 10%;
+  margin-top: 5px;
+}
