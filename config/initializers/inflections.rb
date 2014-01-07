@@ -1,16 +1,8 @@
-# Be sure to restart your server when you modify this file.
-
-# Add new inflection rules using the following format. Inflections
-# are locale specific, and you may define rules for as many different
-# locales as you wish. All of these examples are active by default:
-# ActiveSupport::Inflector.inflections(:en) do |inflect|
-#   inflect.plural /^(ox)$/i, '\1en'
-#   inflect.singular /^(ox)en/i, '\1'
-#   inflect.irregular 'person', 'people'
-#   inflect.uncountable %w( fish sheep )
-# end
-
-# These inflection rules are supported but not enabled by default:
-# ActiveSupport::Inflector.inflections(:en) do |inflect|
-#   inflect.acronym 'RESTful'
-# end
+# 表名对应时删除mongo后缀
+module ActiveSupport::Inflector
+  def pluralize_with_mongo(word)
+    word = word[0..-7] if word[-6..-1] == '_mongo'
+    pluralize_without_mongo(word)
+  end
+  alias_method_chain :pluralize, :mongo
+end
