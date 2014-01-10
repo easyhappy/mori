@@ -47,7 +47,7 @@ group :development, :test do
   gem 'pry-rails',              '0.2.2'
   gem 'zeus',                   '0.13.3'
   gem 'thin',                   '1.6.1'
-  gem 'rspec-rails'
+  gem 'guard-rspec',            '4.2.4',  require: false
 end
 
 gem 'typhoeus',                 '0.6.6'
@@ -74,5 +74,9 @@ gem 'omniauth-github'
 
 gem "omniauth-google-oauth2"
 gem 'newrelic_rpm'
-gem 'spork'
-gem 'spork-rails'
+
+group :test do
+  gem 'spork'
+  gem 'spork-rails'
+  gem 'rspec-rails'
+end

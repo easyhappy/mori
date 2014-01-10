@@ -27,6 +27,7 @@ module Mori
     config.i18n.default_locale = 'zh-CN'
     I18n.default_locale = 'zh-CN'
     config.i18n.fallbacks = true
+    I18n.enforce_available_locales = true
     
     config.filter_parameters += [:password, :password_confirmation]
   
