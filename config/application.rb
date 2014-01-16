@@ -25,9 +25,8 @@ module Mori
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
     config.i18n.default_locale = 'zh-CN'
-    I18n.default_locale = 'zh-CN'
     config.i18n.fallbacks = true
-    I18n.enforce_available_locales = true
+    config.i18n.enforce_available_locales = false
     
     config.filter_parameters += [:password, :password_confirmation]
   
@@ -35,6 +34,7 @@ module Mori
       g.orm             :active_record
       g.template_engine :slim
       g.test_framework  :rspec
+      g.factory_girl    false
     end
   end
 end

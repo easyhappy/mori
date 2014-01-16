@@ -79,4 +79,5 @@ group :test do
   gem 'spork'
   gem 'spork-rails'
   gem 'rspec-rails'
+  gem 'factory_girl_rails', '4.2.1'
 end
