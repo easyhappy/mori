@@ -3,7 +3,6 @@ class ChaptersController < ApplicationController
 
   def show
     @chapter = Chapter.find_by_id(params[:id])
-    ReadBookHistory.set_current_chapter_history params.merge!({book_id: @chapter.book_id})
   end
 
   private
