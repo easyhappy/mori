@@ -1,6 +1,6 @@
 ActiveSupport::Notifications.subscribe "process_action.action_controller"do |name, start, finish, id, payload|
   total_cost = (finish - start) * 1000
-  max_cost = 0
+  max_cost = 5000
   if total_cost > max_cost
     VisitedPageMongo.create do |page_request|
       page_request.path         = payload[:path]
