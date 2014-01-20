@@ -3,6 +3,5 @@ div.new_comment
     = '我要评论：  '
   textarea#comment_content.contents
   
-  = link_to '更多评论', comments_path(:book_id => @book.id), :class => 'more_comments'
-  .comment_submit.btn.btn-primary.btn-large data-loading-text="Loading..."  
+  .comment_submit.btn.btn-primary.btn-large data-loading-text="Loading..."
     = '提交评论'
