@@ -8,7 +8,7 @@ module Contents
       chapters = Chapter.where(:id => 38009)
       chapters.each do |chapter|
         begin
-          chapter = parse_content(chapter)
+          parse_content(chapter)
           chapter.scraper_status = :close
           chapter.save
         rescue Exception => e
@@ -17,8 +17,32 @@ module Contents
       end
     end
 
-    def parse_content chapter
-      doc = h chapter.url,get_encoding
+    def parse_content chapter, try_count=3
+      request = Typhoeus::Request.new(chapter.url)
+      Typhoeus::Hydra.hydra.queue request
+      Typhoeus::Hydra.hydra.run
+
+      response = request.response
+      return unless response.code == 200
+      body = Nokogiri::HTML(response.body, nil, get_encoding)
+      html = body.at_css("#content").inner_html
+      pre_url, next_url = get_urls(chapter, body, 0, 2)
+
+      Content.create! content: html, book_id: chapter.book_id,
+                        chapter_id: chapter.id, word_count: content_count(html),
+                        pre_url: pre_url, next_url: next_url
+    end
+
+    def get_urls chapter, body, *positions
+      base_url = chapter.url.rpartition('/')[0]
+      positions.map do |position|
+        url = body.at_css("#thumb").children[position].attributes["href"].value
+        url == 'index.html' ? '' : [base_url, url].join('/')
+      end
+    end
+
+    def parse_content_old chapter
+      doc   = h chapter.url,get_encoding
       html  = (doc/"#content").inner_html
       begin
         html = html.sub """\r\n\r\n<div align=\"center\"><script src=\"/ssi/style-gg.js\" type=\"text/javascript\"></script></div> \r\n\t\t\t""",""
