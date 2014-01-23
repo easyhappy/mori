@@ -46,4 +46,9 @@ namespace :scraper do
   task :check_content => :environment do
     Ranwen.new.check_contents
   end
+
+  desc "fetch avaliable proxy servers"
+  task :fetch_proxy => :environment do
+    Ranwen.new.analyze_proxys
+  end
 end

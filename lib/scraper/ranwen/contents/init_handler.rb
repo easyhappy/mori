@@ -19,7 +19,7 @@ module Contents
     end
 
     def parse_content chapter, try_count=3
-      request = Typhoeus::Request.new(chapter.url, :proxy => '59.39.145.178:3128')
+      request = Typhoeus::Request.new(chapter.url, :proxy => 'http://59.39.145.178:3128')
       Typhoeus::Hydra.hydra.queue request
       Typhoeus::Hydra.hydra.run
 
