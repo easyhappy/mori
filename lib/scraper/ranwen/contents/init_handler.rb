@@ -5,8 +5,8 @@ module Contents
     attr_accessor :hydra
 
     def init_parse_content
-      #chapters = Chapter.where(:scraper_status => :open)
-      chapters = Chapter.where(:id => 38009)
+      chapters = Chapter.where(:scraper_status => :open)
+      #chapters = Chapter.where(:id => 38009)
       hydra = Typhoeus::Hydra.new(max_concurrency: 10)
       chapters.each do |chapter|
         begin
@@ -34,7 +34,7 @@ module Contents
         rescue Exception => e
           logger_write e.inspect
         end
-        sleep 2.seconds
+        sleep 1.seconds
       end
       request
     end

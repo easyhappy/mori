@@ -36,7 +36,7 @@ module Scraper
 
       private
       def load_proxy_list
-        File.open("data/proxy.dat", 'w') do |file|
+        File.open("data/proxy.dat") do |file|
           while line = file.gets
             server, port, cost = line.split(",")
             PROXY_LIST << [server, port]
