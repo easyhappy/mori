@@ -28,7 +28,22 @@ module Scraper
         output_to_file
       end
 
+      def random_proxy
+        load_proxy_list unless PROXY_LIST.present?
+        proxy = PROXY_LIST.sample(1)[0]
+        "http://#{proxy.join(':')}"
+      end
+
       private
+      def load_proxy_list
+        File.open("data/proxy.dat", 'w') do |file|
+          while line = file.gets
+            server, port, cost = line.split(",")
+            PROXY_LIST << [server, port]
+          end
+        end
+      end
+      
       def char2int(str)
         for i in 0.. str.length-1
           str[i] = CHAR_TO_INT[str[i]] if CHAR_TO_INT[str[i]].present?

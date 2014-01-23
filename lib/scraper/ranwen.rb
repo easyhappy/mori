@@ -5,7 +5,7 @@ require 'mori'
 require 'ranwen/book_handler'
 require 'ranwen/chapter_handler'
 require 'ranwen/content_handler'
-require 'proxy'
+require 'ranwen/proxy_handler'
 
 class Ranwen
   include Mori

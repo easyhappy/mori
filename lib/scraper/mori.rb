@@ -20,7 +20,7 @@ module Mori
   end
 
   def get_base_url
-     "http://www.ranwen.net"
+    "http://www.ranwen.net"
   end
 
   def pre_page
