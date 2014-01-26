@@ -21,18 +21,20 @@ module Contents
     def parse_content chapter
       request = Typhoeus::Request.new(chapter.url, :proxy => random_proxy)
       request.on_complete do |response|
-        return unless response.code == 200
-        begin
-          body = Nokogiri::HTML(response.body, nil, get_encoding)
-          html = body.at_css("#content").inner_html
-          pre_url, next_url = get_urls(chapter, body, 0, 2)
-          Content.create! content: html, book_id: chapter.book_id,
-                            chapter_id: chapter.id, word_count: content_count(html),
-                            pre_url: pre_url, next_url: next_url
-          chapter.scraper_status = :close
-          chapter.save
-        rescue Exception => e
-          logger_write e.inspect
+        puts chapter.url
+        if response.code == 200
+          begin
+            body = Nokogiri::HTML(response.body, nil, get_encoding)
+            html = body.at_css("#content").inner_html
+            pre_url, next_url = get_urls(chapter, body, 0, 2)
+            Content.create! content: html, book_id: chapter.book_id,
+                              chapter_id: chapter.id, word_count: content_count(html),
+                              pre_url: pre_url, next_url: next_url
+            chapter.scraper_status = :close
+            chapter.save
+          rescue Exception => e
+            logger_write e.inspect
+          end
         end
         sleep 1.seconds
       end

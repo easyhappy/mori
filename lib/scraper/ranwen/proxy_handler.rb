@@ -76,7 +76,7 @@ module Scraper
       def output_to_file
         File.open("data/proxy.dat", 'w') do |file|
           PROXY_LIST.each do |proxy|
-            file.write proxy.join(",") + '\\\\n'
+            file.write "#{proxy.join(',')}\n"
           end
         end
       end
