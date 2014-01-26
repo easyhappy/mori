@@ -1,0 +1,25 @@
+/home/andy/Documents/mori/hello/platforms/android/bin/HelloWorld.ap_ \
+ : /home/andy/Documents/mori/hello/platforms/android/res/drawable-hdpi/icon.png \
+/home/andy/Documents/mori/hello/platforms/android/res/drawable/icon.png \
+/home/andy/Documents/mori/hello/platforms/android/res/drawable-xhdpi/icon.png \
+/home/andy/Documents/mori/hello/platforms/android/res/drawable-mdpi/icon.png \
+/home/andy/Documents/mori/hello/platforms/android/res/xml/config.xml \
+/home/andy/Documents/mori/hello/platforms/android/res/drawable-ldpi/icon.png \
+/home/andy/Documents/mori/hello/platforms/android/res/values/strings.xml \
+/home/andy/Documents/mori/hello/platforms/android/bin/res/drawable-hdpi/icon.png \
+/home/andy/Documents/mori/hello/platforms/android/bin/res/drawable/icon.png \
+/home/andy/Documents/mori/hello/platforms/android/bin/res/drawable-xhdpi/icon.png \
+/home/andy/Documents/mori/hello/platforms/android/bin/res/drawable-mdpi/icon.png \
+/home/andy/Documents/mori/hello/platforms/android/bin/res/drawable-ldpi/icon.png \
+/home/andy/Documents/mori/hello/platforms/android/assets/www \
+/home/andy/Documents/mori/hello/platforms/android/assets/www/cordova.js \
+/home/andy/Documents/mori/hello/platforms/android/assets/www/img \
+/home/andy/Documents/mori/hello/platforms/android/assets/www/js \
+/home/andy/Documents/mori/hello/platforms/android/assets/www/config.xml \
+/home/andy/Documents/mori/hello/platforms/android/assets/www/index.html \
+/home/andy/Documents/mori/hello/platforms/android/assets/www/css \
+/home/andy/Documents/mori/hello/platforms/android/assets/www/cordova_plugins.js \
+/home/andy/Documents/mori/hello/platforms/android/assets/www/img/logo.png \
+/home/andy/Documents/mori/hello/platforms/android/assets/www/js/index.js \
+/home/andy/Documents/mori/hello/platforms/android/assets/www/css/index.css \
+/home/andy/Documents/mori/hello/platforms/android/bin/AndroidManifest.xml \
