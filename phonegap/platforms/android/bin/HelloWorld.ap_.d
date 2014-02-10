@@ -23,6 +23,8 @@
 /home/andy/Documents/mori/phonegap/platforms/android/assets/www/js/jquery-1.4.4.min.js \
 /home/andy/Documents/mori/phonegap/platforms/android/assets/www/js/jquery.mobile.js \
 /home/andy/Documents/mori/phonegap/platforms/android/assets/www/js/index.js \
+/home/andy/Documents/mori/phonegap/platforms/android/assets/www/css/images \
 /home/andy/Documents/mori/phonegap/platforms/android/assets/www/css/index.css \
 /home/andy/Documents/mori/phonegap/platforms/android/assets/www/css/jquery.mobile.css \
+/home/andy/Documents/mori/phonegap/platforms/android/assets/www/css/images/icons-18-white.png \
 /home/andy/Documents/mori/phonegap/platforms/android/bin/AndroidManifest.xml \
