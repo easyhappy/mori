@@ -1,4 +1,9 @@
+// Mobile Router
+// =============
+
+// Includes file dependencies
 define([ "jquery","backbone", "../models/CategoryModel", "../collections/CategoriesCollection", "../views/CategoryView" ], function( $, Backbone, CategoryModel, CategoriesCollection, CategoryView ) {
+
     // Extends Backbone.Router
     var CategoryRouter = Backbone.Router.extend( {
 
@@ -74,4 +79,5 @@ define([ "jquery","backbone", "../models/CategoryModel", "../collections/Categor
 
     // Returns the Router class
     return CategoryRouter;
+
 } );
