@@ -29,7 +29,6 @@
 /home/andy/Documents/mori/phonegap/platforms/android/assets/www/js/models \
 /home/andy/Documents/mori/phonegap/platforms/android/assets/www/js/routers/mobileRouter.js \
 /home/andy/Documents/mori/phonegap/platforms/android/assets/www/js/libs/backbone.js \
-/home/andy/Documents/mori/phonegap/platforms/android/assets/www/js/libs/jquery.mobile.js \
 /home/andy/Documents/mori/phonegap/platforms/android/assets/www/js/libs/lodash.js \
 /home/andy/Documents/mori/phonegap/platforms/android/assets/www/js/libs/jquerymobile.js \
 /home/andy/Documents/mori/phonegap/platforms/android/assets/www/js/libs/jquery.js \
