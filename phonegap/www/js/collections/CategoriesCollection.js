@@ -8,7 +8,7 @@ define([ "jquery","backbone","models/CategoryModel" ], function( $, Backbone, Ca
     },
     // Sets the Collection model property to be a Category Model
     model: CategoryModel,
-    url: 'http://192.168.3.48:3000/books/api',
+    url: 'http://192.168.1.102:3000/books/api',
     // Sample JSON data that in a real app will most likely come from a REST web service
     jsonArray: [
       { "category": "animals",  "type": "Pets" },
