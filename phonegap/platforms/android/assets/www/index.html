@@ -11,7 +11,7 @@
     <title>Hello World</title>
   </head>
   <body>
-    <div id="categories" data-role="page" data-theme="b" data-title="Categories">
+    <div id="categories" data-role="page" data-title="Categories">
   
       <div data-role="header">
             <h1>Categories</h1>
@@ -51,4 +51,11 @@
 </div>
 
 </body>
+<script id="categoryItems" type="text/template">
+      <% _.each(collection.toJSON(), function( category, id ) { %>
+            <li class="ui-li-static">
+              <%= category.type %>
+            </li>
+      <% }); %>
+</script>
 </html>

@@ -761,7 +761,7 @@
       };
       options.error = Backbone.wrapError(options.error, collection, options);
       return (this.sync || Backbone.sync).call(this, 'read', this, options);
-    },
+    }, 
 
     // Create a new instance of a model in this collection. Add the model to the
     // collection immediately, unless `wait: true` is passed, in which case we
