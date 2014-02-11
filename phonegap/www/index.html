@@ -52,14 +52,10 @@
 
 </body>
 <script id="categoryItems" type="text/template">
-
-      <% _.each( collection.toJSON(), function( category, id ) { %>
-
+      <% _.each(collection.toJSON(), function( category, id ) { %>
             <li class="ui-li-static">
-                  <%= category.type %>
+              <%= category.type %>
             </li>
-
       <% }); %>
-
 </script>
 </html>
