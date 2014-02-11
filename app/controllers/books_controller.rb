@@ -16,6 +16,7 @@ class BooksController < ApplicationController
   end
 
   def api
+    puts 'aaaa'
     render :json => [{ "category" => "animals",  "type" => "haha" }]
   end
 
