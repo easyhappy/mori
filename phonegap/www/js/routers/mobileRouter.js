@@ -1,16 +1,4 @@
-define([ "jquery","backbone", "../models/CategoryModel", "../collections/CategoriesCollection", "../views/CategoryView" ], function( $, Backbone, CategoryModel, CategoriesCollection, CategoryView ) {
-    // Extends Backbone.Router
-
-    window.HomeView = Backbone.View.extend({
-
-    template:_.template($('#home').html()),
-
-    render:function (eventName) {
-        $(this.el).html(this.template());
-        return this;
-    }
-  });
-
+define([ "jquery","backbone", "../models/CategoryModel", "../collections/CategoriesCollection", "../views/CategoryView", "../views/HomeView"], function( $, Backbone, CategoryModel, CategoriesCollection, CategoryView, HomeView) {
   window.Page1View = Backbone.View.extend({
   
       template:_.template($('#page1').html()),
@@ -33,7 +21,7 @@ define([ "jquery","backbone", "../models/CategoryModel", "../collections/Categor
     // Backbone.js Routes
     routes: {
       "": "home",
-      "page1":"page1"
+      "category":"category"
     },
 
     home:function () {
@@ -41,26 +29,16 @@ define([ "jquery","backbone", "../models/CategoryModel", "../collections/Categor
     },
 
     page1:function () {
-      console.log('#page1');
       this.changePage(new Page1View());
     },
 
-    category: function(type) {
-      var currentView = this[ type + "View" ];
-      if(!currentView.collection.length) {
-        $.mobile.loading( "show" );
-        currentView.collection.fetch({data: {page: 3}}).done( function() {
-          $.mobile.changePage( "#" + type, { reverse: false, changeHash: false } );
-            } );
-        }
-      else {
-        $.mobile.changePage( "#" + type, { reverse: false, changeHash: false } );
-      }
+    category: function() {
+      this.changePage(new CategoryView({el: "#animals",  collection: new CategoriesCollection([], {type: "animals"})}));
     },
 
     changePage:function (page) {
-        $(page.el).attr('data-role', 'page');
-        page.render();
+      $.mobile.loading( "show" );
+      page.render();
         $('body').append($(page.el));
         var transition = $.mobile.defaultPageTransition;
         // We don't want to slide the first page
