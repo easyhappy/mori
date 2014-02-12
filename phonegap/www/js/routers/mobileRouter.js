@@ -32,12 +32,12 @@ define([ "jquery","backbone", "../models/CategoryModel", "../collections/Categor
       this.changePage(new Page1View());
     },
 
-    category: function(){
+    category_new: function(){
       options = {collection: new CategoriesCollection([], {type: "animals"})}
       this.changePage(new CategoryView(options));
     },
 
-    category_old: function() {
+    category: function() {
       var type = 'category'
       var currentView = new CategoryView({collection: new CategoriesCollection([], {type: "animals"})});
       if(!currentView.collection.length) {
@@ -45,6 +45,14 @@ define([ "jquery","backbone", "../models/CategoryModel", "../collections/Categor
         currentView.collection.fetch().done( function() {
           //$.mobile.changePage( $(currentView.el), { reverse: false, changeHash: false } );
             } );
+          currentView.render();
+          $('body').append($(currentView.el));
+          var transition = $.mobile.defaultPageTransition;
+      // We don't want to slide the first page
+      if (this.firstPage) {
+          transition = 'none';
+          this.firstPage = false;
+      }
           $.mobile.changePage($(currentView.el), {changeHash:false, transition: $.mobile.defaultPageTransition});
         }
       else {

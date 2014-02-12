@@ -9,7 +9,6 @@
     <script src="js/libs/require.js" data-main="js/mobile"></script>
     <title>Hello World</title>
   </head>
-  <body>
     <script type="text/template" id="header">
       <div data-role="header">
         <div data-role="navbar">    
@@ -21,18 +20,21 @@
       </div>
     </script>
 
+    <script type="text/template" id="category">
+      <%= $("#header").html() %>
+      <div role="main" class="ui-content">
+        <h3> this is Page 1 </h3>
+        <ul id="list" data-role="listview" data-inset="true">
+        </ul>
+      </div>
+    </script>
+    
     <script type="text/template" id="home">
       <%= $("#header").html() %>
       <div data-role="content">
         <h3>this is Home</h3>
       </div>
     </script>
-
-    <script type="text/template" id="category">
-      <%= $("#header").html() %>
-      <div data-role="content">
-        <h3> this is Page 1 </h3>
-      </div>
-    </script>
+  <body>
   </body>
 </html>

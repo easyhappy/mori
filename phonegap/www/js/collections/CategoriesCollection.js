@@ -46,7 +46,7 @@ define([ "jquery","backbone","models/CategoryModel" ], function( $, Backbone, Ca
             return row.category === self.type;
         } );
         options.success(categories);
-        self.trigger("added");
+        //self.trigger("added");
         deferred.resolve();
       }, 1000);
       return deferred;

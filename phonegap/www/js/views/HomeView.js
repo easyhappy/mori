@@ -1,4 +1,4 @@
-define([ "jquery", "backbone"], function($, Backbone){
+define(["jquery", "backbone"], function($, Backbone){
   var HomeView = Backbone.View.extend({
     template: _.template($('#home').html()),
     
