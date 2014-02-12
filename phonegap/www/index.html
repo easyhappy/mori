@@ -10,58 +10,34 @@
     <title>Hello World</title>
   </head>
   <body>
-    <div id="categories" data-role="page" data-title="Categories">
-  
+    <script type="text/template" id="home">
       <div data-role="header">
             <h1>Categories</h1>
         <div data-role="navbar">    
           <ul>
             <li><a href="#" class="ui-btn-active ui-state-persist">Menu item 1</a></li>
-            <li><a href="#">Menu item 2</a></li>
-            <li><a href="#">Menu item 3</a></li>
+            <li><a href="#page1">Menu item 2</a></li>
+            <li><a href="#page2">Menu item 3</a></li>
           </ul>
         </div>
-      </div><!-- /header -->
-  
-      <div role="main" class="ui-content">
-            <h2>Select a Category Below:</h2>
-            <ul data-role="listview" data-inset="true">
-                  <li><a href="#category?animals" class="animals">Animals</a></li>
-                  <li><a href="#category?colors" class="colors">Colors</a></li>
-                  <li><a href="#category?vehicles" class="vehicles">Vehicles</a></li>
-            </ul>
-      </div><!-- /content -->
-</div>
-<div id="animals" data-role="page" data-title="Animals">
+      </div>
+      <div data-role="content">
+        <h3>Application Template for using Backbone.js and jQuery Mobile.</h3>
+      </div>
+    </script>
 
+    <script type="text/template" id="page1">
       <div data-role="header">
-      <h1>Animals</h1>
-      </div><!-- /header -->
-  
-      <div role="main" class="ui-content">
-            <ul data-role="listview" data-inset="true">
-            </ul>
-      </div><!-- /content -->
-</div>
-
-<div id="colors" data-role="page" data-title="Colors">
-
-      <div data-role="header">
-      <h1>Colors</h1>
-      </div><!-- /header -->
-      <div role="main" class="ui-content">
-            <ul data-role="listview" data-inset="true">
-            </ul>
-      </div><!-- /content -->
-
-</div>
-
-</body>
-<script id="categoryItems" type="text/template">
-      <% _.each(collection.toJSON(), function( category, id ) { %>
-            <li class="ui-li-static">
-              <%= category.type %>
-            </li>
-      <% }); %>
-</script>
+          <a href="#" data-icon="back" class="back ui-btn-left">Back</a>
+          <h1>Page 1</h1>
+      </div>
+      <div data-role="content">
+        <p>Navigate to:</p>
+        <ul data-role="listview" data-inset="true">
+          <li><a href="#">Home</a></li>
+          <li><a href="#page2">Page 2</a></li>
+        </ul>
+      </div>
+    </script>
+  </body>
 </html>
