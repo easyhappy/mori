@@ -24,7 +24,7 @@ define([ "jquery","backbone", "../models/CategoryModel", "../collections/Categor
       var currentView = this[ type + "View" ];
       if(!currentView.collection.length) {
         $.mobile.loading( "show" );
-        currentView.collection.fetch().done( function() {
+        currentView.collection.fetch({data: {page: 3}}).done( function() {
           $.mobile.changePage( "#" + type, { reverse: false, changeHash: false } );
             } );
         }
