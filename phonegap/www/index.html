@@ -6,7 +6,6 @@
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
     <link rel="stylesheet" href="css/jquery.mobile.css">
-    <link rel="stylesheet" type="text/css" href="css/index.css" />
     <script src="js/libs/require.js" data-main="js/mobile"></script>
     <title>Hello World</title>
   </head>
@@ -15,11 +14,13 @@
   
       <div data-role="header">
             <h1>Categories</h1>
-        <ul>
-          <li><a href="#" class="ui-btn-active ui-state-persist">Menu item 1</a></li>
-          <li><a href="#">Menu item 2</a></li>
-          <li><a href="#">Menu item 3</a></li>
-        </ul>
+        <div data-role="navbar">    
+          <ul>
+            <li><a href="#" class="ui-btn-active ui-state-persist">Menu item 1</a></li>
+            <li><a href="#">Menu item 2</a></li>
+            <li><a href="#">Menu item 3</a></li>
+          </ul>
+        </div>
       </div><!-- /header -->
   
       <div role="main" class="ui-content">
