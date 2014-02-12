@@ -27,7 +27,6 @@ define([ "jquery","backbone","models/CategoryModel" ], function( $, Backbone, Ca
     ],
     parse: function(data) {
       this.models[0] = new this.model(data[0]);
-      this.trigger("added");
     },
 
     // Overriding the Backbone.sync method (the Backbone.fetch method calls the sync method when trying to fetch data)
@@ -46,7 +45,7 @@ define([ "jquery","backbone","models/CategoryModel" ], function( $, Backbone, Ca
             return row.category === self.type;
         } );
         options.success(categories);
-        //self.trigger("added");
+        self.trigger("added");
         deferred.resolve();
       }, 1000);
       return deferred;
