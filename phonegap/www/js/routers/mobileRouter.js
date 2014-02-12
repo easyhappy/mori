@@ -46,6 +46,7 @@ define([ "jquery","backbone", "../models/CategoryModel", "../collections/Categor
           //$.mobile.changePage( $(currentView.el), { reverse: false, changeHash: false } );
             } );
           currentView.render();
+          activeSelector('a.category')
           $('body').append($(currentView.el));
           var transition = $.mobile.defaultPageTransition;
       // We don't want to slide the first page
@@ -59,6 +60,9 @@ define([ "jquery","backbone", "../models/CategoryModel", "../collections/Categor
         $.mobile.changePage($(currentView.el), {changeHash:false, transition: $.mobile.defaultPageTransition});
       }
     },
+    activeSelector:function(selector){
+      $(selector).addClass("ui-btn-active")
+    },
 
     changePage:function (page) {
       $.mobile.loading( "show" );
@@ -70,8 +74,10 @@ define([ "jquery","backbone", "../models/CategoryModel", "../collections/Categor
           transition = 'none';
           this.firstPage = false;
       }
+      this.activeSelector("a.home")
       $.mobile.changePage($(page.el), {changeHash:false, transition: transition});
     }
+
   });
   return CategoryRouter;
 });
