@@ -4,8 +4,8 @@ define([ "jquery","backbone", "../models/CategoryModel", "../collections/Categor
       template:_.template($('#page1').html()),
   
       render:function (eventName) {
-          $(this.el).html(this.template());
-          return this;
+        $(this.el).html(this.template());
+        return this;
       }
   });
 
@@ -32,20 +32,36 @@ define([ "jquery","backbone", "../models/CategoryModel", "../collections/Categor
       this.changePage(new Page1View());
     },
 
-    category: function() {
-      this.changePage(new CategoryView({el: "#animals",  collection: new CategoriesCollection([], {type: "animals"})}));
+    category: function(){
+      options = {collection: new CategoriesCollection([], {type: "animals"})}
+      this.changePage(new CategoryView(options));
+    },
+
+    category_old: function() {
+      var type = 'category'
+      var currentView = new CategoryView({collection: new CategoriesCollection([], {type: "animals"})});
+      if(!currentView.collection.length) {
+        $.mobile.loading( "show" );
+        currentView.collection.fetch().done( function() {
+          //$.mobile.changePage( $(currentView.el), { reverse: false, changeHash: false } );
+            } );
+          $.mobile.changePage($(currentView.el), {changeHash:false, transition: $.mobile.defaultPageTransition});
+        }
+      else {
+        $.mobile.changePage($(currentView.el), {changeHash:false, transition: $.mobile.defaultPageTransition});
+      }
     },
 
     changePage:function (page) {
       $.mobile.loading( "show" );
       page.render();
-        $('body').append($(page.el));
-        var transition = $.mobile.defaultPageTransition;
-        // We don't want to slide the first page
-        if (this.firstPage) {
-            transition = 'none';
-            this.firstPage = false;
-        }
+      $('body').append($(page.el));
+      var transition = $.mobile.defaultPageTransition;
+      // We don't want to slide the first page
+      if (this.firstPage) {
+          transition = 'none';
+          this.firstPage = false;
+      }
       $.mobile.changePage($(page.el), {changeHash:false, transition: transition});
     }
   });
