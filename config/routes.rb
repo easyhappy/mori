@@ -7,7 +7,11 @@ Mori::Application.routes.draw do
   resources  :categories
   resources  :books do
     get :search, on: :collection
-    get :api,    on: :collection
   end
   root       "main#index"
+
+  namespace :api do
+    resources :books
+    resources :categories
+  end
 end

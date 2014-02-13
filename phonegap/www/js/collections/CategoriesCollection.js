@@ -8,7 +8,7 @@ define([ "jquery","backbone","models/CategoryModel" ], function( $, Backbone, Ca
     },
     // Sets the Collection model property to be a Category Model
     model: CategoryModel,
-    url: 'http://192.168.1.102:3000/books/api',
+    url: 'http://192.168.3.48:3000/api/categories',
     // Sample JSON data that in a real app will most likely come from a REST web service
     jsonArray: [
       { "category": "animals",  "type": "Pets" },
@@ -25,9 +25,13 @@ define([ "jquery","backbone","models/CategoryModel" ], function( $, Backbone, Ca
       { "category": "vehicles", "type": "Planes" },
       { "category": "vehicles", "type": "Construction" }
     ],
+
+    parse: function(data){
+      self.toJSON(data)
+    },
     
     // Overriding the Backbone.sync method (the Backbone.fetch method calls the sync method when trying to fetch data)
-    sync: function( method, model, options ) {
+    synca: function( method, model, options ) {
       // Local Variables
       // ===============
       // Instantiates an empty array
