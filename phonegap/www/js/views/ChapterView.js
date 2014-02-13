@@ -9,7 +9,7 @@ define([ "jquery", "backbone","models/ChapterModel" ], function( $, Backbone, Ch
       this.$el.html(this.template());
       $('body').append($(this.el));
       $('a.category').addClass("ui-btn-active");
-      this.$el.find("ul.category").html(this.collection.models[0].get("content").content);
+      this.$el.find("ul.category").html(this.collection.models[0].get("content"));
       $.mobile.changePage($(this.el), {changeHash:false, transition: $.mobile.defaultPageTransition});
       return this;
     }

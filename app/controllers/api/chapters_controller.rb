@@ -1,5 +1,8 @@
 class Api::ChaptersController < Api::BaseController
   def index
-    render :json => Chapter.limit(1).to_json(:include => :content)
+    chapters = Chapter.limit(1)
+    c = JSON.parse(chapters.to_json)
+    c[0]["content"] = chapters[0].content.content[0..225]
+    render :json => c
   end
 end
