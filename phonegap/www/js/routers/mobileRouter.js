@@ -1,10 +1,12 @@
 define([ "jquery","backbone", "../models/CategoryModel", 
     "../collections/CategoriesCollection", "../views/CategoryView", 
     "../views/HomeView", '../views/BookView',
-    '../collections/BooksCollection'], 
+    '../collections/BooksCollection',
+    '../views/ChapterView', '../collections/ChaptersCollection'], 
     function( $, Backbone, CategoryModel, 
       CategoriesCollection, CategoryView, 
-      HomeView, BookView, BooksCollection) {
+      HomeView, BookView, BooksCollection,
+      ChapterView, ChaptersCollection) {
   window.Page1View = Backbone.View.extend({
   
       template:_.template($('#page1').html()),
@@ -28,7 +30,8 @@ define([ "jquery","backbone", "../models/CategoryModel",
     routes: {
       "": "home",
       "category": "category",
-      "books?:cid": "books"
+      "books?:cid": "books",
+      "chapters?:bid": "chapters"
     },
 
     home:function () {
@@ -38,6 +41,15 @@ define([ "jquery","backbone", "../models/CategoryModel",
     books: function(){
       var type = 'category'
       var currentView = new BookView({collection: new BooksCollection([])});
+      if(!currentView.collection.length) {
+        $.mobile.loading( "show" );
+        currentView.collection.fetch();
+      }
+    },
+
+    chapters: function(){
+      var type = 'category'
+      var currentView = new ChapterView({collection: new ChaptersCollection([])});
       if(!currentView.collection.length) {
         $.mobile.loading( "show" );
         currentView.collection.fetch();

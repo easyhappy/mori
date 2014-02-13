@@ -13,5 +13,6 @@ Mori::Application.routes.draw do
   namespace :api do
     resources :books
     resources :categories
+    resources :chapters
   end
 end
