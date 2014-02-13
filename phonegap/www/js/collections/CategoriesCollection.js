@@ -13,7 +13,7 @@ define([ "jquery","backbone","models/CategoryModel",
     model: CategoryModel,
     url: function(){
       //return 'http://192.168.1.102:3000/api/categories';
-      return this.baseUrl() + 'api/categories';
+      return this.baseUrl() + '/categories';
     },
     // Sample JSON data that in a real app will most likely come from a REST web service
     jsonArray: [
