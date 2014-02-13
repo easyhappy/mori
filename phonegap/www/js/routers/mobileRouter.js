@@ -1,4 +1,10 @@
-define([ "jquery","backbone", "../models/CategoryModel", "../collections/CategoriesCollection", "../views/CategoryView", "../views/HomeView"], function( $, Backbone, CategoryModel, CategoriesCollection, CategoryView, HomeView) {
+define([ "jquery","backbone", "../models/CategoryModel", 
+    "../collections/CategoriesCollection", "../views/CategoryView", 
+    "../views/HomeView", '../views/BookView',
+    '../collections/BooksCollection'], 
+    function( $, Backbone, CategoryModel, 
+      CategoriesCollection, CategoryView, 
+      HomeView, BookView, BooksCollection) {
   window.Page1View = Backbone.View.extend({
   
       template:_.template($('#page1').html()),
@@ -21,20 +27,21 @@ define([ "jquery","backbone", "../models/CategoryModel", "../collections/Categor
     // Backbone.js Routes
     routes: {
       "": "home",
-      "category":"category"
+      "category": "category",
+      "books?:cid": "books"
     },
 
     home:function () {
       this.changePage(new HomeView());
     },
 
-    page1:function () {
-      this.changePage(new Page1View());
-    },
-
-    category_new: function(){
-      options = {collection: new CategoriesCollection([], {type: "animals"})}
-      this.changePage(new CategoryView(options));
+    books: function(){
+      var type = 'category'
+      var currentView = new BookView({collection: new BooksCollection([])});
+      if(!currentView.collection.length) {
+        $.mobile.loading( "show" );
+        currentView.collection.fetch();
+      }
     },
 
     category: function() {
@@ -43,23 +50,6 @@ define([ "jquery","backbone", "../models/CategoryModel", "../collections/Categor
       if(!currentView.collection.length) {
         $.mobile.loading( "show" );
         currentView.collection.fetch();
-        return
-        currentView.collection.fetch().done( function() {
-          //$.mobile.changePage( $(currentView.el), { reverse: false, changeHash: false } );
-            } );
-          currentView.render();
-          $('body').append($(currentView.el));
-          this.activeSelector('a.category')
-          var transition = $.mobile.defaultPageTransition;
-      // We don't want to slide the first page
-      if (this.firstPage) {
-          transition = 'none';
-          this.firstPage = false;
-      }
-          $.mobile.changePage($(currentView.el), {changeHash:false, transition: $.mobile.defaultPageTransition});
-        }
-      else {
-        $.mobile.changePage($(currentView.el), {changeHash:false, transition: $.mobile.defaultPageTransition});
       }
     },
     activeSelector:function(selector){

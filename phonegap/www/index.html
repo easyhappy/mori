@@ -36,10 +36,21 @@
       </div>
     </script>
 
+    <script id="BookItems" type="text/template">
+      <% _.each(collection.toJSON(), function( book, id ) { %>
+        <li>
+          <a href="#chapters?bid=<%= book.id %>">
+            <img src='img/demo.jpg'>
+            <p><%= book.name %></p>
+          </a>
+        </li>
+      <% }); %>
+    </script>
+
     <script id="categoryItems" type="text/template">
       <% _.each(collection.toJSON(), function( category, id ) { %>
         <li>
-          <a href="#">
+          <a href="#books?cid=<%= category.id %>">
             <img src='img/demo.jpg'>
             <p><%= category.name %></p>
           </a>
