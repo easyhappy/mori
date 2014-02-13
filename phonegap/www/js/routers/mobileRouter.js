@@ -1,5 +1,14 @@
-define([ "jquery","backbone", "../models/CategoryModel", "../collections/CategoriesCollection", "../views/CategoryView" ], function( $, Backbone, CategoryModel, CategoriesCollection, CategoryView ) {
-    // Extends Backbone.Router
+define([ "jquery","backbone", "../models/CategoryModel", "../collections/CategoriesCollection", "../views/CategoryView", "../views/HomeView"], function( $, Backbone, CategoryModel, CategoriesCollection, CategoryView, HomeView) {
+  window.Page1View = Backbone.View.extend({
+  
+      template:_.template($('#page1').html()),
+  
+      render:function (eventName) {
+        $(this.el).html(this.template());
+        return this;
+      }
+  });
+
     var CategoryRouter = Backbone.Router.extend( {
     // The Router constructor
     initialize: function() {
@@ -12,26 +21,63 @@ define([ "jquery","backbone", "../models/CategoryModel", "../collections/Categor
     // Backbone.js Routes
     routes: {
       "": "home",
-      "category?:type": "category"
+      "category":"category"
     },
 
-    // Home method
-    home: function() {
-      $.mobile.changePage( "#categories" , { reverse: false, changeHash: false } );
+    home:function () {
+      this.changePage(new HomeView());
     },
 
-    category: function(type) {
-      var currentView = this[ type + "View" ];
+    page1:function () {
+      this.changePage(new Page1View());
+    },
+
+    category_new: function(){
+      options = {collection: new CategoriesCollection([], {type: "animals"})}
+      this.changePage(new CategoryView(options));
+    },
+
+    category: function() {
+      var type = 'category'
+      var currentView = new CategoryView({collection: new CategoriesCollection([], {type: "animals"})});
       if(!currentView.collection.length) {
         $.mobile.loading( "show" );
-        currentView.collection.fetch({data: {page: 3}}).done( function() {
-          $.mobile.changePage( "#" + type, { reverse: false, changeHash: false } );
+        currentView.collection.fetch().done( function() {
+          //$.mobile.changePage( $(currentView.el), { reverse: false, changeHash: false } );
             } );
+          currentView.render();
+          $('body').append($(currentView.el));
+          this.activeSelector('a.category')
+          var transition = $.mobile.defaultPageTransition;
+      // We don't want to slide the first page
+      if (this.firstPage) {
+          transition = 'none';
+          this.firstPage = false;
+      }
+          $.mobile.changePage($(currentView.el), {changeHash:false, transition: $.mobile.defaultPageTransition});
         }
       else {
-        $.mobile.changePage( "#" + type, { reverse: false, changeHash: false } );
+        $.mobile.changePage($(currentView.el), {changeHash:false, transition: $.mobile.defaultPageTransition});
       }
+    },
+    activeSelector:function(selector){
+      $(selector).addClass("ui-btn-active")
+    },
+
+    changePage:function (page) {
+      $.mobile.loading( "show" );
+      page.render();
+      $('body').append($(page.el));
+      var transition = $.mobile.defaultPageTransition;
+      // We don't want to slide the first page
+      if (this.firstPage) {
+          transition = 'none';
+          this.firstPage = false;
+      }
+      this.activeSelector("a.home")
+      $.mobile.changePage($(page.el), {changeHash:false, transition: transition});
     }
+
   });
   return CategoryRouter;
 });
