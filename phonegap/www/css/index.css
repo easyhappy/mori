@@ -94,3 +94,7 @@ h1 {
 .ui-footer{
   margin-bottom: 5%;
 }
+
+ul.category {
+    font-size: 30px;
+}
