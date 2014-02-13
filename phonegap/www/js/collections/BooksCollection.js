@@ -1,4 +1,5 @@
-define([ "jquery","backbone","models/BookModel" ], function( $, Backbone, BookModel ) {
+define([ "jquery","backbone","models/BookModel", "collections/BaseCollection"], 
+  function( $, Backbone, BookModel, BaseCollection) {
   var Collection = Backbone.Collection.extend( {
     model: BookModel,
     url:   'http://192.168.3.48:3000/api/books',

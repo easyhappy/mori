@@ -1,14 +1,20 @@
-define([ "jquery","backbone","models/CategoryModel" ], function( $, Backbone, CategoryModel ) {
+define([ "jquery","backbone","models/CategoryModel",
+  "collections/BaseCollection"], 
+  function( $, Backbone, CategoryModel, BaseCollection) {
   // Extends Backbone.Router
-  var Collection = Backbone.Collection.extend( {
+  var Collection = Backbone.Collection.extend(BaseCollection).extend( {
     // The Collection constructor
     initialize: function(models, options ) {
       // Sets the type instance property (ie. animals)
       this.type = options.type;
     },
     // Sets the Collection model property to be a Category Model
+    //mixin: BaseCollection,
     model: CategoryModel,
-    url: 'http://192.168.3.48:3000/api/categories',
+    url: function(){
+      //return 'http://192.168.1.102:3000/api/categories';
+      return this.baseUrl() + 'api/categories';
+    },
     // Sample JSON data that in a real app will most likely come from a REST web service
     jsonArray: [
       { "category": "animals",  "type": "Pets" },

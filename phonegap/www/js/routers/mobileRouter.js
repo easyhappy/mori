@@ -62,6 +62,7 @@ define([ "jquery","backbone", "../models/CategoryModel",
       var currentView = new CategoryView({collection: new CategoriesCollection([], {type: "animals"})});
       if(!currentView.collection.length) {
         $.mobile.loading( "show" );
+        //options = {url: currentView.collection.baseUrl() + currentView.collection.url()}
         currentView.collection.fetch();
       }
     },
