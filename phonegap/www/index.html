@@ -38,9 +38,11 @@
 
     <script id="categoryItems" type="text/template">
       <% _.each(collection.toJSON(), function( category, id ) { %>
-        <li class="ui-btn ui-icon-arrow-r">
+        <li>
+          <a href="#">
             <img src='img/demo.jpg'>
             <p><%= category.name %></p>
+          </a>
         </li>
       <% }); %>
     </script>
