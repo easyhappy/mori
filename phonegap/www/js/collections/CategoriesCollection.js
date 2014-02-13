@@ -26,8 +26,14 @@ define([ "jquery","backbone","models/CategoryModel" ], function( $, Backbone, Ca
       { "category": "vehicles", "type": "Construction" }
     ],
 
-    parse: function(data){
-      self.toJSON(data)
+    parse: function(categories){
+      var count = 0;
+      var self = this;
+      _.each(categories, function(item){
+        self.models[count] = new self.model(item);
+        count += 1;
+      });
+      this.trigger("added");
     },
     
     // Overriding the Backbone.sync method (the Backbone.fetch method calls the sync method when trying to fetch data)

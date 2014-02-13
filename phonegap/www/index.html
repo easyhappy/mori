@@ -24,12 +24,7 @@
       <%= $("#header").html() %>
       <div role="main" class="ui-content">
         <h3> this is Page 1 </h3>
-        <ul data-role="listview" data-count-theme="b" data-inset="true">
-              <li><a href="#">
-        <img src="img/demo.jpg">
-        <h2>Broken Bells</h2>
-        <p>Broken Bells</p></a>
-        </li>
+        <ul class='category' data-role="listview" data-count-theme="b" data-inset="true">
         </ul>
       </div>
     </script>
@@ -39,6 +34,15 @@
       <div data-role="content">
         <h3>this is Home</h3>
       </div>
+    </script>
+
+    <script id="categoryItems" type="text/template">
+      <% _.each(collection.toJSON(), function( category, id ) { %>
+        <li class="ui-btn ui-icon-arrow-r">
+            <img src='img/demo.jpg'>
+            <p><%= category.name %></p>
+        </li>
+      <% }); %>
     </script>
   <body>
   </body>

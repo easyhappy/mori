@@ -42,6 +42,8 @@ define([ "jquery","backbone", "../models/CategoryModel", "../collections/Categor
       var currentView = new CategoryView({collection: new CategoriesCollection([], {type: "animals"})});
       if(!currentView.collection.length) {
         $.mobile.loading( "show" );
+        currentView.collection.fetch();
+        return
         currentView.collection.fetch().done( function() {
           //$.mobile.changePage( $(currentView.el), { reverse: false, changeHash: false } );
             } );
