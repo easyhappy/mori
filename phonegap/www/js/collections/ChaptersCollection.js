@@ -1,7 +1,7 @@
 define([ "jquery","backbone","models/ChapterModel" ], function( $, Backbone, ChapterModel ) {
   var Collection = Backbone.Collection.extend( {
     model: ChapterModel,
-    url:   'http://192.168.3.48:3000/api/chapters',
+    url:   "http://192.168.3.48:3000/api/chapters",
 
     parse: function(chapters){
       var count = 0;

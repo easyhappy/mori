@@ -10,7 +10,6 @@ define([ "jquery", "backbone","models/ChapterModel" ], function( $, Backbone, Ch
       $('body').append($(this.el));
       $('a.category').addClass("ui-btn-active");
       this.$el.find("ul.category").html(this.collection.models[0].get("content").content);
-      
       $.mobile.changePage($(this.el), {changeHash:false, transition: $.mobile.defaultPageTransition});
       return this;
     }

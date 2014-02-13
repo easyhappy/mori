@@ -52,7 +52,8 @@ define([ "jquery","backbone", "../models/CategoryModel",
       var currentView = new ChapterView({collection: new ChaptersCollection([])});
       if(!currentView.collection.length) {
         $.mobile.loading( "show" );
-        currentView.collection.fetch();
+        options = {data: {h: document.body.clientHeight, w: document.body.clientWidth}};
+        currentView.collection.fetch(options);
       }
     },
 
