@@ -8,14 +8,15 @@ define([ "jquery","backbone",
       return this.baseUrl() + '/chapters';
     },
 
-    parse: function(chapters){
+    parse: function(response){
       var count = 0;
       var self = this;
-      _.each(chapters, function(item){
+      _.each(response.data, function(item){
         self.models[count] = new self.model(item);
         count += 1;
       });
-      this.trigger("added");
+      //$('#category_test').attr("top", response.top)
+      this.trigger("added", response.top, response.height, response.position);
     },
   });
   return Collection;

@@ -11,7 +11,7 @@
     <title>Hello World</title>
   </head>
     <script type="text/template" id="header">
-      <div data-role="header">
+      <div data-role="header" class='div_header'>
         <div data-role="navbar" class="ui-btn-active ui-state-persist">    
           <ul>
             <li><a class='home' href="#">我的书架</a></li>
@@ -24,8 +24,8 @@
     <script type="text/template" id="category">
       <%= $("#header").html() %>
       <div role="main" class="ui-content">
-        <h3> this is Page 1 </h3>
-        <ul class='category' data-role="listview" data-count-theme="b" data-inset="true">
+        <h3 id='page_title'> this is Page 1 </h3>
+        <ul class='category' data-dom-cache="false" id="category_test"   data-role="listview" data-count-theme="b" data-inset="true">
         </ul>
       </div>
     </script>

@@ -98,3 +98,14 @@ h1 {
 ul.category {
     font-size: 30px;
 }
+
+ul.test_category{
+  position: absolute;
+}
+
+.div_header{
+  z-index: 1000;
+}
+.page_title{
+  z-index: 1000;
+}
