@@ -13,13 +13,17 @@ define([ "jquery", "backbone","models/ChapterModel" ], function( $, Backbone, Ch
       this.$el.find("ul.category").html(this.collection.models[0].get("content"));
       alert(document.getElementById("category_test").style.top)
       document.getElementById("category_test").style.top='-' + arguments[0] + 'px'
-      alert(document.getElementById("category_test").style.top)
       document.getElementById("category_test").style.height='-' + arguments[1] + 'px'
       //document.getElementById("category_test").style.position =  arguments[2];
       //$('#category_test').selectmenu('refresh');
       //document.getElementById("category_test").offsetHeight()
-      $.mobile.changePage($(this.el), {changeHash:false, transition: $.mobile.defaultPageTransition});
-      return this;
+       $.mobile.changePage($(this.el), {changeHash:false, transition: $.mobile.defaultPageTransition});
+       $(window).scroll(function(){
+        if  ($(window).scrollTop()+200 >= $(document).height() -$(window).height()){
+          alert('jjjj')
+        }
+       }
+        )
     }
   });
   // Returns the View class
