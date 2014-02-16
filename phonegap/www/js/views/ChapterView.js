@@ -1,4 +1,5 @@
-define([ "jquery", "backbone","models/ChapterModel" ], function( $, Backbone, ChapterModel) {
+define([ "jquery", "backbone","models/ChapterModel", 'collections/ChaptersCollection'], 
+  function( $, Backbone, ChapterModel, ChaptersCollection) {
   var ChapterView = Backbone.View.extend({
     initialize: function(){
       //参数this的作用是什么？
@@ -11,18 +12,23 @@ define([ "jquery", "backbone","models/ChapterModel" ], function( $, Backbone, Ch
       $('a.category').addClass("ui-btn-active");
       $('ul.category').addClass("test_category");
       this.$el.find("ul.category").html(this.collection.models[0].get("content"));
-      alert(document.getElementById("category_test").style.top)
       document.getElementById("category_test").style.top='-' + arguments[0] + 'px'
       document.getElementById("category_test").style.height='-' + arguments[1] + 'px'
-      //document.getElementById("category_test").style.position =  arguments[2];
-      //$('#category_test').selectmenu('refresh');
-      //document.getElementById("category_test").offsetHeight()
+
        $.mobile.changePage($(this.el), {changeHash:false, transition: $.mobile.defaultPageTransition});
-       $(window).scroll(function(){
-        if  ($(window).scrollTop()+200 >= $(document).height() -$(window).height()){
-          alert('jjjj')
+        $(window).scroll(function(){
+
+         if  ($(window).scrollTop() >= $(document).height()-$(window).height()){
+          var type = 'category'
+          alert('afadsf')
+          var currentView = new ChapterView({collection: new ChaptersCollection([])});
+          if(!currentView.collection.length) {
+            $.mobile.loading( "show" );
+            options = {data: {h: document.body.clientHeight, w: document.body.clientWidth}};
+            currentView.collection.fetch(options);
+          }
+         }
         }
-       }
         )
     }
   });
