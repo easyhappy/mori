@@ -12,9 +12,6 @@ define([ "jquery", "backbone","models/ChapterModel", 'collections/ChaptersCollec
       $('a.category').addClass("ui-btn-active");
       $('ul.category').addClass("test_category");
       this.$el.find("ul.category").html(this.collection.models[0].get("content"));
-      document.getElementById("category_test").style.top='-' + arguments[0] + 'px'
-      document.getElementById("category_test").style.height='-' + arguments[1] + 'px'
-
        $.mobile.changePage($(this.el), {changeHash:false, transition: $.mobile.defaultPageTransition});
         $(window).scroll(function(){
 

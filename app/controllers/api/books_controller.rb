@@ -1,5 +1,5 @@
 class Api::BooksController < Api::BaseController
   def index
-    render :json => Book.all.limit(5).to_json
+    render :json => {models: Book.all.limit(5)}
   end
 end

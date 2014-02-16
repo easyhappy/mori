@@ -1,5 +1,5 @@
 class Api::CategoriesController < Api::BaseController
   def index
-    render :json => Category.all.to_json
+    render :json => {models: Category.all}
   end
 end
