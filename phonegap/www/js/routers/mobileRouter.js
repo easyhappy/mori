@@ -46,9 +46,8 @@ define([ "jquery","backbone", "../models/CategoryModel",
         _.each(arguments, function(arg){b = arg.split("="); options['data'][b[0]] = b[1]})
         currentView.collection.fetch(options).done(function(){
           $(window).scroll(function(){
-            if  ($(window).scrollTop() >= $(document).height()-$(window).height()){
-              options['data']['page'] = 1
-              alert('aa')
+            if ($(window).scrollTop() >= $(document).height()-$(window).height()){
+              options['data']['page'] = parseInt($('#category_test').attr('data-page') || 1) + 1
               //currentView.collection.fetch(options)
             }
           })

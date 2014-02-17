@@ -9,10 +9,11 @@ define([ "jquery", "backbone","models/BookModel" ], function( $, Backbone, BookM
       this.$el.html(this.template());
 
       var categoryView = _.template($('#BookItems').html(), {collection: this.collection})
-      this.$el.find("ul.category").html(categoryView);
+      this.$el.find("ul.category").append(categoryView);
       $('body').append($(this.el));
       $('a.category').addClass("ui-btn-active")
       $('#category_name').html(arguments[0]['category_name'])
+      this.$el.find("ul.category").attr('data-page', arguments['0']['page'])
       $.mobile.changePage($(this.el), {changeHash:false, transition: $.mobile.defaultPageTransition});
       return this;
     }
