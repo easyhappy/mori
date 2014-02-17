@@ -54,7 +54,7 @@ define([ "jquery","backbone", "../models/CategoryModel",
       var currentView = new BookView({collection: new BooksCollection([])});
       if(!currentView.collection.length) {
         $.mobile.loading( "show" );
-        options = {dataType: 'json', crossDomain : true, data: {}};
+        options = {dataType: 'JSON', crossDomain : true, data: {}};
         _.each(arguments, function(arg){b = arg.split("="); options['data'][b[0]] = b[1]})
         currentView.collection.fetch(options);
       }
