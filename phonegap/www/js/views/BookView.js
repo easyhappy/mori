@@ -14,6 +14,7 @@ define([ "jquery", "backbone","models/BookModel" ], function( $, Backbone, BookM
       $('a.category').addClass("ui-btn-active")
       $('#category_name').html(arguments[0]['category_name'])
       this.$el.find("ul.category").attr('data-page', arguments['0']['page'])
+      this.$el.find("ul.category").attr('data-cid',  1)
       $.mobile.changePage($(this.el), {changeHash:false, transition: $.mobile.defaultPageTransition});
       return this;
     }

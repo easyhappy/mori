@@ -31,27 +31,32 @@ define([ "jquery","backbone", "../models/CategoryModel",
       "": "home",
       "category": "category",
       "books?:cid": "books",
-      "chapters?:bid": "chapters"
+      "chapters?:bid": "chapters",
+      "more_books": "more_books"
     },
 
     home:function () {
       this.changePage(new HomeView());
     },
 
+    more_books: function(){
+      var currentView = new BookView({collection: new BooksCollection([])});
+      if(!currentView.collection.length) {
+        $.mobile.loading( "show" );
+        alert('jjjj')
+        options = {dataType: 'json', data: {'cid': 1}};
+        //_.each(arguments, function(arg){b = arg.split("="); options['data'][b[0]] = b[1]})
+        currentView.collection.fetch(options);
+      }
+    },
+
     books: function(){
       var currentView = new BookView({collection: new BooksCollection([])});
       if(!currentView.collection.length) {
         $.mobile.loading( "show" );
-        options = {dataType: 'json', data: {}};
+        options = {dataType: 'json', crossDomain : true, data: {}};
         _.each(arguments, function(arg){b = arg.split("="); options['data'][b[0]] = b[1]})
-        currentView.collection.fetch(options).done(function(){
-          $(window).scroll(function(){
-            if ($(window).scrollTop() >= $(document).height()-$(window).height()){
-              options['data']['page'] = parseInt($('#category_test').attr('data-page') || 1) + 1
-              //currentView.collection.fetch(options)
-            }
-          })
-        });
+        currentView.collection.fetch(options);
       }
     },
 

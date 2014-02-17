@@ -1,6 +1,6 @@
 class Api::BooksController < Api::BaseController
   def index
-    books = Book.where(:category_id => params['cid']).page(params['page'])
+    books = Book.where(:category_id => params['cid']).page(params['page'], :per_page => 5)
     
     bs= JSON.parse(books.to_json)
     bs.each_with_index do |b, postion|
