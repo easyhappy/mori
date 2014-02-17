@@ -44,7 +44,15 @@ define([ "jquery","backbone", "../models/CategoryModel",
         $.mobile.loading( "show" );
         options = {dataType: 'json', data: {}};
         _.each(arguments, function(arg){b = arg.split("="); options['data'][b[0]] = b[1]})
-        currentView.collection.fetch(options);
+        currentView.collection.fetch(options).done(function(){
+          $(window).scroll(function(){
+            if  ($(window).scrollTop() >= $(document).height()-$(window).height()){
+              options['data']['page'] = 1
+              alert('aa')
+              //currentView.collection.fetch(options)
+            }
+          })
+        });
       }
     },
 
