@@ -1,5 +1,12 @@
 class Api::BooksController < Api::BaseController
   def index
-    render :json => {models: Book.all.limit(5)}
+    books = Book.where(:category_id => params['cid']).limit(10)
+    
+    bs= JSON.parse(books.to_json)
+    bs.each_with_index do |b, postion|
+      bs[postion]['chapters_count'] = books[postion].chapters.count
+    end
+
+    render :json => {models: bs, category_name: books.first.category.name}
   end
 end

@@ -3,13 +3,6 @@ define([ "jquery","backbone","models/CategoryModel",
   function( $, Backbone, CategoryModel, BaseCollection) {
   // Extends Backbone.Router
   var Collection = Backbone.Collection.extend(BaseCollection).extend( {
-    // The Collection constructor
-    initialize: function(models, options ) {
-      // Sets the type instance property (ie. animals)
-      this.type = options.type;
-    },
-    // Sets the Collection model property to be a Category Model
-    //mixin: BaseCollection,
     model: CategoryModel,
     url: function(){
       //return 'http://192.168.1.102:3000/api/categories';

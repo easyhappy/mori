@@ -11,22 +11,11 @@ define([ "jquery", "backbone","models/ChapterModel", 'collections/ChaptersCollec
       $('body').append($(this.el));
       $('a.category').addClass("ui-btn-active");
       $('ul.category').addClass("test_category");
+      $(".test_category").on("swipeleft", function(){
+        alert('aaa');
+      })
       this.$el.find("ul.category").html(this.collection.models[0].get("content"));
-       $.mobile.changePage($(this.el), {changeHash:false, transition: $.mobile.defaultPageTransition});
-        $(window).scroll(function(){
-
-         if  ($(window).scrollTop() >= $(document).height()-$(window).height()){
-          var type = 'category'
-          alert('afadsf')
-          var currentView = new ChapterView({collection: new ChaptersCollection([])});
-          if(!currentView.collection.length) {
-            $.mobile.loading( "show" );
-            options = {data: {h: document.body.clientHeight, w: document.body.clientWidth}};
-            currentView.collection.fetch(options);
-          }
-         }
-        }
-        )
+      $.mobile.changePage($(this.el), {changeHash:false, transition: $.mobile.defaultPageTransition});
     }
   });
   // Returns the View class

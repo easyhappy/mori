@@ -39,11 +39,12 @@ define([ "jquery","backbone", "../models/CategoryModel",
     },
 
     books: function(){
-      var type = 'category'
       var currentView = new BookView({collection: new BooksCollection([])});
       if(!currentView.collection.length) {
         $.mobile.loading( "show" );
-        currentView.collection.fetch();
+        options = {dataType: 'json', data: {}};
+        _.each(arguments, function(arg){b = arg.split("="); options['data'][b[0]] = b[1]})
+        currentView.collection.fetch(options);
       }
     },
 
@@ -58,12 +59,11 @@ define([ "jquery","backbone", "../models/CategoryModel",
     },
 
     category: function() {
-      var type = 'category'
-      var currentView = new CategoryView({collection: new CategoriesCollection([], {type: "animals"})});
+      var currentView = new CategoryView({collection: new CategoriesCollection([])});
       if(!currentView.collection.length) {
         $.mobile.loading( "show" );
-        //options = {url: currentView.collection.baseUrl() + currentView.collection.url()}
-        currentView.collection.fetch();
+        options = {dataType: 'json', data: {}};
+        currentView.collection.fetch(options);
       }
     },
     activeSelector:function(selector){
