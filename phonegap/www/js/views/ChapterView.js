@@ -1,6 +1,6 @@
-define([ "jquery", "backbone","models/ChapterModel", 'collections/ChaptersCollection'], 
-  function( $, Backbone, ChapterModel, ChaptersCollection) {
-  var ChapterView = Backbone.View.extend({
+define([ "jquery", "backbone","models/ChapterModel", 'collections/ChaptersCollection', "views/BaseView"], 
+  function( $, Backbone, ChapterModel, ChaptersCollection, BaseView) {
+  var ChapterView = Backbone.View.extend(BaseView).extend({
     initialize: function(){
       //参数this的作用是什么？
       this.template = _.template($('#category').html());
@@ -16,6 +16,8 @@ define([ "jquery", "backbone","models/ChapterModel", 'collections/ChaptersCollec
       })
       this.$el.find("ul.category").html(this.collection.models[0].get("content"));
       $.mobile.changePage($(this.el), {reverse: false, changeHash:false, transition: $.mobile.defaultPageTransition});
+      this.removeLastView();
+      return this;
     }
   });
   // Returns the View class

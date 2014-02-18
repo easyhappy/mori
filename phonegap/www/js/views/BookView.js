@@ -1,10 +1,11 @@
-define([ "jquery", "backbone","models/BookModel", "collections/BooksCollection"], function( $, Backbone, BookMode, BooksCollection) {
-  var BookView = Backbone.View.extend({
+define([ "jquery", "backbone","models/BookModel", "collections/BooksCollection", "views/BaseView"], function( $, Backbone, BookMode, BooksCollection,  BaseView) {
+  var BookView = Backbone.View.extend(BaseView).extend({
     initialize: function(){
       //参数this的作用是什么？
       this.template = _.template($('#books').html());
       this.collection.on("added", this.render, this);
     },
+
     render: function(){
       if(arguments[0].more !='true'){
         this.$el.html(this.template());
@@ -29,7 +30,7 @@ define([ "jquery", "backbone","models/BookModel", "collections/BooksCollection"]
           self.more_books();
         });
       }
-      
+      this.removeLastView();
       return this;
     },
 

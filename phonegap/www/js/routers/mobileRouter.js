@@ -20,9 +20,6 @@ define([ "jquery","backbone", "../models/CategoryModel",
     var CategoryRouter = Backbone.Router.extend( {
     // The Router constructor
     initialize: function() {
-      this.animalsView  = new CategoryView({el: "#animals",  collection: new CategoriesCollection([], {type: "animals"})});
-      this.colorsView   = new CategoryView({el: "#colors",   collection: new CategoriesCollection([], {type: "colors"})});
-      this.vehiclesView = new CategoryView({el: "#vehicles", collection: new CategoriesCollection([], {type: "vehicles"})});
       Backbone.history.start();
     },
 
@@ -36,19 +33,20 @@ define([ "jquery","backbone", "../models/CategoryModel",
     },
 
     home:function () {
-      this.changePage(new HomeView());
+      var view = new HomeView()
+      this.changePage(view);
     },
 
     more_books: function(){
-      var currentView = new BookView({collection: new BooksCollection([])});
-      if(!currentView.collection.length) {
+      var view = new BookView({collection: new BooksCollection([])});
+      if(!view.collection.length) {
         options = {dataType: 'json', data: {'cid': 1}};
         //options[data]['page'] = 
         options['data']['more'] = true
         options['data']['page'] = $('ul.category').attr('data-page')
         //_.each(arguments, function(arg){b = arg.split("="); options['data'][b[0]] = b[1]})
         var self = this;
-        currentView.collection.fetch(options).done(function(){
+        view.collection.fetch(options).done(function(){
           $('#more_books').click(function(){
           self.more_books();
         });
@@ -57,38 +55,43 @@ define([ "jquery","backbone", "../models/CategoryModel",
     },
 
     books: function(){
-      var currentView = new BookView({collection: new BooksCollection([])});
-      if(!currentView.collection.length) {
+      var view = new BookView({collection: new BooksCollection([])});
+      if(!view.collection.length) {
         $.mobile.loading( "show" );
         options = {dataType: 'JSON', crossDomain : true, data: {}};
         options['data']['page'] = $('ul.category').attr('data-page')
         _.each(arguments, function(arg){b = arg.split("="); options['data'][b[0]] = b[1]})
         var self = this;
-        currentView.collection.fetch(options).done(function(){
+        view.collection.fetch(options).done(function(){
           $('#more_books').click(function(){
-          this.removeEventListener();
-          self.more_books();
-        });
+            self.more_books();
+          });
         });
       }
     },
 
     chapters: function(){
       var type = 'category'
-      var currentView = new ChapterView({collection: new ChaptersCollection([])});
-      if(!currentView.collection.length) {
+      var view = new ChapterView({collection: new ChaptersCollection([])});
+      if(!view.collection.length) {
         $.mobile.loading( "show" );
         options = {data: {h: document.body.clientHeight, w: document.body.clientWidth}};
-        currentView.collection.fetch(options);
+        var self = this;
+        view.collection.fetch(options).done(function(){
+        });
       }
     },
 
     category: function() {
-      var currentView = new CategoryView({collection: new CategoriesCollection([])});
-      if(!currentView.collection.length) {
+      var view = new CategoryView({collection: new CategoriesCollection([])});
+      if(!view.collection.length) {
         $.mobile.loading( "show" );
         options = {dataType: 'json', data: {}};
-        currentView.collection.fetch(options);
+        var self = this;
+        view.collection.fetch(options).done(function(){
+          self.currentView = view;
+          //view.lastView.close();
+        });
       }
     },
     activeSelector:function(selector){
