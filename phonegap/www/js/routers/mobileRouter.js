@@ -46,11 +46,11 @@ define([ "jquery","backbone", "../models/CategoryModel",
         options = {dataType: 'json', data: {'cid': 1}};
         //options[data]['page'] = 
         options['data']['more'] = true
+        options['data']['page'] = $('ul.category').attr('data-page')
         //_.each(arguments, function(arg){b = arg.split("="); options['data'][b[0]] = b[1]})
         var self = this;
         currentView.collection.fetch(options).done(function(){
           $('#more_books').click(function(){
-          alert('jjj')
           self.more_books();
         });
         });;
@@ -62,12 +62,13 @@ define([ "jquery","backbone", "../models/CategoryModel",
       if(!currentView.collection.length) {
         $.mobile.loading( "show" );
         options = {dataType: 'JSON', crossDomain : true, data: {}};
+        options['data']['page'] = $('ul.category').attr('data-page')
         _.each(arguments, function(arg){b = arg.split("="); options['data'][b[0]] = b[1]})
         var self = this;
         currentView.collection.fetch(options).done(function(){
           $('#more_books').click(function(){
+          this.removeEventListener();
           self.more_books();
-          return false;
         });
         });
       }

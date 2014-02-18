@@ -50,7 +50,7 @@
 
     <script id="BookItems" type="text/template">
       <% _.each(collection.toJSON(), function( book, id ) { %>
-        <li>
+        <li class="ui-li-has-thumb">
           <a href="#chapters?bid=<%= book.id %>">
             <img src='img/demo.jpg'>
             <span><%= book.name %></span>
