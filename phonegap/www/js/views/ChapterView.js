@@ -15,7 +15,7 @@ define([ "jquery", "backbone","models/ChapterModel", 'collections/ChaptersCollec
         alert('aaa');
       })
       this.$el.find("ul.category").html(this.collection.models[0].get("content"));
-      $.mobile.changePage($(this.el), {changeHash:false, transition: $.mobile.defaultPageTransition});
+      $.mobile.changePage($(this.el), {reverse: false, changeHash:false, transition: $.mobile.defaultPageTransition});
     }
   });
   // Returns the View class

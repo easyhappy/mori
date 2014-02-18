@@ -15,7 +15,7 @@ define([ "jquery", "backbone","models/BookModel", "collections/BooksCollection"]
         $('#category_name').html(arguments[0]['category_name'])
         this.$el.find("ul.category").attr('data-page', arguments['0']['page'])
         this.$el.find("ul.category").attr('data-cid',  1)
-        $.mobile.changePage($(this.el), {changeHash:false, transition: $.mobile.defaultPageTransition});  
+        $.mobile.changePage($(this.el), {swipeleft: true, reverse: false, changeHash:false, transition: $.mobile.defaultPageTransition});  
       }else{
         var categoryView = _.template($('#BookItems').html(), {collection: this.collection})
         $("ul.category").append(categoryView);

@@ -24,6 +24,7 @@ require([ "jquery", "backbone", "routers/mobileRouter" ], function( $, Backbone,
 	$.mobile.linkBindingEnabled = false;
 	// Disabling this will prevent jQuery Mobile from handling hash changes
 	$.mobile.hashListeningEnabled = false;
+  $.mobile.page.prototype.options.domCache = false;
     }
   )
 

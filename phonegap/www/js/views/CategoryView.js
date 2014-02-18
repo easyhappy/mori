@@ -13,7 +13,7 @@ define([ "jquery", "backbone","models/CategoryModel" ], function( $, Backbone, C
       this.$el.find("ul.category").html(categoryView);
       $('body').append($(this.el));
       $('a.category').addClass("ui-btn-active")
-      $.mobile.changePage($(this.el), {changeHash:false, transition: $.mobile.defaultPageTransition});
+      $.mobile.changePage($(this.el), {reverse: false, changeHash:false, transition: $.mobile.defaultPageTransition});
       return this;
     }
   });
