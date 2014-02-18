@@ -42,7 +42,6 @@ define([ "jquery","backbone", "../models/CategoryModel",
     more_books: function(){
       var currentView = new BookView({collection: new BooksCollection([])});
       if(!currentView.collection.length) {
-        $.mobile.loading( "show" );
         options = {dataType: 'json', data: {'cid': 1}};
         //options[data]['page'] = 
         options['data']['more'] = true
