@@ -31,8 +31,8 @@ define([ "jquery","backbone", "../models/CategoryModel",
       "": "home",
       "category": "category",
       "books?:cid": "books",
-      "chapters?:bid": "chapters",
-      "more_books": "more_books"
+      "chapters?:bid": "chapters"
+      //"more_books": "more_books"
     },
 
     home:function () {
@@ -43,10 +43,17 @@ define([ "jquery","backbone", "../models/CategoryModel",
       var currentView = new BookView({collection: new BooksCollection([])});
       if(!currentView.collection.length) {
         $.mobile.loading( "show" );
-        alert('jjjj')
         options = {dataType: 'json', data: {'cid': 1}};
+        //options[data]['page'] = 
+        options['data']['more'] = true
         //_.each(arguments, function(arg){b = arg.split("="); options['data'][b[0]] = b[1]})
-        currentView.collection.fetch(options);
+        var self = this;
+        currentView.collection.fetch(options).done(function(){
+          $('#more_books').click(function(){
+          alert('jjj')
+          self.more_books();
+        });
+        });;
       }
     },
 
@@ -56,7 +63,13 @@ define([ "jquery","backbone", "../models/CategoryModel",
         $.mobile.loading( "show" );
         options = {dataType: 'JSON', crossDomain : true, data: {}};
         _.each(arguments, function(arg){b = arg.split("="); options['data'][b[0]] = b[1]})
-        currentView.collection.fetch(options);
+        var self = this;
+        currentView.collection.fetch(options).done(function(){
+          $('#more_books').click(function(){
+          self.more_books();
+          return false;
+        });
+        });
       }
     },
 
