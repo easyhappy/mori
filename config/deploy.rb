@@ -39,7 +39,7 @@ task :deploy => :environment do
     #invoke :'bundle:install'
     #invoke :'unicorn_rails restart'
     #invoke :'rails:db_migrate'
-    invoke :'rails:assets_precompile'
+    #invoke :'rails:assets_precompile'
 
     to :launch do
       #queue "touch #{deploy_to}/tmp/restart.txt"

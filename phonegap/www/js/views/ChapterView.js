@@ -12,14 +12,22 @@ define([ "jquery", "backbone","models/ChapterModel", 'collections/ChaptersCollec
       $('a.category').addClass("ui-btn-active");
       $('ul.category').addClass("test_category");
 
-      $.mobile.changePage($(this.el), {reverse: false, changeHash:false, transition: $.mobile.defaultPageTransition});
+      $(window).scroll(function(){
+        if ($(window).scrollTop() >= $(window).height()){
+          alert('jjjjj')
+        }
+      });
+      $.mobile.changePage($(this.el), {reverse: false, changeHash:false, transition: 'slide'});
       
       this.removeLastView();
+      
       return this;
     },
 
     
   });
+
+  
 
   return ChapterView;
 });

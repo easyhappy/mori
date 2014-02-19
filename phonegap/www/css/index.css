@@ -113,3 +113,11 @@ ul.test_category{
 .chapter_content{
   font-size: 20px;
 }
+
+.chapter_header{
+  text-align:center
+}
+.in, .out {
+    -webkit-animation-timing-function: ease-in-out;
+    -webkit-animation-duration: 350ms !important;
+}

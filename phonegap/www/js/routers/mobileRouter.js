@@ -83,21 +83,28 @@ define([ "jquery","backbone", "../models/CategoryModel",
     },
     
     swipe: function(){
-      $(".chapter_content").on("swipeleft", function(){
-        var parent_id = $(".chapter_content").last().attr('data-parent-id')
-        if(!parent_id){
-          alert('上一章不存在!!')
-          return;
-        }
-        $.mobile.router.chapters('chapter_id=' + parent_id)
-      });
+      var ableClick = true;
       $(".chapter_content").on("swiperight", function(){
-        var next_id = $(".chapter_content").last().attr('data-next-id')
-        if(!next_id){
-          alert('没有下一章了!!')
-          return;
+        if(ableClick){
+          ableClick = false;
+          var parent_id = $(".chapter_content").last().attr('data-parent-id')
+          if(!parent_id){
+            alert('上一章不存在!!')
+            return;
+          }
+          $.mobile.router.chapters('chapter_id=' + parent_id)
         }
-        $.mobile.router.chapters('chapter_id=' + next_id)
+      });
+      $(".chapter_content").on("swipeleft", function(){
+        if(ableClick){
+          ableClick = false;
+          var next_id = $(".chapter_content").last().attr('data-next-id')
+          if(!next_id){
+            alert('没有下一章了!!')
+            return;
+          }
+          $.mobile.router.chapters('chapter_id=' + next_id)
+        }
       });
     },
 
