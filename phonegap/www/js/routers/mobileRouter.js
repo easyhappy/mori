@@ -81,6 +81,18 @@ define([ "jquery","backbone", "../models/CategoryModel",
         view.collection.fetch(options).done(self.swipe);
       }
     },
+
+    chapters_new: function(){
+      var type = 'category'
+      var view = new ChapterView({collection: new ChaptersCollection([])});
+      if(!view.collection.length) {
+        //$.mobile.loading( "show" );
+        options = {data: {h: document.body.clientHeight, w: document.body.clientWidth}};
+        _.each(arguments, function(arg){b = arg.split("="); options['data'][b[0]] = b[1]})
+        var self = this;
+        view.collection.fetch(options).done(self.swipe);
+      }
+    },
     
     swipe: function(){
       var ableClick = true;
