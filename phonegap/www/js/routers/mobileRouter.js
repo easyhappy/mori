@@ -78,26 +78,26 @@ define([ "jquery","backbone", "../models/CategoryModel",
         options = {data: {h: document.body.clientHeight, w: document.body.clientWidth}};
         _.each(arguments, function(arg){b = arg.split("="); options['data'][b[0]] = b[1]})
         var self = this;
-        view.collection.fetch(options).done(this.swipe, self);
+        view.collection.fetch(options).done(self.swipe);
       }
     },
     
     swipe: function(){
       $(".chapter_content").on("swipeleft", function(){
-        var parent_id = $(".chapter_content").attr('data-parent-id')
+        var parent_id = $(".chapter_content").last().attr('data-parent-id')
         if(!parent_id){
           alert('上一章不存在!!')
           return;
         }
-        currentRouter.chapters('chapter_id=' + parent_id)
+        $.mobile.router.chapters('chapter_id=' + parent_id)
       });
       $(".chapter_content").on("swiperight", function(){
-        var next_id = $(".chapter_content").attr('data-next-id')
+        var next_id = $(".chapter_content").last().attr('data-next-id')
         if(!next_id){
           alert('没有下一章了!!')
           return;
         }
-        currentRouter.chapters('chapter_id=' + next_id)
+        $.mobile.router.chapters('chapter_id=' + next_id)
       });
     },
 

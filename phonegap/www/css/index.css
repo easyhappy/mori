@@ -110,3 +110,6 @@ ul.test_category{
 }
 
 .ui-page { -webkit-backface-visibility: hidden; }
+.chapter_content{
+  font-size: 20px;
+}

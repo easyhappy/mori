@@ -34,6 +34,9 @@
     <script type="text/template" id="chapters">
       <%= $("#header").html() %>
       <div role="main" class="ui-content">
+        <div class='chapter_header'>
+          <%= collection[0].name %>
+        </div>
         <div class='chapter_content' data-parent-id="<%=collection[0].parent_id%>" data-next-id="<%= collection[0].next_id %>">
           <%= collection[0].content %>
         </div>

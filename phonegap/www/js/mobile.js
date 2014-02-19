@@ -31,6 +31,6 @@ require([ "jquery", "backbone", "routers/mobileRouter" ], function( $, Backbone,
   require( [ "jquerymobile" ], function() {
    // Instantiates a new Backbone.js Mobile Router
    this.router = new Mobile();
-    
+   $.mobile.router = this.router
   });
 } );
