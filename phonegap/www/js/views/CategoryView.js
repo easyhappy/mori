@@ -1,10 +1,6 @@
-define([ "jquery", "backbone","models/CategoryModel", "views/BaseView"], function( $, Backbone, CategoryModel, BaseView ) {
+define([ "jquery", "backbone","models/CategoryModel", "views/BaseView"], 
+  function($, Backbone, CategoryModel, BaseView ) {
   var CategoryView = Backbone.View.extend(BaseView).extend({
-    initialize: function(){
-      //参数this的作用是什么？
-      this.template = _.template($('#category').html());
-      this.collection.on("added", this.render, this);
-    },
     render: function(){
       this.$el.html(this.template());
 
