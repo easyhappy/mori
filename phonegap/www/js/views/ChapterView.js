@@ -4,6 +4,10 @@ define([ "jquery", "backbone","models/ChapterModel", 'collections/ChaptersCollec
     initialize: function(){
       this.collection.on("added", this.render, this);
     },
+    events: { "scroll": "scroll" },
+    scroll: function(){
+      alert('jjjjadfadf')
+    },
     
     render: function(){
       this.template = _.template($('#chapters').html(), {collection: this.collection.toJSON()});
@@ -12,11 +16,13 @@ define([ "jquery", "backbone","models/ChapterModel", 'collections/ChaptersCollec
       $('a.category').addClass("ui-btn-active");
       $('ul.category').addClass("test_category");
 
-      $(window).scroll(function(){
-        if ($(window).scrollTop() >= $(window).height()){
-          alert('jjjjj')
+      $.mobile.silentScroll(0)
+      var loadNext = true
+      $(document).on('scrollstart', function(){
+        if(loadNext&&($(window).scrollTop() >= ($(document).height() - $(window).height())/2)){
+          loadNext = false;
         }
-      });
+      })
       $.mobile.changePage($(this.el), {reverse: false, changeHash:false, transition: 'slide'});
       
       this.removeLastView();
