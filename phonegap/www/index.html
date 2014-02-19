@@ -30,6 +30,15 @@
         </ul>
       </div>
     </script>
+
+    <script type="text/template" id="chapters">
+      <%= $("#header").html() %>
+      <div role="main" class="ui-content">
+        <div class='chapter_content' data-parent-id="<%=collection[0].parent_id%>" data-next-id="<%= collection[0].next_id %>">
+          <%= collection[0].content %>
+        </div>
+      </div>
+    </script>
     
     <script type="text/template" id="books">
     <div data-role="header">
@@ -53,7 +62,7 @@
     <script id="BookItems" type="text/template">
       <% _.each(collection.toJSON(), function( book, id ) { %>
         <li class="ui-li-has-thumb">
-          <a href="#chapters?bid=<%= book.id %>">
+          <a href="#chapters?chapter_id=<%=book.chapter_id%>">
             <img src='img/demo.jpg'>
             <span><%= book.name %></span>
             <p>作者: <%=book.author %></p>

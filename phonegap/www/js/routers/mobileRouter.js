@@ -76,10 +76,29 @@ define([ "jquery","backbone", "../models/CategoryModel",
       if(!view.collection.length) {
         $.mobile.loading( "show" );
         options = {data: {h: document.body.clientHeight, w: document.body.clientWidth}};
+        _.each(arguments, function(arg){b = arg.split("="); options['data'][b[0]] = b[1]})
         var self = this;
-        view.collection.fetch(options).done(function(){
-        });
+        view.collection.fetch(options).done(this.swipe, self);
       }
+    },
+    
+    swipe: function(){
+      $(".chapter_content").on("swipeleft", function(){
+        var parent_id = $(".chapter_content").attr('data-parent-id')
+        if(!parent_id){
+          alert('上一章不存在!!')
+          return;
+        }
+        currentRouter.chapters('chapter_id=' + parent_id)
+      });
+      $(".chapter_content").on("swiperight", function(){
+        var next_id = $(".chapter_content").attr('data-next-id')
+        if(!next_id){
+          alert('没有下一章了!!')
+          return;
+        }
+        currentRouter.chapters('chapter_id=' + next_id)
+      });
     },
 
     category: function() {
