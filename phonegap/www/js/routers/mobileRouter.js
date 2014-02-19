@@ -47,9 +47,9 @@ define([ "jquery","backbone", "../models/CategoryModel",
         _.each(arguments, function(arg){b = arg.split("="); options['data'][b[0]] = b[1]})
         var self = this;
         view.collection.fetch(options).done(function(){
-          $('#more_books').click(function(){
-          self.more_books();
-        });
+          //$('#more_books').click(function(){
+          //self.more_books();
+          //});
         });;
       }
     },
@@ -90,7 +90,6 @@ define([ "jquery","backbone", "../models/CategoryModel",
         var self = this;
         view.collection.fetch(options).done(function(){
           self.currentView = view;
-          //view.lastView.close();
         });
       }
     },

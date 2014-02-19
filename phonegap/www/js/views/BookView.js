@@ -25,10 +25,10 @@ define([ "jquery", "backbone","models/BookModel", "collections/BooksCollection",
         $("ul.category").attr('data-page', arguments['0']['page'])
         $("ul.category").attr('data-cid',  arguments['0']['cid'])
         $("ul.category").listview("refresh")
-        var self = this 
-        this.$el.find('#more_books').click(function(){
-          self.more_books();
-        });
+        //var self = this 
+        //this.$el.find('#more_books').click(function(){
+        //  self.more_books();
+        //});
       }
       this.removeLastView();
       return this;
