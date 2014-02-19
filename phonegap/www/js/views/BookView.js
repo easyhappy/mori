@@ -15,7 +15,7 @@ define([ "jquery", "backbone","models/BookModel", "collections/BooksCollection",
         $('a.category').addClass("ui-btn-active")
         $('#category_name').html(arguments[0]['category_name'])
         this.$el.find("ul.category").attr('data-page', arguments['0']['page'])
-        this.$el.find("ul.category").attr('data-cid',  1)
+        this.$el.find("ul.category").attr('data-cid',  arguments['0']['cid'])
         $.mobile.changePage($(this.el), {swipeleft: true, reverse: false, changeHash:false, transition: $.mobile.defaultPageTransition});  
       }else{
         var categoryView = _.template($('#BookItems').html(), {collection: this.collection})
@@ -23,7 +23,7 @@ define([ "jquery", "backbone","models/BookModel", "collections/BooksCollection",
         $('a.category').addClass("ui-btn-active")
         $('#category_name').html(arguments[0]['category_name'])
         $("ul.category").attr('data-page', arguments['0']['page'])
-        $("ul.category").attr('data-cid',  1)
+        $("ul.category").attr('data-cid',  arguments['0']['cid'])
         $("ul.category").listview("refresh")
         var self = this 
         this.$el.find('#more_books').click(function(){

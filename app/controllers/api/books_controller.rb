@@ -7,6 +7,6 @@ class Api::BooksController < Api::BaseController
       bs[postion]['chapters_count'] = books[postion].chapters.count
     end
 
-    render :json => {models: bs, category_name: books.first.category.name, page: params['page'] + 1, more: params['more']}
+    render :json => {models: bs, category_name: books.first.category.name, page: params['page'] + 1, more: params['more'], cid: params['cid']}
   end
 end

@@ -108,3 +108,5 @@ ul.test_category{
 .page_title{
   z-index: 1000;
 }
+
+.ui-page { -webkit-backface-visibility: hidden; }

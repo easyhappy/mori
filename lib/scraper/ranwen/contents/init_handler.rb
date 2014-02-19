@@ -22,6 +22,7 @@ module Contents
       request = Typhoeus::Request.new(chapter.url, :proxy => random_proxy)
       request.on_complete do |response|
         puts chapter.url
+        puts response.code
         if response.code == 200
           begin
             body = Nokogiri::HTML(response.body, nil, get_encoding)

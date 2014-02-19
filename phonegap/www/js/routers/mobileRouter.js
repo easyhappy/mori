@@ -40,11 +40,11 @@ define([ "jquery","backbone", "../models/CategoryModel",
     more_books: function(){
       var view = new BookView({collection: new BooksCollection([])});
       if(!view.collection.length) {
-        options = {dataType: 'json', data: {'cid': 1}};
+        options = {dataType: 'json', data: {'cid': $('ul.category').last().attr('data-cid')}};
         //options[data]['page'] = 
         options['data']['more'] = true
-        options['data']['page'] = $('ul.category').attr('data-page')
-        //_.each(arguments, function(arg){b = arg.split("="); options['data'][b[0]] = b[1]})
+        options['data']['page'] = $('ul.category').last().attr('data-page')
+        _.each(arguments, function(arg){b = arg.split("="); options['data'][b[0]] = b[1]})
         var self = this;
         view.collection.fetch(options).done(function(){
           $('#more_books').click(function(){

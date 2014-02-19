@@ -28,7 +28,7 @@ module Mori
   end
 
   def get_encoding
-    "gb2312"
+    "gbk"
   end
 
   def content_count html
