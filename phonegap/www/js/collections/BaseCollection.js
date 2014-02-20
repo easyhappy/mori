@@ -1,8 +1,8 @@
 define([ "jquery","backbone"], function(jquery, Backbone){
   var Mixin = {
     baseUrl: function(){
-      return 'http://www.5ireading.com/api';
-      return 'http://192.168.1.102:3000/api';
+      //return 'http://www.5ireading.com/api';
+      return 'http://192.168.3.48:3000/api';
     },
     parse: function(response){
       var count = 0;

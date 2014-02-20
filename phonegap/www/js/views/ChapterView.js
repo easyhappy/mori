@@ -6,13 +6,22 @@ define([ "jquery", "backbone","models/ChapterModel", 'collections/ChaptersCollec
     },
     
     render: function(){
+      if($('.chapter_content').size() > 0){
+        var model = this.collection.toJSON()[0]
+        $('.chapter_name').last().html(model.name)
+        $('.chapter_content').last().html(model.content)
+        $('.chapter_content').last().attr('data-next-id', model.next_id)
+        $('.chapter_content').last().attr('data-parent-id', model.parent_id)
+        $.mobile.loading('hide')
+        $(window).scrollTop(0)
+        return this
+      }
       this.template = _.template($('#chapters').html(), {collection: this.collection.toJSON()});
       this.$el.html(this.template);
       $('body').append($(this.el));
       $('a.category').addClass("ui-btn-active");
       $('ul.category').addClass("test_category");
 
-      $.mobile.silentScroll(0)
       var loadNext = true
       $(document).on('scrollstart', function(){
         if(loadNext&&($(window).scrollTop() >= ($(document).height() - $(window).height())/2)){
@@ -27,10 +36,10 @@ define([ "jquery", "backbone","models/ChapterModel", 'collections/ChaptersCollec
           $.mobile.router.chapters_new('chapter_id=' + next_id, 'asyn=true')
         }
       })
-      $.mobile.changePage($(this.el), {reverse: false, changeHash:false, transition: 'slide'});
-      
+      //$.mobile.changePage($(this.el), {reverse: false, changeHash:false, transition: 'slide'});
+      $.mobile.changePage($(this.el), {reverse: false, changeHash:false});
       this.removeLastView();
-      
+
       return this;
     },
 
