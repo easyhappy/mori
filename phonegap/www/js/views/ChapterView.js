@@ -14,6 +14,8 @@ define([ "jquery", "backbone","models/ChapterModel", 'collections/ChaptersCollec
         $('.chapter_content').last().attr('data-parent-id', model.parent_id)
         $.mobile.loading('hide')
         $(window).scrollTop(0)
+        this.pre_load();
+        $.mobile.router.swipe();
         return this
       }
       this.template = _.template($('#chapters').html(), {collection: this.collection.toJSON()});
@@ -21,8 +23,18 @@ define([ "jquery", "backbone","models/ChapterModel", 'collections/ChaptersCollec
       $('body').append($(this.el));
       $('a.category').addClass("ui-btn-active");
       $('ul.category').addClass("test_category");
+      this.pre_load();
+      
+      //$.mobile.changePage($(this.el), {reverse: false, changeHash:false, transition: 'slide'});
+      $.mobile.changePage($(this.el), {reverse: false, changeHash:false});
+      this.removeLastView();
 
+      return this;
+    },
+
+    pre_load: function(){
       var loadNext = true
+      $(document).off('scrollstart')
       $(document).on('scrollstart', function(){
         if(loadNext&&($(window).scrollTop() >= ($(document).height() - $(window).height())/2)){
           loadNext = false;
@@ -36,12 +48,7 @@ define([ "jquery", "backbone","models/ChapterModel", 'collections/ChaptersCollec
           $.mobile.router.chapters_new('chapter_id=' + next_id, 'asyn=true')
         }
       })
-      //$.mobile.changePage($(this.el), {reverse: false, changeHash:false, transition: 'slide'});
-      $.mobile.changePage($(this.el), {reverse: false, changeHash:false});
-      this.removeLastView();
-
-      return this;
-    },
+    }
 
     
   });

@@ -12,6 +12,22 @@ define([ "jquery","backbone"], function(jquery, Backbone){
         count += 1;
       });
       this.trigger("added", _.omit(response, 'models'));
+    },
+
+    localFetch: function(options){
+      if(store = localStorage.getItem(options['data']['key'])){
+        var store_models = JSON.parse(store)
+      
+        var self = this;
+        var count = 0;
+        _.each(store_models, function(item){
+          self.models[count] = new self.model(item);
+          count += 1;
+        })
+        this.trigger('added')
+        return true;
+      }
+      return false;
     }
   }
   return Mixin;

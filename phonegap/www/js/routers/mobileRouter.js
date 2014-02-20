@@ -77,8 +77,14 @@ define([ "jquery","backbone", "../models/CategoryModel",
         $.mobile.loading( "show" );
         options = {data: {h: document.body.clientHeight, w: document.body.clientWidth}};
         _.each(arguments, function(arg){b = arg.split("="); options['data'][b[0]] = b[1]})
+        options['data']['key'] = 'chapter_id_' + options['data']['chapter_id']
         var self = this;
-        view.collection.fetch(options).done(self.swipe);
+
+        if(view.collection.localFetch(options)){
+          self.swipe()
+        }else{
+          view.collection.fetch(options).done(self.swipe)
+        };
       }
     },
 
@@ -90,18 +96,23 @@ define([ "jquery","backbone", "../models/CategoryModel",
         options = {data: {h: document.body.clientHeight, w: document.body.clientWidth}};
         _.each(arguments, function(arg){b = arg.split("="); options['data'][b[0]] = b[1]})
         var self = this;
-        view.collection.fetch(options).done(self.swipe);
+        $.mobile.nextView = view;
+        options['data']['key'] = 'chapter_id_' + options['data']['chapter_id']
+        view.collection.localFetch(options);
       }
     },
     
     swipe: function(){
       var ableClick = true;
+      $(".chapter_content").off('swiperight')
+      $(".chapter_content").off('swipeleft')
       $(".chapter_content").on("swiperight", function(){
         if(ableClick){
           ableClick = false;
           var parent_id = $(".chapter_content").last().attr('data-parent-id')
           if(!parent_id){
             alert('上一章不存在!!')
+            ableClick = true;
             return;
           }
           $.mobile.router.chapters('chapter_id=' + parent_id)
@@ -113,9 +124,17 @@ define([ "jquery","backbone", "../models/CategoryModel",
           var next_id = $(".chapter_content").last().attr('data-next-id')
           if(!next_id){
             alert('没有下一章了!!')
+            ableClick = true;
             return;
           }
-          $.mobile.router.chapters('chapter_id=' + next_id)
+          if($.mobile.fetchNext == 'done'){
+            $.mobile.nextView.collection.models = $.mobile.models
+            $.mobile.nextView.collection.trigger('added');
+            $.mobile.nextView = null;
+            $.mobile.fetchNext = 'no'
+          }else{
+            $.mobile.router.chapters('chapter_id=' + next_id)
+          }
         }
       });
     },
