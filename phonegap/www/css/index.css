@@ -119,5 +119,5 @@ ul.test_category{
 }
 .in, .out {
     -webkit-animation-timing-function: ease-in-out;
-    -webkit-animation-duration: 350ms !important;
+    -webkit-animation-duration: 500ms !important;
 }

@@ -107,8 +107,10 @@ define([ "jquery","backbone", "../models/CategoryModel",
       $(".chapter_content").off('swiperight')
       $(".chapter_content").off('swipeleft')
       $(".chapter_content").on("swiperight", function(){
+
         if(ableClick){
           ableClick = false;
+          $.mobile.reverse = true
           var parent_id = $(".chapter_content").last().attr('data-parent-id')
           if(!parent_id){
             alert('上一章不存在!!')
@@ -127,6 +129,7 @@ define([ "jquery","backbone", "../models/CategoryModel",
             ableClick = true;
             return;
           }
+          $.mobile.reverse = false
           if($.mobile.fetchNext == 'done'){
             $.mobile.nextView.collection.models = $.mobile.models
             $.mobile.nextView.collection.trigger('added');
