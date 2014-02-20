@@ -16,39 +16,32 @@ define([ "jquery", "backbone","models/ChapterModel", 'collections/ChaptersCollec
         $(window).scrollTop(0)
         this.pre_load();
         $.mobile.router.swipe();
-        //return this
+        return this
       }
-      $(window).scrollTop(0)
       this.template = _.template($('#chapters').html(), {collection: this.collection.toJSON()});
       this.$el.html(this.template);
       $('body').append($(this.el));
       $('a.category').addClass("ui-btn-active");
       $('ul.category').addClass("test_category");
-      $.mobile.loadNext = false
-
-      $.mobile.changePage($(this.el), {reverse: $.mobile.reverse, changeHash:false, transition: 'flow', showLoadMsg: 'hhhh'});
-      if(!$.mobile.pre_load){
-        this.pre_load();$.mobile.pre_load = true
-      }
+      $.mobile.changePage($(this.el), {changeHash:false, transition: 'flow'});
+      this.pre_load();
       this.removeLastView();
-      $.mobile.reverse = true
       return this;
     },
 
     pre_load: function(){
-      $.mobile.loadNext = true
+      $.mobile.config.loadNext = false
       $(document).off('scrollstart')
       $(document).on('scrollstart', function(){
-        if($.mobile.loadNext&&$(document).height() > 0 && ($(window).scrollTop() >= ($(document).height() - $(window).height())/2)){
-          alert('load next page....' + $.mobile.loadNext)
-          $.mobile.loadNext = false;
+        if(!$.mobile.config.loadNext&&$(document).height() > 0 && ($(window).scrollTop() >= ($(document).height() - $(window).height())/2)){
+          alert('load next page....' + $.mobile.config.loadNext)
+          $.mobile.config.loadNext = true;
           var next_id = $(".chapter_content").last().attr('data-next-id')
           if(!next_id){
             alert('没有下一章了!!')
             return;
           }
-          $.mobile.fetchNext = 'doing'
-          $.mobile.router.chapters_new('chapter_id=' + next_id, 'asyn=true')
+          $.mobile.router.chapters('chapter_id=' + next_id, 'asyn=true')
         }
       })
     }

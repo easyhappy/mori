@@ -7,15 +7,6 @@ define([ "jquery","backbone", "../models/CategoryModel",
       CategoriesCollection, CategoryView, 
       HomeView, BookView, BooksCollection,
       ChapterView, ChaptersCollection) {
-  window.Page1View = Backbone.View.extend({
-  
-      template:_.template($('#page1').html()),
-  
-      render:function (eventName) {
-        $(this.el).html(this.template());
-        return this;
-      }
-  });
 
     var CategoryRouter = Backbone.Router.extend( {
     // The Router constructor
@@ -29,7 +20,6 @@ define([ "jquery","backbone", "../models/CategoryModel",
       "category": "category",
       "books?:cid": "books",
       "chapters?:bid": "chapters"
-      //"more_books": "more_books"
     },
 
     home:function () {
@@ -40,16 +30,15 @@ define([ "jquery","backbone", "../models/CategoryModel",
     more_books: function(){
       var view = new BookView({collection: new BooksCollection([])});
       if(!view.collection.length) {
-        options = {dataType: 'json', data: {'cid': $('ul.category').last().attr('data-cid')}};
-        //options[data]['page'] = 
+        options = {data: {'cid': $('ul.category').last().attr('data-cid')}};
         options['data']['more'] = true
         options['data']['page'] = $('ul.category').last().attr('data-page')
         _.each(arguments, function(arg){b = arg.split("="); options['data'][b[0]] = b[1]})
         var self = this;
         view.collection.fetch(options).done(function(){
-          //$('#more_books').click(function(){
-          //self.more_books();
-          //});
+          $('#more_books').click(function(){
+            self.more_books();
+          });
         });;
       }
     },
@@ -61,6 +50,7 @@ define([ "jquery","backbone", "../models/CategoryModel",
         options = {dataType: 'JSON', crossDomain : true, data: {}};
         options['data']['page'] = $('ul.category').attr('data-page')
         _.each(arguments, function(arg){b = arg.split("="); options['data'][b[0]] = b[1]})
+        options['data']['key'] = 'book_' + options['data']['chapter_id']
         var self = this;
         view.collection.fetch(options).done(function(){
           $('#more_books').click(function(){
@@ -71,34 +61,19 @@ define([ "jquery","backbone", "../models/CategoryModel",
     },
 
     chapters: function(){
-      var type = 'category'
       var view = new ChapterView({collection: new ChaptersCollection([])});
       if(!view.collection.length) {
-        $.mobile.loading( "show" );
-        options = {data: {h: document.body.clientHeight, w: document.body.clientWidth}};
+        options = {data: {}};
         _.each(arguments, function(arg){b = arg.split("="); options['data'][b[0]] = b[1]})
         options['data']['key'] = 'chapter_id_' + options['data']['chapter_id']
-        var self = this;
 
         if(view.collection.localFetch(options)){
-          self.swipe()
-        }else{
-          view.collection.fetch(options).done(self.swipe)
-        };
-      }
-    },
-
-    chapters_new: function(){
-      var type = 'category'
-      var view = new ChapterView({collection: new ChaptersCollection([])});
-      if(!view.collection.length) {
-        //$.mobile.loading( "show" );
-        options = {data: {h: document.body.clientHeight, w: document.body.clientWidth}};
-        _.each(arguments, function(arg){b = arg.split("="); options['data'][b[0]] = b[1]})
+          this.swipe()
+          return
+        }
         var self = this;
-        $.mobile.nextView = view;
-        options['data']['key'] = 'chapter_id_' + options['data']['chapter_id']
-        view.collection.localFetch(options);
+        $.mobile.loading( "show" );
+        view.collection.fetch(options).done(self.swipe)
       }
     },
     
@@ -107,10 +82,8 @@ define([ "jquery","backbone", "../models/CategoryModel",
       $(".chapter_content").off('swiperight')
       $(".chapter_content").off('swipeleft')
       $(".chapter_content").on("swiperight", function(){
-
         if(ableClick){
           ableClick = false;
-          $.mobile.reverse = true
           var parent_id = $(".chapter_content").last().attr('data-parent-id')
           if(!parent_id){
             alert('上一章不存在!!')
@@ -129,28 +102,20 @@ define([ "jquery","backbone", "../models/CategoryModel",
             ableClick = true;
             return;
           }
-          $.mobile.reverse = false
-          if($.mobile.fetchNext == 'done'){
-            $.mobile.nextView.collection.models = $.mobile.models
-            $.mobile.nextView.collection.trigger('added');
-            $.mobile.nextView = null;
-            $.mobile.fetchNext = 'no'
-          }else{
-            $.mobile.router.chapters('chapter_id=' + next_id)
+          $.mobile.router.chapters('chapter_id=' + next_id)
           }
-        }
       });
     },
 
     category: function() {
       var view = new CategoryView({collection: new CategoriesCollection([])});
       if(!view.collection.length) {
-        $.mobile.loading( "show" );
-        options = {dataType: 'json', data: {}};
-        var self = this;
-        view.collection.fetch(options).done(function(){
-          self.currentView = view;
-        });
+        options = {data: {}};
+        options['data']['key'] = 'categories'
+        if(!view.collection.localFetch(options)){
+          $.mobile.loading( "show" );
+          view.collection.fetch(options)
+        };
       }
     },
     activeSelector:function(selector){

@@ -32,5 +32,6 @@ require([ "jquery", "backbone", "routers/mobileRouter" ], function( $, Backbone,
    // Instantiates a new Backbone.js Mobile Router
    this.router = new Mobile();
    $.mobile.router = this.router
+   $.mobile.config = {'loadNext': false}
   });
 } );

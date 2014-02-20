@@ -8,6 +8,6 @@ class Api::BooksController < Api::BaseController
       bs[postion]['chapter_id'] = books[postion].chapters.first.id
     end
 
-    render :json => {models: bs, category_name: books.first.category.name, page: params['page'] + 1, more: params['more'], cid: params['cid']}
+    render :json => {models: bs, category_name: books.first.category.name, page: params['page'] + 1, more: params['more'], cid: params['cid']}.merge(params)
   end
 end
