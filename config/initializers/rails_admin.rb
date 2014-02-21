@@ -8,6 +8,7 @@ RailsAdmin.config do |config|
 
   # Set the admin name here (optional second array element will appear in red). For example:
   config.main_app_name = ['Mori', 'Admin']
+  config.included_models = %w[Book Category Chapter ClickLog Comment ErrorUrl Session]
   config.authorize_with :cancan
   # or for a more dynamic name:
   # config.main_app_name = Proc.new { |controller| [Rails.application.engine_name.titleize, controller.params['action'].titleize] }
