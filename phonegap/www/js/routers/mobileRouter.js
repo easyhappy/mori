@@ -34,6 +34,14 @@ define([ "jquery","backbone", "../models/CategoryModel",
         options['data']['more'] = true
         options['data']['page'] = $('ul.category').last().attr('data-page')
         _.each(arguments, function(arg){b = arg.split("="); options['data'][b[0]] = b[1]})
+        
+        if(view.collection.localFetch(options)){
+          $('#more_books').click(function(){
+            self.more_books();
+          });
+          return
+        }
+        
         var self = this;
         view.collection.fetch(options).done(function(){
           $('#more_books').click(function(){
@@ -50,8 +58,14 @@ define([ "jquery","backbone", "../models/CategoryModel",
         options = {dataType: 'JSON', crossDomain : true, data: {}};
         options['data']['page'] = $('ul.category').attr('data-page')
         _.each(arguments, function(arg){b = arg.split("="); options['data'][b[0]] = b[1]})
-        options['data']['key'] = 'book_' + options['data']['chapter_id']
+        options['data']['key'] = 'book_' + options['data']['cid'] + '_' + options['data']['page']
         var self = this;
+        if(view.collection.localFetch(options)){
+          $('#more_books').click(function(){
+            self.more_books();
+          });
+          return
+        }
         view.collection.fetch(options).done(function(){
           $('#more_books').click(function(){
             self.more_books();

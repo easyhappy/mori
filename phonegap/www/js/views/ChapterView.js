@@ -30,18 +30,19 @@ define([ "jquery", "backbone","models/ChapterModel", 'collections/ChaptersCollec
     },
 
     pre_load: function(){
-      $.mobile.config.loadNext = false
+      $.mobile.loadNext = false
       $(document).off('scrollstart')
       $(document).on('scrollstart', function(){
-        if(!$.mobile.config.loadNext&&$(document).height() > 0 && ($(window).scrollTop() >= ($(document).height() - $(window).height())/2)){
-          alert('load next page....' + $.mobile.config.loadNext)
-          $.mobile.config.loadNext = true;
+        if(!$.mobile.loadNext&&$(document).height() > 0 && ($(window).scrollTop() >= ($(document).height() - $(window).height())/2)){
+          alert('load next page....' + $.mobile.loadNext)
           var next_id = $(".chapter_content").last().attr('data-next-id')
           if(!next_id){
             alert('没有下一章了!!')
+            $.mobile.loadNext = true;
             return;
           }
           $.mobile.router.chapters('chapter_id=' + next_id, 'asyn=true')
+          $.mobile.loadNext = true;
         }
       })
     }
