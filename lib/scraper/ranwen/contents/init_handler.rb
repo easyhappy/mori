@@ -3,10 +3,15 @@ $:.unshift(File.dirname(__FILE__))
 module Contents
   module InitHandler
     attr_accessor :hydra
+    attr_accessor :per_page
+    attr_accessor :current_page
 
     def init_parse_content
-      chapters = Chapter.where(:scraper_status => :open)
-      #chapters = Chapter.where(:id => 38009)
+      parse_conent_in_batch Chapter.where(:scraper_status => :open).paginate(:per_page => 50, :page => current_page) 
+    end
+
+    def parse_conent_in_batch chapters
+      return unless chapters.present?
       hydra = Typhoeus::Hydra.new(max_concurrency: 10)
       chapters.each do |chapter|
         begin
@@ -16,10 +21,12 @@ module Contents
         end
       end
       hydra.run
+      puts '下一页了......'
+      parse_conent_in_batch Chapter.where(:scraper_status => :open).paginate(:per_page => 50, :page => current_page)
     end
 
     def parse_content chapter
-      request = Typhoeus::Request.new(chapter.url, :proxy => random_proxy)
+      request = Typhoeus::Request.new(chapter.url, :proxy => random_proxy, :timeout => 3000)
       request.on_complete do |response|
         puts chapter.url
         puts response.code
@@ -34,20 +41,31 @@ module Contents
             chapter.scraper_status = :close
             chapter.save
           rescue Exception => e
+            binding.pry
             logger_write e.inspect
           end
         end
-        sleep 1.seconds
+        #sleep 1.seconds
       end
       request
     end
 
     def get_urls chapter, body, *positions
       base_url = chapter.url.rpartition('/')[0]
-      positions.map do |position|
-        url = body.at_css("#thumb").children[position].attributes["href"].value
-        url == 'index.html' ? '' : [base_url, url].join('/')
+      begin
+        positions.map do |position|
+          get_url body, '#thumb', position
+        end
+      rescue
+        positions.map do |position|
+          get_url body, '.link_14', position
+        end
       end
+    end
+
+    def get_url body, selector, position
+      url = body.at_css(selector).children[position].attributes["href"].value
+      url == 'index.html' ? '' : [base_url, url].join('/')
     end
   end
 end

@@ -11,6 +11,7 @@ module Mori
   ERROR_LOGGER = Logger.new('log/scraper_err.log')
   def logger_write message
     BOOK_LOGGER.info message
+    puts message
   end
 
   def logger_error message
