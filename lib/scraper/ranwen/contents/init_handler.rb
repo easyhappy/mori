@@ -5,9 +5,11 @@ module Contents
     attr_accessor :hydra
     attr_accessor :per_page
     attr_accessor :current_page
+    attr_accessor :per_page
 
     def init_parse_content
-      parse_conent_in_batch Chapter.where(:scraper_status => :open).paginate(:per_page => 50, :page => current_page) 
+      per_page = 20
+      parse_conent_in_batch Chapter.where(:scraper_status => :open).paginate(:per_page => per_page, :page => current_page) 
     end
 
     def parse_conent_in_batch chapters
@@ -22,7 +24,7 @@ module Contents
       end
       hydra.run
       puts '下一页了......'
-      parse_conent_in_batch Chapter.where(:scraper_status => :open).paginate(:per_page => 50, :page => current_page)
+      parse_conent_in_batch Chapter.where(:scraper_status => :open).paginate(:per_page => per_page, :page => current_page)
     end
 
     def parse_content chapter
@@ -41,8 +43,7 @@ module Contents
             chapter.scraper_status = :close
             chapter.save
           rescue Exception => e
-            binding.pry
-            logger_write e.inspect
+            logger_write e.inspect + chapter.url unless parse_content_by_hpricot chapter
           end
         end
         #sleep 1.seconds
@@ -54,17 +55,59 @@ module Contents
       base_url = chapter.url.rpartition('/')[0]
       begin
         positions.map do |position|
-          get_url body, '#thumb', position
+          get_url body, '#thumb', position, base_url
         end
       rescue
         positions.map do |position|
-          get_url body, '.link_14', position
+          get_url body, '.link_14', position, base_url
         end
       end
     end
 
-    def get_url body, selector, position
+    def get_url body, selector, position, base_url
       url = body.at_css(selector).children[position].attributes["href"].value
+      url == 'index.html' ? '' : [base_url, url].join('/')
+    end
+
+    private
+    def parse_content_by_hpricot chapter
+      begin
+        doc = h chapter.url, get_encoding
+        html  = (doc/"#content").inner_html
+        begin
+          html = html.sub """\r\n\r\n<div align=\"center\"><script src=\"/ssi/style-gg.js\" type=\"text/javascript\"></script></div> \r\n\t\t\t""",""
+          html = html.sub "\r\n\t\t\t",''
+        rescue Exception => e
+          logger_write e.inspect + chapter.url
+        end
+        pre_url, next_url = get_url_by_hpricot chapter, doc
+        Content.create! content: html, book_id: chapter.book_id,
+                                chapter_id: chapter.id, word_count: content_count(html),
+                                pre_url: pre_url, next_url: next_url
+        chapter.scraper_status = :close
+        return chapter.save
+      rescue Exception => e
+        logger_write e.inspect
+        return false
+      end
+    end
+
+    def get_url_by_hpricot chapter, doc
+      base_url = chapter.url.rpartition('/')[0]
+      begin 
+        urls = (doc/"#thumb/a").map do |item|
+          get_absolute_url(base_url, item['href'])
+        end
+        [urls[0], urls[2]]
+      rescue Exception => e
+        urls = (doc/"td.link_14/a").map do |item|
+          get_absolute_url(base_url, item['href'])
+        end
+        [urls[0], urls[2]]
+      end
+    end
+
+    def get_absolute_url(base_url, url)
       url == 'index.html' ? '' : [base_url, url].join('/')
     end
   end
