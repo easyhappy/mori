@@ -4,12 +4,10 @@ module Contents
   module InitHandler
     attr_accessor :hydra
     attr_accessor :per_page
-    attr_accessor :current_page
-    attr_accessor :per_page
 
     def init_parse_content
       per_page = 20
-      parse_conent_in_batch Chapter.where(:scraper_status => :open).paginate(:per_page => per_page, :page => current_page) 
+      parse_conent_in_batch Chapter.where(:scraper_status => :open).limit(per_page)
     end
 
     def parse_conent_in_batch chapters
@@ -24,7 +22,7 @@ module Contents
       end
       hydra.run
       puts '下一页了......'
-      parse_conent_in_batch Chapter.where(:scraper_status => :open).paginate(:per_page => per_page, :page => current_page)
+      parse_conent_in_batch Chapter.where(:scraper_status => :open).limit(per_page)
     end
 
     def parse_content chapter
@@ -37,16 +35,11 @@ module Contents
             body = Nokogiri::HTML(response.body, nil, get_encoding)
             html = body.at_css("#content").inner_html
             pre_url, next_url = get_urls(chapter, body, 0, 2)
-            Content.create! content: html, book_id: chapter.book_id,
-                              chapter_id: chapter.id, word_count: content_count(html),
-                              pre_url: pre_url, next_url: next_url
-            chapter.scraper_status = :close
-            chapter.save
+            create_content chapter, html, pre_url, next_url
           rescue Exception => e
             logger_write e.inspect + chapter.url unless parse_content_by_hpricot chapter
           end
         end
-        #sleep 1.seconds
       end
       request
     end
@@ -66,7 +59,7 @@ module Contents
 
     def get_url body, selector, position, base_url
       url = body.at_css(selector).children[position].attributes["href"].value
-      url == 'index.html' ? '' : [base_url, url].join('/')
+      get_absolute_url(base_url, url)
     end
 
     private
@@ -81,11 +74,7 @@ module Contents
           logger_write e.inspect + chapter.url
         end
         pre_url, next_url = get_url_by_hpricot chapter, doc
-        Content.create! content: html, book_id: chapter.book_id,
-                                chapter_id: chapter.id, word_count: content_count(html),
-                                pre_url: pre_url, next_url: next_url
-        chapter.scraper_status = :close
-        return chapter.save
+        return create_content chapter, html, pre_url, next_url
       rescue Exception => e
         logger_write e.inspect
         return false
@@ -109,6 +98,14 @@ module Contents
 
     def get_absolute_url(base_url, url)
       url == 'index.html' ? '' : [base_url, url].join('/')
+    end
+
+    def create_content chapter, html, pre_url, next_url
+      Content.create! content: html, book_id: chapter.book_id,
+                        chapter_id: chapter.id, word_count: content_count(html),
+                        pre_url: pre_url, next_url: next_url
+      chapter.scraper_status = :close
+      chapter.save
     end
   end
 end
