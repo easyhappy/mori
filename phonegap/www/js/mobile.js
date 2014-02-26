@@ -27,11 +27,13 @@ require([ "jquery", "backbone", "routers/mobileRouter" ], function( $, Backbone,
   $.mobile.defaultPageTransition = 'pop'
   }
   )
-
   require( [ "jquerymobile" ], function() {
    // Instantiates a new Backbone.js Mobile Router
    this.router = new Mobile();
    $.mobile.router = this.router
    $.mobile.config = {'loadNext': false}
+   $.mobile.pushStateEnabled = false;
+   $.mobile.changePage.defaults.changeHash = false;
   });
+
 } );

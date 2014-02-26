@@ -12,6 +12,8 @@ define([ "jquery","backbone", "../models/CategoryModel",
     // The Router constructor
     initialize: function() {
       Backbone.history.start();
+      document.addEventListener("pause", this.onBackground, false);
+      document.addEventListener("backbutton", this.onBackKey, true);
     },
 
     // Backbone.js Routes
@@ -20,6 +22,14 @@ define([ "jquery","backbone", "../models/CategoryModel",
       "category": "category",
       "books?:cid": "books",
       "chapters?:bid": "chapters"
+    },
+
+    onBackKey: function(e){
+     e.preventDefault();
+    },
+
+    onBackground: function(e){
+      alert('background')
     },
 
     home:function () {
