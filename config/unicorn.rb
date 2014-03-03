@@ -12,7 +12,7 @@
 # more will usually help for _short_ waits on databases/caches.
 rails_env = ENV['RAILS_ENV'] || 'production'
 
-worker_processes rails_env == "production" ? 9 : 1
+worker_processes rails_env == "production" ? 1 : 1
 
 #APP_PATH = '/home/ubuntu/Document/mori'
 APP_PATH = '/home/andy/Documents/mori'
@@ -42,8 +42,8 @@ pid "#{APP_PATH}/shared/pids/unicorn.pid"
 # By default, the Unicorn logger will write to stderr.
 # Additionally, ome applications/frameworks log to stderr or stdout,
 # so prevent them from going to /dev/null when daemonized here:
-stderr_path "#{APP_PATH}/shared/log/unicorn.stderr.log"
-stdout_path "#{APP_PATH}/shared/log/unicorn.stdout.log"
+stderr_path "#{APP_PATH}/shared/logs/unicorn.stderr.log"
+stdout_path "#{APP_PATH}/shared/logs/unicorn.stdout.log"
 
 # combine Ruby 2.0.0dev or REE with "preload_app true" for memory savings
 # http://rubyenterpriseedition.com/faq.html#adapt_apps_for_cow
@@ -83,7 +83,7 @@ before_fork do |server, worker|
   # helps (but does not completely) prevent identical, repeated signals
   # from being lost when the receiving process is busy.
   # sleep 1
-  
+
   # 延时初始化，避免重启时的用户访问等待
   sleep 4
 end

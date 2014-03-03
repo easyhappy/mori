@@ -1,7 +1,26 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show]
+  @counter = 0
+
+  class << self
+    attr_accessor :counter
+  end
+
+  #trap(:INFO) {
+  #  $stderr.puts "Count: #{BooksController.counter}"
+  #}
 
   def index
+    counter = self.class.counter # read
+    sleep(0.1)
+    counter += 1                 # update
+    sleep(0.1)
+    self.class.counter = counter # write
+    #puts "self.class.counter is #{self.class.counter}"
+    render :json => {data: counter}
+  end
+
+  def index_old
     @books = Book.search params.merge(page: @page)
   end
 
