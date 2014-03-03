@@ -1,7 +1,7 @@
 defaults: &defaults
-  allow_dynamic_fields: true
+  #allow_dynamic_fields: true
   raise_not_found_error: true
-  identity_map_enabled: true
+  #identity_map_enabled: true
 
 development:
   # Configure available database sessions. (required)
@@ -34,6 +34,7 @@ development:
         # retry_interval: 1
   # Configure Mongoid specific options. (optional)
   options:
+    <<: *defaults
     # Enable the identity map, needed for eager loading. (default: false)
     # identity_map_enabled: false
 
