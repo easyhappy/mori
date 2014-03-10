@@ -15,4 +15,5 @@ Mori::Application.routes.draw do
     resources :categories
     resources :chapters
   end
+  mount Blorgh::Engine, :at => "/blog"
 end
