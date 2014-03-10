@@ -4,5 +4,6 @@ class MainController < ApplicationController
     @histories = ReadBookHistory.histories params.merge({page: @page})
     @hot_books = Book.hot
     @recent_books = Book.recent
+    
   end
 end
