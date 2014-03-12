@@ -1,4 +1,5 @@
 Mori::Application.routes.draw do
+  mount API => '/grape_api'
   resources :comments
 
 

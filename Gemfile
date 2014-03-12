@@ -84,3 +84,8 @@ group :test do
 end
 
 gem 'blorgh', :path => "./blorgh"
+
+#grape api
+gem 'grape', '0.6.1'
+gem 'grape-swagger', '0.6.0'
+gem 'grape-entity', '0.3.0'
