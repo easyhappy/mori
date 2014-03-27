@@ -36,5 +36,10 @@ module Mori
       g.test_framework  :rspec
       g.factory_girl    false
     end
+
+    config.after_initialize do
+      ActiveSupport::Dependencies.logger = Rails.logger
+      ActiveSupport::Dependencies.log_activity = true
+    end
   end
 end
