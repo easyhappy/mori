@@ -14,8 +14,8 @@ rails_env = ENV['RAILS_ENV'] || 'production'
 
 worker_processes rails_env == "production" ? 9 : 1
 
-#APP_PATH = '/home/ubuntu/Document/mori'
-APP_PATH = '/home/andy/Documents/mori'
+APP_PATH = '/home/ubuntu/Document/mori'
+#APP_PATH = '/home/andy/Documents/mori'
 
 # Since Unicorn is never exposed to outside clients, it does not need to
 # run on the standard HTTP port (80), there is no reason to start Unicorn
@@ -83,7 +83,7 @@ before_fork do |server, worker|
   # helps (but does not completely) prevent identical, repeated signals
   # from being lost when the receiving process is busy.
   # sleep 1
-  
+
   # 延时初始化，避免重启时的用户访问等待
   sleep 4
 end
