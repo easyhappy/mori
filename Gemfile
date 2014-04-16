@@ -7,8 +7,8 @@ gem 'rails', '4.0.0'
 # Use mysql as the database for Active Record
 gem 'mysql2'
 gem 'mongo'
-gem 'mongoid'
-#gem 'mongoid', github: 'mongoid/mongoid', :ref => "1e53479"
+#gem 'mongoid'
+gem 'mongoid', github: 'mongoid/mongoid', :ref => "1e53479"
 gem 'bson_ext'
 
 # Use SCSS for stylesheets
