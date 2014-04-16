@@ -43,7 +43,7 @@ task :deploy => :environment do
 
     to :launch do
       #queue "touch #{deploy_to}/tmp/restart.txt"
-      queue 'unicorn_rails   -c config/unicorn.rb -Eproduction'
+      queue 'unicorn_rails   -c /home/ubuntu/Document/mori/config/unicorn.rb -Eproduction'
       #queue 'cat /home/ubuntu/Document/mori/shared/pids/unicorn.pid | xargs kill -USR2'
     end
   end
