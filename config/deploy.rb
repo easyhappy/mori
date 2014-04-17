@@ -6,7 +6,7 @@ set :repo_url, 'git@github.com:easyhappy/mori.git'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
-ask :branch, :test_capistrano_deploy
+set :branch, :test_capistrano_deploy
 
 # Default deploy_to directory is /var/www/my_app
 set :deploy_to, "/home/ubuntu/Document/mori"
@@ -39,6 +39,14 @@ namespace :deploy do
 
   desc 'Restart application'
   task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+      # Your restart mechanism here, for example:
+      # execute :touch, release_path.join('tmp/restart.txt')
+      execute :rails, "s -p 8080"
+    end
+  end
+
+  task :start do
     on roles(:app), in: :sequence, wait: 5 do
       # Your restart mechanism here, for example:
       # execute :touch, release_path.join('tmp/restart.txt')
