@@ -1,58 +1,59 @@
-require 'mina/bundler'
-require 'mina/rails'
-require 'mina/git'
-require 'mina/rvm'
+# config valid only for Capistrano 3.1
+lock '3.2.0'
 
-set :domain,      'www.5ireading.com'
-set :user,        'ubuntu'
-set :deploy_to,   '/home/ubuntu/Document/mori'
-set :repository,  'git@github.com:easyhappy/mori.git'
-set :branch,      'master'
+set :application, 'my_app_name'
+set :repo_url, 'git@github.com:easyhappy/mori.git'
 
-task :environment do
-  invoke :'rvm:use[ruby-2.0.0-p353@mori]'
-end
+# Default branch is :master
+# ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
+ask :branch, :test_capistrano_deploy
 
-# Put any custom mkdir's in here for when `mina setup` is ran.
-# For Rails apps, we'll make some of the shared paths that are shared between
-# all releases.
-task :setup => :environment do
-  #queue! %[mkdir -p "#{deploy_to}/shared/log"]
-  #queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/log"]
-  #queue! %[mkdir -p "#{deploy_to}/shared/config"]
-  #queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/config"]
-  #queue! %[touch "#{deploy_to}/config/database.yml"]
-  #queue  %[echo  "-----> Be sure to edit 'config/database.yml'."]
-  queue   %[mkdir -p shared/logs]
-  queue   %[mkdir -p shared/sockets]
-  queue   %[mkdir -p shared/pids]
-end
+# Default deploy_to directory is /var/www/my_app
+set :deploy_to, "/home/ubuntu/Document/mori"
+set :rails_env, :production
+# Default value for :scm is :git
+# set :scm, :git
 
-desc "Deploys the current version to the server."
-task :deploy => :environment do
-  deploy do
-    # Put things that will set up an empty directory into a fully set-up
-    # instance of your project.
-    queue 'git pull'
-    #queue 'sudo service nginx stop'
-    #invoke :'deploy:link_shared_paths'
-    #invoke :'bundle:install'
-    #invoke :'unicorn_rails restart'
-    #invoke :'rails:db_migrate'
-    #invoke :'rails:assets_precompile'
+# Default value for :format is :pretty
+# set :format, :pretty
 
-    to :launch do
-      #queue "touch #{deploy_to}/tmp/restart.txt"
-      queue 'unicorn_rails   -c /home/ubuntu/Document/mori/config/unicorn.rb -Eproduction'
-      #queue 'cat /home/ubuntu/Document/mori/shared/pids/unicorn.pid | xargs kill -USR2'
+# Default value for :log_level is :debug
+set :log_level, :debug
+
+# Default value for :pty is false
+# set :pty, true
+
+# Default value for :linked_files is []
+# set :linked_files, %w{config/database.yml}
+
+# Default value for linked_dirs is []
+# set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+
+# Default value for default_env is {}
+# set :default_env, { path: "/opt/ruby/bin:$PATH" }
+
+# Default value for keep_releases is 5
+# set :keep_releases, 5
+
+namespace :deploy do
+
+  desc 'Restart application'
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+      # Your restart mechanism here, for example:
+      # execute :touch, release_path.join('tmp/restart.txt')
     end
   end
+
+  after :publishing, :restart
+
+  after :restart, :clear_cache do
+    on roles(:web), in: :groups, limit: 3, wait: 10 do
+      # Here we can do anything such as:
+      # within release_path do
+      #   execute :rake, 'cache:clear'
+      # end
+    end
+  end
+
 end
-
-# For help in making your deploy script, see the Mina documentation:
-#
-#  - http://nadarei.co/mina
-#  - http://nadarei.co/mina/tasks
-#  - http://nadarei.co/mina/settings
-#  - http://nadarei.co/mina/helpers
-

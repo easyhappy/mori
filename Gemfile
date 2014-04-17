@@ -49,6 +49,10 @@ group :development, :test do
   gem 'zeus',                   '0.13.3'
   gem 'thin',                   '1.6.1'
   gem 'guard-rspec',            '4.2.4',  require: false
+  gem 'capistrano'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+  gem 'capistrano-rbenv'
 end
 
 gem 'typhoeus',                 '0.6.6'
