@@ -50,7 +50,7 @@ namespace :deploy do
     on roles(:web), in: :sequence, wait: 5 do
       # Your restart mechanism here, for example:
       # execute :touch, release_path.join('tmp/restart.txt')
-      execute :echo,  "hello andy"
+      info "Host #{host} (#{host.roles.to_a.join(', ')}):\t#{capture(:uptime)}"
       execute :rails, "s -p 8080"
     end
   end
