@@ -1,7 +1,7 @@
 # config valid only for Capistrano 3.1
 lock '3.2.0'
 
-set :application, 'my_app_name'
+set :application, 'mori'
 set :repo_url, 'git@github.com:easyhappy/mori.git'
 
 # Default branch is :master
@@ -53,7 +53,7 @@ namespace :deploy do
       # execute :touch, release_path.join('tmp/restart.txt')
       info "Host #{host} (#{host.roles.to_a.join(', ')}):\t#{capture(:uptime)}"
       within '/home/ubuntu/Document/mori' do
-        %x('rails s -p 8080')
+        execute :rails,  's -p 8080'
       end
     end
   end
