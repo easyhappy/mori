@@ -5,7 +5,10 @@ require 'capistrano/deploy'
 require 'capistrano/rvm'
 
 set :rvm_path,        '/home/ubuntu/.rvm'
-set :rvm_ruby_version, '2.0.0p353'
+set :rvm_map_bins, %w{gem rake ruby bundle}
+set :rvm_type, :auto
+set :rvm_ruby_version, "default"
+
 set :application, 'mori'
 set :repo_url, 'git@github.com:easyhappy/mori.git'
 
