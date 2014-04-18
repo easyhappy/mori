@@ -52,7 +52,7 @@ group :development, :test do
   gem 'capistrano'
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
-  gem 'capistrano-rbenv'
+  gem 'capistrano-rvm'
 end
 
 gem 'typhoeus',                 '0.6.6'

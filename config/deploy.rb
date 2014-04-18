@@ -1,5 +1,7 @@
 # config valid only for Capistrano 3.1
 lock '3.2.0'
+require 'capistrano/setup'
+require 'capistrano/deploy'
 require 'capistrano/rvm'
 
 set :application, 'mori'
@@ -10,9 +12,10 @@ set :repo_url, 'git@github.com:easyhappy/mori.git'
 set :branch, :test_capistrano_deploy
 
 # Default deploy_to directory is /var/www/my_app
-set :deploy_to, "/home/ubuntu/Document/mori"
-set :rails_env, :production
-set :deploy_user, :ubuntu
+set :deploy_to,     "/home/ubuntu/Document/mori"
+set :rails_env,     :production
+set :deploy_user,   :ubuntu
+set :keep_releases, 5
 # Default value for :scm is :git
 # set :scm, :git
 
