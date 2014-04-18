@@ -53,7 +53,7 @@ namespace :deploy do
       # execute :touch, release_path.join('tmp/restart.txt')
       info "Host #{host} (#{host.roles.to_a.join(', ')}):\t#{capture(:uptime)}"
       within '/home/ubuntu/Document/mori' do
-        execute :rails,  's -p 8080'
+        execute :sh,  'start.sh'
       end
     end
   end
