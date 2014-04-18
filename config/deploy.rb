@@ -52,7 +52,7 @@ namespace :deploy do
       # Your restart mechanism here, for example:
       # execute :touch, release_path.join('tmp/restart.txt')
       info "Host #{host} (#{host.roles.to_a.join(', ')}):\t#{capture(:uptime)}"
-      run "bundle exec rails s -p 8080"
+      execute :rails, 's -p 8080', '/home/ubuntu/Document/mori'      
     end
   end
 
