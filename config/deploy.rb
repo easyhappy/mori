@@ -53,7 +53,7 @@ namespace :deploy do
       # execute :touch, release_path.join('tmp/restart.txt')
       info "Host #{host} (#{host.roles.to_a.join(', ')}):\t#{capture(:uptime)}"
       within '/home/ubuntu/Document/mori' do
-        %x('RAILS_ENV=development bundle exec rails "s -p 8080"')
+        %x('RAILS_ENV=development bundle exec rails s -p 8080')
       end
     end
   end
