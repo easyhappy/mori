@@ -63,7 +63,7 @@ namespace :deploy do
       info "Host #{host} (#{host.roles.to_a.join(', ')}):\t#{capture(:uptime)}"
       within '/home/ubuntu/Document/mori' do
         execute :sh,  'start.sh&'
-        # "cd #{/home/ubuntu/Document/mori} && bundle exec unicorn_rails -c config/unicorn.rb -Eproduction -D"
+        #execute "cd /home/ubuntu/Document/mori; /bin/bash --login;/home/ubuntu/.rvm/bin/rvm use ruby-2.0@mori;unicorn_rails -c /home/ubuntu/Document/mori/config/unicorn.rb -Eproduction -D"
       end
     end
   end
