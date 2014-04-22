@@ -1,4 +1,3 @@
-
 God.watch do |w|
   w.name = "simple"
   w.start = "rake scraper:content"
