@@ -62,7 +62,8 @@ namespace :deploy do
       # execute :touch, release_path.join('tmp/restart.txt')
       info "Host #{host} (#{host.roles.to_a.join(', ')}):\t#{capture(:uptime)}"
       within '/home/ubuntu/Document/mori' do
-        execute :sh,  'start.sh'
+        execute :sh,  'start.sh&'
+        # "cd #{/home/ubuntu/Document/mori} && bundle exec unicorn_rails -c config/unicorn.rb -Eproduction -D"
       end
     end
   end

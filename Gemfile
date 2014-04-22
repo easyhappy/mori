@@ -1,4 +1,4 @@
-eval(File.read(File.dirname(__FILE__) + '/Gemfile.local'), binding) rescue source 'http://rubygems.org'
+gem 'capistrano-unicorn', :require => falseeval(File.read(File.dirname(__FILE__) + '/Gemfile.local'), binding) rescue source 'http://rubygems.org'
 #source 'http://ruby.taobao.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -53,6 +53,7 @@ group :development, :test do
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
   gem 'capistrano-rvm'
+  gem 'capistrano-unicorn',    :require => false
 end
 
 gem 'typhoeus',                 '0.6.6'
